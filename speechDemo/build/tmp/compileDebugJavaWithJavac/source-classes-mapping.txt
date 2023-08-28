@@ -1,0 +1,105 @@
+com/iflytek/voicedemo/IdentifyGroup/ResultIdentifyActivity.java
+ com.iflytek.voicedemo.IdentifyGroup.ResultIdentifyActivity
+ com.iflytek.voicedemo.IdentifyGroup.ResultIdentifyActivity$MyAdapter
+com/iflytek/voicedemo/IdentifyGroup/FaceIdentifyActivity.java
+ com.iflytek.voicedemo.IdentifyGroup.FaceIdentifyActivity
+ com.iflytek.voicedemo.IdentifyGroup.FaceIdentifyActivity$1
+ com.iflytek.voicedemo.IdentifyGroup.FaceIdentifyActivity$2
+ com.iflytek.voicedemo.IdentifyGroup.FaceIdentifyActivity$3
+ com.iflytek.voicedemo.IdentifyGroup.FaceIdentifyActivity$4
+com/iflytek/speech/setting/IseSettings.java
+ com.iflytek.speech.setting.IseSettings
+ com.iflytek.speech.setting.IseSettings$1
+ com.iflytek.speech.setting.IseSettings$2
+ com.iflytek.speech.setting.IseSettings$3
+ com.iflytek.speech.setting.IseSettings$4
+ com.iflytek.speech.setting.IseSettings$5
+ com.iflytek.speech.setting.IseSettings$6
+com/iflytek/voicedemo/TtsDemo.java
+ com.iflytek.voicedemo.TtsDemo
+ com.iflytek.voicedemo.TtsDemo$1
+ com.iflytek.voicedemo.TtsDemo$2
+ com.iflytek.voicedemo.TtsDemo$3
+ com.iflytek.voicedemo.TtsDemo$4
+com/iflytek/ise/result/util/ResultFormatUtil.java
+ com.iflytek.ise.result.util.ResultFormatUtil
+com/iflytek/speech/setting/TtsSettings.java
+ com.iflytek.speech.setting.TtsSettings
+com/iflytek/voicedemo/IatDemo.java
+ com.iflytek.voicedemo.IatDemo
+ com.iflytek.voicedemo.IatDemo$1
+ com.iflytek.voicedemo.IatDemo$2
+ com.iflytek.voicedemo.IatDemo$3
+ com.iflytek.voicedemo.IatDemo$4
+ com.iflytek.voicedemo.IatDemo$5
+com/iflytek/speech/util/JsonParser.java
+ com.iflytek.speech.util.JsonParser
+com/iflytek/ise/result/FinalResult.java
+ com.iflytek.ise.result.FinalResult
+com/iflytek/voicedemo/IseDemo.java
+ com.iflytek.voicedemo.IseDemo
+ com.iflytek.voicedemo.IseDemo$1
+com/iflytek/speech/util/FaceRect.java
+ com.iflytek.speech.util.FaceRect
+com/iflytek/ise/result/util/ResultTranslateUtil.java
+ com.iflytek.ise.result.util.ResultTranslateUtil
+com/iflytek/ise/result/ReadSentenceResult.java
+ com.iflytek.ise.result.ReadSentenceResult
+com/iflytek/ise/result/entity/Syll.java
+ com.iflytek.ise.result.entity.Syll
+com/iflytek/voicedemo/SpeechApp.java
+ com.iflytek.voicedemo.SpeechApp
+com/iflytek/ise/result/xml/XmlResultParser.java
+ com.iflytek.ise.result.xml.XmlResultParser
+com/iflytek/ise/result/entity/Phone.java
+ com.iflytek.ise.result.entity.Phone
+com/iflytek/speech/util/XmlParser.java
+ com.iflytek.speech.util.XmlParser
+com/iflytek/ise/result/ReadWordResult.java
+ com.iflytek.ise.result.ReadWordResult
+com/iflytek/speech/util/FucUtil.java
+ com.iflytek.speech.util.FucUtil
+com/iflytek/ise/result/Result.java
+ com.iflytek.ise.result.Result
+com/iflytek/voicedemo/faceonline/OnlineFaceDemo.java
+ com.iflytek.voicedemo.faceonline.OnlineFaceDemo
+ com.iflytek.voicedemo.faceonline.OnlineFaceDemo$1
+ com.iflytek.voicedemo.faceonline.OnlineFaceDemo$2
+ com.iflytek.voicedemo.faceonline.OnlineFaceDemo$3
+ com.iflytek.voicedemo.faceonline.OnlineFaceDemo$4
+ com.iflytek.voicedemo.faceonline.OnlineFaceDemo$5
+ com.iflytek.voicedemo.faceonline.OnlineFaceDemo$6
+com/iflytek/voicedemo/IdentifyGroup/GroupManagerActivity.java
+ com.iflytek.voicedemo.IdentifyGroup.GroupManagerActivity
+ com.iflytek.voicedemo.IdentifyGroup.GroupManagerActivity$1
+ com.iflytek.voicedemo.IdentifyGroup.GroupManagerActivity$2
+ com.iflytek.voicedemo.IdentifyGroup.GroupManagerActivity$3
+ com.iflytek.voicedemo.IdentifyGroup.GroupManagerActivity$4
+ com.iflytek.voicedemo.IdentifyGroup.GroupManagerActivity$5
+ com.iflytek.voicedemo.IdentifyGroup.GroupManagerActivity$MyAdapter
+com/iflytek/speech/setting/UrlSettings.java
+ com.iflytek.speech.setting.UrlSettings
+ com.iflytek.speech.setting.UrlSettings$1
+com/iflytek/ise/result/ReadSyllableResult.java
+ com.iflytek.ise.result.ReadSyllableResult
+com/iflytek/speech/util/SettingTextWatcher.java
+ com.iflytek.speech.util.SettingTextWatcher
+com/iflytek/ise/result/entity/Word.java
+ com.iflytek.ise.result.entity.Word
+com/iflytek/speech/util/FaceUtil.java
+ com.iflytek.speech.util.FaceUtil
+ com.iflytek.speech.util.FaceUtil$1CpuFilter
+com/iflytek/speech/setting/IatSettings.java
+ com.iflytek.speech.setting.IatSettings
+com/iflytek/ise/result/entity/Sentence.java
+ com.iflytek.ise.result.entity.Sentence
+com/iflytek/voicedemo/BuildConfig.java
+ com.iflytek.voicedemo.BuildConfig
+com/iflytek/voicedemo/AsrDemo.java
+ com.iflytek.voicedemo.AsrDemo
+ com.iflytek.voicedemo.AsrDemo$1
+ com.iflytek.voicedemo.AsrDemo$2
+ com.iflytek.voicedemo.AsrDemo$3
+ com.iflytek.voicedemo.AsrDemo$4
+com/iflytek/voicedemo/MainActivity.java
+ com.iflytek.voicedemo.MainActivity

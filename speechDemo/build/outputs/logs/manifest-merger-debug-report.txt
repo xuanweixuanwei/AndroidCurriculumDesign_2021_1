@@ -1,0 +1,328 @@
+-- Merging decision tree log ---
+manifest
+ADDED from D:\Android\AndroidStudioProjects\speechDemo\src\main\AndroidManifest.xml:2:1-92:12
+INJECTED from D:\Android\AndroidStudioProjects\speechDemo\src\main\AndroidManifest.xml:2:1-92:12
+INJECTED from D:\Android\AndroidStudioProjects\speechDemo\src\main\AndroidManifest.xml:2:1-92:12
+INJECTED from D:\Android\AndroidStudioProjects\speechDemo\src\main\AndroidManifest.xml:2:1-92:12
+MERGED from [androidx.legacy:legacy-support-v4:1.0.0] C:\Users\xuanwei\.gradle\caches\transforms-3\3fe5827d6ee265022c6c7d744237ebf4\transformed\legacy-support-v4-1.0.0\AndroidManifest.xml:17:1-22:12
+MERGED from [com.google.android.material:material:1.4.0] C:\Users\xuanwei\.gradle\caches\transforms-3\e44905d88435b8a284dfc0fee1bf9165\transformed\material-1.4.0\AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.media:media:1.0.0] C:\Users\xuanwei\.gradle\caches\transforms-3\a44f7d642c441ca604adf667f4646668\transformed\media-1.0.0\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.legacy:legacy-support-core-ui:1.0.0] C:\Users\xuanwei\.gradle\caches\transforms-3\913e08ed52afe8f9bdfeff7169cfe857\transformed\legacy-support-core-ui-1.0.0\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.dynamicanimation:dynamicanimation:1.0.0] C:\Users\xuanwei\.gradle\caches\transforms-3\ec14db118fa5a12c63b129931d41ad83\transformed\dynamicanimation-1.0.0\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.legacy:legacy-support-core-utils:1.0.0] C:\Users\xuanwei\.gradle\caches\transforms-3\3a91b684008f575ae984b8716902e3f7\transformed\legacy-support-core-utils-1.0.0\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.coordinatorlayout:coordinatorlayout:1.1.0] C:\Users\xuanwei\.gradle\caches\transforms-3\c22fd05136e22dd74f12fdb52c866d0a\transformed\coordinatorlayout-1.1.0\AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.constraintlayout:constraintlayout:2.0.1] C:\Users\xuanwei\.gradle\caches\transforms-3\c80fb2248081ca473de89fa44ae0377c\transformed\constraintlayout-2.0.1\AndroidManifest.xml:2:1-11:12
+MERGED from [androidx.transition:transition:1.2.0] C:\Users\xuanwei\.gradle\caches\transforms-3\06d232761adef0ba5b5d99fd1a4b3500\transformed\transition-1.2.0\AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.appcompat:appcompat:1.2.0] C:\Users\xuanwei\.gradle\caches\transforms-3\4f7fde6443b19e6ece3941e32d79f216\transformed\appcompat-1.2.0\AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.appcompat:appcompat-resources:1.2.0] C:\Users\xuanwei\.gradle\caches\transforms-3\f4f96b6f64c4e289016b728e9d598190\transformed\jetified-appcompat-resources-1.2.0\AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.vectordrawable:vectordrawable-animated:1.1.0] C:\Users\xuanwei\.gradle\caches\transforms-3\bf9fef39d4962548a4e4bead6bd316b6\transformed\vectordrawable-animated-1.1.0\AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.vectordrawable:vectordrawable:1.1.0] C:\Users\xuanwei\.gradle\caches\transforms-3\34e4afa6bdb61e696bb8f3d82c690a41\transformed\vectordrawable-1.1.0\AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.viewpager2:viewpager2:1.0.0] C:\Users\xuanwei\.gradle\caches\transforms-3\68653bf21883c8f561deda403f4d10fb\transformed\jetified-viewpager2-1.0.0\AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.fragment:fragment:1.1.0] C:\Users\xuanwei\.gradle\caches\transforms-3\37dd68a38dc2fe0f95c2ba962d982159\transformed\fragment-1.1.0\AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.loader:loader:1.0.0] C:\Users\xuanwei\.gradle\caches\transforms-3\4fb902d840465e2b9805977f1d6b945a\transformed\loader-1.0.0\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.viewpager:viewpager:1.0.0] C:\Users\xuanwei\.gradle\caches\transforms-3\5b5b966ca59807804aa23da69f0f2cc1\transformed\viewpager-1.0.0\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.drawerlayout:drawerlayout:1.0.0] C:\Users\xuanwei\.gradle\caches\transforms-3\06a90d9743f8212f77a343f46d78c090\transformed\drawerlayout-1.0.0\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.slidingpanelayout:slidingpanelayout:1.0.0] C:\Users\xuanwei\.gradle\caches\transforms-3\2f558a16ae7effefb4c40445cb99fcf6\transformed\slidingpanelayout-1.0.0\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.recyclerview:recyclerview:1.1.0] C:\Users\xuanwei\.gradle\caches\transforms-3\af07ceebc9ddad3887a8cc2866511b22\transformed\recyclerview-1.1.0\AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.customview:customview:1.0.0] C:\Users\xuanwei\.gradle\caches\transforms-3\ab184f952a956d2124517adce3ea9eec\transformed\customview-1.0.0\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.swiperefreshlayout:swiperefreshlayout:1.0.0] C:\Users\xuanwei\.gradle\caches\transforms-3\02ba2442eddfc12787d7e8f7834095e1\transformed\swiperefreshlayout-1.0.0\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.asynclayoutinflater:asynclayoutinflater:1.0.0] C:\Users\xuanwei\.gradle\caches\transforms-3\1d5929fdd2dd1eb6526d78cff549db56\transformed\asynclayoutinflater-1.0.0\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.activity:activity:1.0.0] C:\Users\xuanwei\.gradle\caches\transforms-3\325c92f53eda8c8102854a7546350aed\transformed\jetified-activity-1.0.0\AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.core:core:1.5.0] C:\Users\xuanwei\.gradle\caches\transforms-3\e759884e8e1539e68246ec4d8729cc98\transformed\core-1.5.0\AndroidManifest.xml:17:1-26:12
+MERGED from [androidx.cardview:cardview:1.0.0] C:\Users\xuanwei\.gradle\caches\transforms-3\f950e68cf2d530665e7ddc5a0bb6330c\transformed\cardview-1.0.0\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.documentfile:documentfile:1.0.0] C:\Users\xuanwei\.gradle\caches\transforms-3\23574aa646515120bc7d481972f71742\transformed\documentfile-1.0.0\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.localbroadcastmanager:localbroadcastmanager:1.0.0] C:\Users\xuanwei\.gradle\caches\transforms-3\4a686211be3134d52c983281414d9a4c\transformed\localbroadcastmanager-1.0.0\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.print:print:1.0.0] C:\Users\xuanwei\.gradle\caches\transforms-3\137fae5cb8b43fd4d77cda20fb259169\transformed\print-1.0.0\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.interpolator:interpolator:1.0.0] C:\Users\xuanwei\.gradle\caches\transforms-3\2c33c4bae6ea4f0acc28f0ec64c6b2d4\transformed\interpolator-1.0.0\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.cursoradapter:cursoradapter:1.0.0] C:\Users\xuanwei\.gradle\caches\transforms-3\769e8eeb090a40829e9ec33d2a71a862\transformed\cursoradapter-1.0.0\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] C:\Users\xuanwei\.gradle\caches\transforms-3\5861500acfc863b7035da42a520ef0d9\transformed\versionedparcelable-1.1.1\AndroidManifest.xml:17:1-27:12
+MERGED from [androidx.lifecycle:lifecycle-livedata:2.0.0] C:\Users\xuanwei\.gradle\caches\transforms-3\e39262abccdf4c3a9281c19542803319\transformed\lifecycle-livedata-2.0.0\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.lifecycle:lifecycle-livedata-core:2.0.0] C:\Users\xuanwei\.gradle\caches\transforms-3\98006fa0842eeb889f972732f9d31478\transformed\lifecycle-livedata-core-2.0.0\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.arch.core:core-runtime:2.0.0] C:\Users\xuanwei\.gradle\caches\transforms-3\e656f0c5b9b75f08d112991d26ac37df\transformed\core-runtime-2.0.0\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.lifecycle:lifecycle-runtime:2.1.0] C:\Users\xuanwei\.gradle\caches\transforms-3\9d414050ca8af8aaf07d560069d0353b\transformed\lifecycle-runtime-2.1.0\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.lifecycle:lifecycle-viewmodel:2.1.0] C:\Users\xuanwei\.gradle\caches\transforms-3\7f288a0b9bf5d3232f4a344936bfca78\transformed\lifecycle-viewmodel-2.1.0\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.savedstate:savedstate:1.0.0] C:\Users\xuanwei\.gradle\caches\transforms-3\3a94067bbc7a20922fd67b30f2364566\transformed\jetified-savedstate-1.0.0\AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.annotation:annotation-experimental:1.0.0] C:\Users\xuanwei\.gradle\caches\transforms-3\301b99617320b59a57400f8a9ec84a15\transformed\jetified-annotation-experimental-1.0.0\AndroidManifest.xml:17:1-24:12
+INJECTED from D:\Android\AndroidStudioProjects\speechDemo\src\main\AndroidManifest.xml:2:1-92:12
+INJECTED from D:\Android\AndroidStudioProjects\speechDemo\src\main\AndroidManifest.xml:2:1-92:12
+INJECTED from D:\Android\AndroidStudioProjects\speechDemo\src\main\AndroidManifest.xml:2:1-92:12
+	package
+		ADDED from D:\Android\AndroidStudioProjects\speechDemo\src\main\AndroidManifest.xml:3:5-36
+		INJECTED from D:\Android\AndroidStudioProjects\speechDemo\src\main\AndroidManifest.xml
+		INJECTED from D:\Android\AndroidStudioProjects\speechDemo\src\main\AndroidManifest.xml
+	android:versionName
+		ADDED from D:\Android\AndroidStudioProjects\speechDemo\src\main\AndroidManifest.xml:5:5-40
+		INJECTED from D:\Android\AndroidStudioProjects\speechDemo\src\main\AndroidManifest.xml
+		INJECTED from D:\Android\AndroidStudioProjects\speechDemo\src\main\AndroidManifest.xml
+	xmlns:android
+		ADDED from D:\Android\AndroidStudioProjects\speechDemo\src\main\AndroidManifest.xml:2:11-69
+	android:versionCode
+		ADDED from D:\Android\AndroidStudioProjects\speechDemo\src\main\AndroidManifest.xml:4:5-28
+		INJECTED from D:\Android\AndroidStudioProjects\speechDemo\src\main\AndroidManifest.xml
+		INJECTED from D:\Android\AndroidStudioProjects\speechDemo\src\main\AndroidManifest.xml
+uses-permission#android.permission.INTERNET
+ADDED from D:\Android\AndroidStudioProjects\speechDemo\src\main\AndroidManifest.xml:7:5-67
+	android:name
+		ADDED from D:\Android\AndroidStudioProjects\speechDemo\src\main\AndroidManifest.xml:7:22-64
+uses-permission#android.permission.RECORD_AUDIO
+ADDED from D:\Android\AndroidStudioProjects\speechDemo\src\main\AndroidManifest.xml:8:5-71
+	android:name
+		ADDED from D:\Android\AndroidStudioProjects\speechDemo\src\main\AndroidManifest.xml:8:22-68
+uses-permission#android.permission.CAMERA
+ADDED from D:\Android\AndroidStudioProjects\speechDemo\src\main\AndroidManifest.xml:9:5-65
+	android:name
+		ADDED from D:\Android\AndroidStudioProjects\speechDemo\src\main\AndroidManifest.xml:9:22-62
+uses-permission#android.permission.READ_PHONE_STATE
+ADDED from D:\Android\AndroidStudioProjects\speechDemo\src\main\AndroidManifest.xml:10:5-75
+	android:name
+		ADDED from D:\Android\AndroidStudioProjects\speechDemo\src\main\AndroidManifest.xml:10:22-72
+application
+ADDED from D:\Android\AndroidStudioProjects\speechDemo\src\main\AndroidManifest.xml:12:5-90:19
+MERGED from [com.google.android.material:material:1.4.0] C:\Users\xuanwei\.gradle\caches\transforms-3\e44905d88435b8a284dfc0fee1bf9165\transformed\material-1.4.0\AndroidManifest.xml:22:5-20
+MERGED from [com.google.android.material:material:1.4.0] C:\Users\xuanwei\.gradle\caches\transforms-3\e44905d88435b8a284dfc0fee1bf9165\transformed\material-1.4.0\AndroidManifest.xml:22:5-20
+MERGED from [androidx.constraintlayout:constraintlayout:2.0.1] C:\Users\xuanwei\.gradle\caches\transforms-3\c80fb2248081ca473de89fa44ae0377c\transformed\constraintlayout-2.0.1\AndroidManifest.xml:9:5-20
+MERGED from [androidx.constraintlayout:constraintlayout:2.0.1] C:\Users\xuanwei\.gradle\caches\transforms-3\c80fb2248081ca473de89fa44ae0377c\transformed\constraintlayout-2.0.1\AndroidManifest.xml:9:5-20
+MERGED from [androidx.core:core:1.5.0] C:\Users\xuanwei\.gradle\caches\transforms-3\e759884e8e1539e68246ec4d8729cc98\transformed\core-1.5.0\AndroidManifest.xml:24:5-89
+MERGED from [androidx.core:core:1.5.0] C:\Users\xuanwei\.gradle\caches\transforms-3\e759884e8e1539e68246ec4d8729cc98\transformed\core-1.5.0\AndroidManifest.xml:24:5-89
+MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] C:\Users\xuanwei\.gradle\caches\transforms-3\5861500acfc863b7035da42a520ef0d9\transformed\versionedparcelable-1.1.1\AndroidManifest.xml:24:5-25:19
+MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] C:\Users\xuanwei\.gradle\caches\transforms-3\5861500acfc863b7035da42a520ef0d9\transformed\versionedparcelable-1.1.1\AndroidManifest.xml:24:5-25:19
+	android:appComponentFactory
+		ADDED from [androidx.core:core:1.5.0] C:\Users\xuanwei\.gradle\caches\transforms-3\e759884e8e1539e68246ec4d8729cc98\transformed\core-1.5.0\AndroidManifest.xml:24:18-86
+	android:label
+		ADDED from D:\Android\AndroidStudioProjects\speechDemo\src\main\AndroidManifest.xml:15:9-31
+	android:icon
+		ADDED from D:\Android\AndroidStudioProjects\speechDemo\src\main\AndroidManifest.xml:13:9-38
+	android:name
+		ADDED from D:\Android\AndroidStudioProjects\speechDemo\src\main\AndroidManifest.xml:14:9-33
+provider#androidx.core.content.FileProvider
+ADDED from D:\Android\AndroidStudioProjects\speechDemo\src\main\AndroidManifest.xml:16:9-24:20
+	android:grantUriPermissions
+		ADDED from D:\Android\AndroidStudioProjects\speechDemo\src\main\AndroidManifest.xml:20:13-47
+	android:authorities
+		ADDED from D:\Android\AndroidStudioProjects\speechDemo\src\main\AndroidManifest.xml:18:13-69
+	android:exported
+		ADDED from D:\Android\AndroidStudioProjects\speechDemo\src\main\AndroidManifest.xml:19:13-37
+	android:name
+		ADDED from D:\Android\AndroidStudioProjects\speechDemo\src\main\AndroidManifest.xml:17:13-62
+meta-data#android.support.FILE_PROVIDER_PATHS
+ADDED from D:\Android\AndroidStudioProjects\speechDemo\src\main\AndroidManifest.xml:21:13-23:54
+	android:resource
+		ADDED from D:\Android\AndroidStudioProjects\speechDemo\src\main\AndroidManifest.xml:23:17-51
+	android:name
+		ADDED from D:\Android\AndroidStudioProjects\speechDemo\src\main\AndroidManifest.xml:22:17-67
+activity#com.iflytek.voicedemo.MainActivity
+ADDED from D:\Android\AndroidStudioProjects\speechDemo\src\main\AndroidManifest.xml:26:9-38:20
+	android:screenOrientation
+		ADDED from D:\Android\AndroidStudioProjects\speechDemo\src\main\AndroidManifest.xml:31:13-49
+	android:label
+		ADDED from D:\Android\AndroidStudioProjects\speechDemo\src\main\AndroidManifest.xml:30:13-35
+	android:exported
+		ADDED from D:\Android\AndroidStudioProjects\speechDemo\src\main\AndroidManifest.xml:32:13-36
+	android:configChanges
+		ADDED from D:\Android\AndroidStudioProjects\speechDemo\src\main\AndroidManifest.xml:28:13-133
+	android:icon
+		ADDED from D:\Android\AndroidStudioProjects\speechDemo\src\main\AndroidManifest.xml:29:13-42
+	android:name
+		ADDED from D:\Android\AndroidStudioProjects\speechDemo\src\main\AndroidManifest.xml:27:13-62
+intent-filter#action:name:android.intent.action.MAIN+category:name:android.intent.category.LAUNCHER
+ADDED from D:\Android\AndroidStudioProjects\speechDemo\src\main\AndroidManifest.xml:33:13-37:29
+action#android.intent.action.MAIN
+ADDED from D:\Android\AndroidStudioProjects\speechDemo\src\main\AndroidManifest.xml:34:17-69
+	android:name
+		ADDED from D:\Android\AndroidStudioProjects\speechDemo\src\main\AndroidManifest.xml:34:25-66
+category#android.intent.category.LAUNCHER
+ADDED from D:\Android\AndroidStudioProjects\speechDemo\src\main\AndroidManifest.xml:36:17-77
+	android:name
+		ADDED from D:\Android\AndroidStudioProjects\speechDemo\src\main\AndroidManifest.xml:36:27-74
+activity#com.iflytek.speech.setting.TtsSettings
+ADDED from D:\Android\AndroidStudioProjects\speechDemo\src\main\AndroidManifest.xml:39:9-75
+	android:name
+		ADDED from D:\Android\AndroidStudioProjects\speechDemo\src\main\AndroidManifest.xml:39:19-72
+activity#com.iflytek.speech.setting.IatSettings
+ADDED from D:\Android\AndroidStudioProjects\speechDemo\src\main\AndroidManifest.xml:40:9-75
+	android:name
+		ADDED from D:\Android\AndroidStudioProjects\speechDemo\src\main\AndroidManifest.xml:40:19-72
+activity#com.iflytek.voicedemo.IatDemo
+ADDED from D:\Android\AndroidStudioProjects\speechDemo\src\main\AndroidManifest.xml:41:9-44:52
+	android:screenOrientation
+		ADDED from D:\Android\AndroidStudioProjects\speechDemo\src\main\AndroidManifest.xml:44:13-49
+	android:configChanges
+		ADDED from D:\Android\AndroidStudioProjects\speechDemo\src\main\AndroidManifest.xml:43:13-133
+	android:name
+		ADDED from D:\Android\AndroidStudioProjects\speechDemo\src\main\AndroidManifest.xml:42:13-57
+activity#com.iflytek.voicedemo.AsrDemo
+ADDED from D:\Android\AndroidStudioProjects\speechDemo\src\main\AndroidManifest.xml:45:9-48:52
+	android:screenOrientation
+		ADDED from D:\Android\AndroidStudioProjects\speechDemo\src\main\AndroidManifest.xml:48:13-49
+	android:configChanges
+		ADDED from D:\Android\AndroidStudioProjects\speechDemo\src\main\AndroidManifest.xml:47:13-133
+	android:name
+		ADDED from D:\Android\AndroidStudioProjects\speechDemo\src\main\AndroidManifest.xml:46:13-57
+activity#com.iflytek.voicedemo.TtsDemo
+ADDED from D:\Android\AndroidStudioProjects\speechDemo\src\main\AndroidManifest.xml:49:9-52:52
+	android:screenOrientation
+		ADDED from D:\Android\AndroidStudioProjects\speechDemo\src\main\AndroidManifest.xml:52:13-49
+	android:configChanges
+		ADDED from D:\Android\AndroidStudioProjects\speechDemo\src\main\AndroidManifest.xml:51:13-133
+	android:name
+		ADDED from D:\Android\AndroidStudioProjects\speechDemo\src\main\AndroidManifest.xml:50:13-57
+activity#com.iflytek.voicedemo.IseDemo
+ADDED from D:\Android\AndroidStudioProjects\speechDemo\src\main\AndroidManifest.xml:53:9-56:52
+	android:screenOrientation
+		ADDED from D:\Android\AndroidStudioProjects\speechDemo\src\main\AndroidManifest.xml:56:13-49
+	android:configChanges
+		ADDED from D:\Android\AndroidStudioProjects\speechDemo\src\main\AndroidManifest.xml:55:13-133
+	android:name
+		ADDED from D:\Android\AndroidStudioProjects\speechDemo\src\main\AndroidManifest.xml:54:13-57
+activity#com.iflytek.voicedemo.faceonline.OnlineFaceDemo
+ADDED from D:\Android\AndroidStudioProjects\speechDemo\src\main\AndroidManifest.xml:57:9-60:52
+	android:screenOrientation
+		ADDED from D:\Android\AndroidStudioProjects\speechDemo\src\main\AndroidManifest.xml:60:13-49
+	android:configChanges
+		ADDED from D:\Android\AndroidStudioProjects\speechDemo\src\main\AndroidManifest.xml:59:13-133
+	android:name
+		ADDED from D:\Android\AndroidStudioProjects\speechDemo\src\main\AndroidManifest.xml:58:13-75
+activity#com.iflytek.voicedemo.IdentifyGroup.GroupManagerActivity
+ADDED from D:\Android\AndroidStudioProjects\speechDemo\src\main\AndroidManifest.xml:61:9-64:52
+	android:screenOrientation
+		ADDED from D:\Android\AndroidStudioProjects\speechDemo\src\main\AndroidManifest.xml:64:13-49
+	android:configChanges
+		ADDED from D:\Android\AndroidStudioProjects\speechDemo\src\main\AndroidManifest.xml:63:13-133
+	android:name
+		ADDED from D:\Android\AndroidStudioProjects\speechDemo\src\main\AndroidManifest.xml:62:13-84
+activity#com.iflytek.voicedemo.IdentifyGroup.FaceIdentifyActivity
+ADDED from D:\Android\AndroidStudioProjects\speechDemo\src\main\AndroidManifest.xml:65:9-68:52
+	android:screenOrientation
+		ADDED from D:\Android\AndroidStudioProjects\speechDemo\src\main\AndroidManifest.xml:68:13-49
+	android:configChanges
+		ADDED from D:\Android\AndroidStudioProjects\speechDemo\src\main\AndroidManifest.xml:67:13-133
+	android:name
+		ADDED from D:\Android\AndroidStudioProjects\speechDemo\src\main\AndroidManifest.xml:66:13-84
+activity#com.iflytek.voicedemo.IdentifyGroup.ResultIdentifyActivity
+ADDED from D:\Android\AndroidStudioProjects\speechDemo\src\main\AndroidManifest.xml:69:9-72:52
+	android:screenOrientation
+		ADDED from D:\Android\AndroidStudioProjects\speechDemo\src\main\AndroidManifest.xml:72:13-49
+	android:configChanges
+		ADDED from D:\Android\AndroidStudioProjects\speechDemo\src\main\AndroidManifest.xml:71:13-133
+	android:name
+		ADDED from D:\Android\AndroidStudioProjects\speechDemo\src\main\AndroidManifest.xml:70:13-86
+activity#com.iflytek.speech.setting.IseSettings
+ADDED from D:\Android\AndroidStudioProjects\speechDemo\src\main\AndroidManifest.xml:73:9-76:52
+	android:screenOrientation
+		ADDED from D:\Android\AndroidStudioProjects\speechDemo\src\main\AndroidManifest.xml:76:13-49
+	android:configChanges
+		ADDED from D:\Android\AndroidStudioProjects\speechDemo\src\main\AndroidManifest.xml:75:13-133
+	android:name
+		ADDED from D:\Android\AndroidStudioProjects\speechDemo\src\main\AndroidManifest.xml:74:13-66
+activity#com.iflytek.speech.setting.UrlSettings
+ADDED from D:\Android\AndroidStudioProjects\speechDemo\src\main\AndroidManifest.xml:77:9-80:52
+	android:screenOrientation
+		ADDED from D:\Android\AndroidStudioProjects\speechDemo\src\main\AndroidManifest.xml:80:13-49
+	android:configChanges
+		ADDED from D:\Android\AndroidStudioProjects\speechDemo\src\main\AndroidManifest.xml:79:13-133
+	android:name
+		ADDED from D:\Android\AndroidStudioProjects\speechDemo\src\main\AndroidManifest.xml:78:13-66
+meta-data#IFLYTEK_APPKEY
+ADDED from D:\Android\AndroidStudioProjects\speechDemo\src\main\AndroidManifest.xml:82:9-84:42
+	android:value
+		ADDED from D:\Android\AndroidStudioProjects\speechDemo\src\main\AndroidManifest.xml:84:13-29
+	android:name
+		ADDED from D:\Android\AndroidStudioProjects\speechDemo\src\main\AndroidManifest.xml:83:13-42
+meta-data#IFLYTEK_CHANNEL
+ADDED from D:\Android\AndroidStudioProjects\speechDemo\src\main\AndroidManifest.xml:85:9-87:44
+	android:value
+		ADDED from D:\Android\AndroidStudioProjects\speechDemo\src\main\AndroidManifest.xml:87:13-41
+	android:name
+		ADDED from D:\Android\AndroidStudioProjects\speechDemo\src\main\AndroidManifest.xml:86:13-43
+uses-sdk
+INJECTED from D:\Android\AndroidStudioProjects\speechDemo\src\main\AndroidManifest.xml reason: use-sdk injection requested
+INJECTED from D:\Android\AndroidStudioProjects\speechDemo\src\main\AndroidManifest.xml
+INJECTED from D:\Android\AndroidStudioProjects\speechDemo\src\main\AndroidManifest.xml
+MERGED from [androidx.legacy:legacy-support-v4:1.0.0] C:\Users\xuanwei\.gradle\caches\transforms-3\3fe5827d6ee265022c6c7d744237ebf4\transformed\legacy-support-v4-1.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.legacy:legacy-support-v4:1.0.0] C:\Users\xuanwei\.gradle\caches\transforms-3\3fe5827d6ee265022c6c7d744237ebf4\transformed\legacy-support-v4-1.0.0\AndroidManifest.xml:20:5-44
+MERGED from [com.google.android.material:material:1.4.0] C:\Users\xuanwei\.gradle\caches\transforms-3\e44905d88435b8a284dfc0fee1bf9165\transformed\material-1.4.0\AndroidManifest.xml:20:5-44
+MERGED from [com.google.android.material:material:1.4.0] C:\Users\xuanwei\.gradle\caches\transforms-3\e44905d88435b8a284dfc0fee1bf9165\transformed\material-1.4.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.media:media:1.0.0] C:\Users\xuanwei\.gradle\caches\transforms-3\a44f7d642c441ca604adf667f4646668\transformed\media-1.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.media:media:1.0.0] C:\Users\xuanwei\.gradle\caches\transforms-3\a44f7d642c441ca604adf667f4646668\transformed\media-1.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.legacy:legacy-support-core-ui:1.0.0] C:\Users\xuanwei\.gradle\caches\transforms-3\913e08ed52afe8f9bdfeff7169cfe857\transformed\legacy-support-core-ui-1.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.legacy:legacy-support-core-ui:1.0.0] C:\Users\xuanwei\.gradle\caches\transforms-3\913e08ed52afe8f9bdfeff7169cfe857\transformed\legacy-support-core-ui-1.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.dynamicanimation:dynamicanimation:1.0.0] C:\Users\xuanwei\.gradle\caches\transforms-3\ec14db118fa5a12c63b129931d41ad83\transformed\dynamicanimation-1.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.dynamicanimation:dynamicanimation:1.0.0] C:\Users\xuanwei\.gradle\caches\transforms-3\ec14db118fa5a12c63b129931d41ad83\transformed\dynamicanimation-1.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.legacy:legacy-support-core-utils:1.0.0] C:\Users\xuanwei\.gradle\caches\transforms-3\3a91b684008f575ae984b8716902e3f7\transformed\legacy-support-core-utils-1.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.legacy:legacy-support-core-utils:1.0.0] C:\Users\xuanwei\.gradle\caches\transforms-3\3a91b684008f575ae984b8716902e3f7\transformed\legacy-support-core-utils-1.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.coordinatorlayout:coordinatorlayout:1.1.0] C:\Users\xuanwei\.gradle\caches\transforms-3\c22fd05136e22dd74f12fdb52c866d0a\transformed\coordinatorlayout-1.1.0\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.coordinatorlayout:coordinatorlayout:1.1.0] C:\Users\xuanwei\.gradle\caches\transforms-3\c22fd05136e22dd74f12fdb52c866d0a\transformed\coordinatorlayout-1.1.0\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.constraintlayout:constraintlayout:2.0.1] C:\Users\xuanwei\.gradle\caches\transforms-3\c80fb2248081ca473de89fa44ae0377c\transformed\constraintlayout-2.0.1\AndroidManifest.xml:5:5-7:41
+MERGED from [androidx.constraintlayout:constraintlayout:2.0.1] C:\Users\xuanwei\.gradle\caches\transforms-3\c80fb2248081ca473de89fa44ae0377c\transformed\constraintlayout-2.0.1\AndroidManifest.xml:5:5-7:41
+MERGED from [androidx.transition:transition:1.2.0] C:\Users\xuanwei\.gradle\caches\transforms-3\06d232761adef0ba5b5d99fd1a4b3500\transformed\transition-1.2.0\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.transition:transition:1.2.0] C:\Users\xuanwei\.gradle\caches\transforms-3\06d232761adef0ba5b5d99fd1a4b3500\transformed\transition-1.2.0\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.appcompat:appcompat:1.2.0] C:\Users\xuanwei\.gradle\caches\transforms-3\4f7fde6443b19e6ece3941e32d79f216\transformed\appcompat-1.2.0\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.appcompat:appcompat:1.2.0] C:\Users\xuanwei\.gradle\caches\transforms-3\4f7fde6443b19e6ece3941e32d79f216\transformed\appcompat-1.2.0\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.appcompat:appcompat-resources:1.2.0] C:\Users\xuanwei\.gradle\caches\transforms-3\f4f96b6f64c4e289016b728e9d598190\transformed\jetified-appcompat-resources-1.2.0\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.appcompat:appcompat-resources:1.2.0] C:\Users\xuanwei\.gradle\caches\transforms-3\f4f96b6f64c4e289016b728e9d598190\transformed\jetified-appcompat-resources-1.2.0\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.vectordrawable:vectordrawable-animated:1.1.0] C:\Users\xuanwei\.gradle\caches\transforms-3\bf9fef39d4962548a4e4bead6bd316b6\transformed\vectordrawable-animated-1.1.0\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.vectordrawable:vectordrawable-animated:1.1.0] C:\Users\xuanwei\.gradle\caches\transforms-3\bf9fef39d4962548a4e4bead6bd316b6\transformed\vectordrawable-animated-1.1.0\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.vectordrawable:vectordrawable:1.1.0] C:\Users\xuanwei\.gradle\caches\transforms-3\34e4afa6bdb61e696bb8f3d82c690a41\transformed\vectordrawable-1.1.0\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.vectordrawable:vectordrawable:1.1.0] C:\Users\xuanwei\.gradle\caches\transforms-3\34e4afa6bdb61e696bb8f3d82c690a41\transformed\vectordrawable-1.1.0\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.viewpager2:viewpager2:1.0.0] C:\Users\xuanwei\.gradle\caches\transforms-3\68653bf21883c8f561deda403f4d10fb\transformed\jetified-viewpager2-1.0.0\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.viewpager2:viewpager2:1.0.0] C:\Users\xuanwei\.gradle\caches\transforms-3\68653bf21883c8f561deda403f4d10fb\transformed\jetified-viewpager2-1.0.0\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.fragment:fragment:1.1.0] C:\Users\xuanwei\.gradle\caches\transforms-3\37dd68a38dc2fe0f95c2ba962d982159\transformed\fragment-1.1.0\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.fragment:fragment:1.1.0] C:\Users\xuanwei\.gradle\caches\transforms-3\37dd68a38dc2fe0f95c2ba962d982159\transformed\fragment-1.1.0\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.loader:loader:1.0.0] C:\Users\xuanwei\.gradle\caches\transforms-3\4fb902d840465e2b9805977f1d6b945a\transformed\loader-1.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.loader:loader:1.0.0] C:\Users\xuanwei\.gradle\caches\transforms-3\4fb902d840465e2b9805977f1d6b945a\transformed\loader-1.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.viewpager:viewpager:1.0.0] C:\Users\xuanwei\.gradle\caches\transforms-3\5b5b966ca59807804aa23da69f0f2cc1\transformed\viewpager-1.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.viewpager:viewpager:1.0.0] C:\Users\xuanwei\.gradle\caches\transforms-3\5b5b966ca59807804aa23da69f0f2cc1\transformed\viewpager-1.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.drawerlayout:drawerlayout:1.0.0] C:\Users\xuanwei\.gradle\caches\transforms-3\06a90d9743f8212f77a343f46d78c090\transformed\drawerlayout-1.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.drawerlayout:drawerlayout:1.0.0] C:\Users\xuanwei\.gradle\caches\transforms-3\06a90d9743f8212f77a343f46d78c090\transformed\drawerlayout-1.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.slidingpanelayout:slidingpanelayout:1.0.0] C:\Users\xuanwei\.gradle\caches\transforms-3\2f558a16ae7effefb4c40445cb99fcf6\transformed\slidingpanelayout-1.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.slidingpanelayout:slidingpanelayout:1.0.0] C:\Users\xuanwei\.gradle\caches\transforms-3\2f558a16ae7effefb4c40445cb99fcf6\transformed\slidingpanelayout-1.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.recyclerview:recyclerview:1.1.0] C:\Users\xuanwei\.gradle\caches\transforms-3\af07ceebc9ddad3887a8cc2866511b22\transformed\recyclerview-1.1.0\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.recyclerview:recyclerview:1.1.0] C:\Users\xuanwei\.gradle\caches\transforms-3\af07ceebc9ddad3887a8cc2866511b22\transformed\recyclerview-1.1.0\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.customview:customview:1.0.0] C:\Users\xuanwei\.gradle\caches\transforms-3\ab184f952a956d2124517adce3ea9eec\transformed\customview-1.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.customview:customview:1.0.0] C:\Users\xuanwei\.gradle\caches\transforms-3\ab184f952a956d2124517adce3ea9eec\transformed\customview-1.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.swiperefreshlayout:swiperefreshlayout:1.0.0] C:\Users\xuanwei\.gradle\caches\transforms-3\02ba2442eddfc12787d7e8f7834095e1\transformed\swiperefreshlayout-1.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.swiperefreshlayout:swiperefreshlayout:1.0.0] C:\Users\xuanwei\.gradle\caches\transforms-3\02ba2442eddfc12787d7e8f7834095e1\transformed\swiperefreshlayout-1.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.asynclayoutinflater:asynclayoutinflater:1.0.0] C:\Users\xuanwei\.gradle\caches\transforms-3\1d5929fdd2dd1eb6526d78cff549db56\transformed\asynclayoutinflater-1.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.asynclayoutinflater:asynclayoutinflater:1.0.0] C:\Users\xuanwei\.gradle\caches\transforms-3\1d5929fdd2dd1eb6526d78cff549db56\transformed\asynclayoutinflater-1.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.activity:activity:1.0.0] C:\Users\xuanwei\.gradle\caches\transforms-3\325c92f53eda8c8102854a7546350aed\transformed\jetified-activity-1.0.0\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.activity:activity:1.0.0] C:\Users\xuanwei\.gradle\caches\transforms-3\325c92f53eda8c8102854a7546350aed\transformed\jetified-activity-1.0.0\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.core:core:1.5.0] C:\Users\xuanwei\.gradle\caches\transforms-3\e759884e8e1539e68246ec4d8729cc98\transformed\core-1.5.0\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.core:core:1.5.0] C:\Users\xuanwei\.gradle\caches\transforms-3\e759884e8e1539e68246ec4d8729cc98\transformed\core-1.5.0\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.cardview:cardview:1.0.0] C:\Users\xuanwei\.gradle\caches\transforms-3\f950e68cf2d530665e7ddc5a0bb6330c\transformed\cardview-1.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.cardview:cardview:1.0.0] C:\Users\xuanwei\.gradle\caches\transforms-3\f950e68cf2d530665e7ddc5a0bb6330c\transformed\cardview-1.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.documentfile:documentfile:1.0.0] C:\Users\xuanwei\.gradle\caches\transforms-3\23574aa646515120bc7d481972f71742\transformed\documentfile-1.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.documentfile:documentfile:1.0.0] C:\Users\xuanwei\.gradle\caches\transforms-3\23574aa646515120bc7d481972f71742\transformed\documentfile-1.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.localbroadcastmanager:localbroadcastmanager:1.0.0] C:\Users\xuanwei\.gradle\caches\transforms-3\4a686211be3134d52c983281414d9a4c\transformed\localbroadcastmanager-1.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.localbroadcastmanager:localbroadcastmanager:1.0.0] C:\Users\xuanwei\.gradle\caches\transforms-3\4a686211be3134d52c983281414d9a4c\transformed\localbroadcastmanager-1.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.print:print:1.0.0] C:\Users\xuanwei\.gradle\caches\transforms-3\137fae5cb8b43fd4d77cda20fb259169\transformed\print-1.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.print:print:1.0.0] C:\Users\xuanwei\.gradle\caches\transforms-3\137fae5cb8b43fd4d77cda20fb259169\transformed\print-1.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.interpolator:interpolator:1.0.0] C:\Users\xuanwei\.gradle\caches\transforms-3\2c33c4bae6ea4f0acc28f0ec64c6b2d4\transformed\interpolator-1.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.interpolator:interpolator:1.0.0] C:\Users\xuanwei\.gradle\caches\transforms-3\2c33c4bae6ea4f0acc28f0ec64c6b2d4\transformed\interpolator-1.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.cursoradapter:cursoradapter:1.0.0] C:\Users\xuanwei\.gradle\caches\transforms-3\769e8eeb090a40829e9ec33d2a71a862\transformed\cursoradapter-1.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.cursoradapter:cursoradapter:1.0.0] C:\Users\xuanwei\.gradle\caches\transforms-3\769e8eeb090a40829e9ec33d2a71a862\transformed\cursoradapter-1.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] C:\Users\xuanwei\.gradle\caches\transforms-3\5861500acfc863b7035da42a520ef0d9\transformed\versionedparcelable-1.1.1\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] C:\Users\xuanwei\.gradle\caches\transforms-3\5861500acfc863b7035da42a520ef0d9\transformed\versionedparcelable-1.1.1\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.lifecycle:lifecycle-livedata:2.0.0] C:\Users\xuanwei\.gradle\caches\transforms-3\e39262abccdf4c3a9281c19542803319\transformed\lifecycle-livedata-2.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-livedata:2.0.0] C:\Users\xuanwei\.gradle\caches\transforms-3\e39262abccdf4c3a9281c19542803319\transformed\lifecycle-livedata-2.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-livedata-core:2.0.0] C:\Users\xuanwei\.gradle\caches\transforms-3\98006fa0842eeb889f972732f9d31478\transformed\lifecycle-livedata-core-2.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-livedata-core:2.0.0] C:\Users\xuanwei\.gradle\caches\transforms-3\98006fa0842eeb889f972732f9d31478\transformed\lifecycle-livedata-core-2.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.arch.core:core-runtime:2.0.0] C:\Users\xuanwei\.gradle\caches\transforms-3\e656f0c5b9b75f08d112991d26ac37df\transformed\core-runtime-2.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.arch.core:core-runtime:2.0.0] C:\Users\xuanwei\.gradle\caches\transforms-3\e656f0c5b9b75f08d112991d26ac37df\transformed\core-runtime-2.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-runtime:2.1.0] C:\Users\xuanwei\.gradle\caches\transforms-3\9d414050ca8af8aaf07d560069d0353b\transformed\lifecycle-runtime-2.1.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-runtime:2.1.0] C:\Users\xuanwei\.gradle\caches\transforms-3\9d414050ca8af8aaf07d560069d0353b\transformed\lifecycle-runtime-2.1.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-viewmodel:2.1.0] C:\Users\xuanwei\.gradle\caches\transforms-3\7f288a0b9bf5d3232f4a344936bfca78\transformed\lifecycle-viewmodel-2.1.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-viewmodel:2.1.0] C:\Users\xuanwei\.gradle\caches\transforms-3\7f288a0b9bf5d3232f4a344936bfca78\transformed\lifecycle-viewmodel-2.1.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.savedstate:savedstate:1.0.0] C:\Users\xuanwei\.gradle\caches\transforms-3\3a94067bbc7a20922fd67b30f2364566\transformed\jetified-savedstate-1.0.0\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.savedstate:savedstate:1.0.0] C:\Users\xuanwei\.gradle\caches\transforms-3\3a94067bbc7a20922fd67b30f2364566\transformed\jetified-savedstate-1.0.0\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.annotation:annotation-experimental:1.0.0] C:\Users\xuanwei\.gradle\caches\transforms-3\301b99617320b59a57400f8a9ec84a15\transformed\jetified-annotation-experimental-1.0.0\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.annotation:annotation-experimental:1.0.0] C:\Users\xuanwei\.gradle\caches\transforms-3\301b99617320b59a57400f8a9ec84a15\transformed\jetified-annotation-experimental-1.0.0\AndroidManifest.xml:20:5-22:41
+INJECTED from D:\Android\AndroidStudioProjects\speechDemo\src\main\AndroidManifest.xml
+INJECTED from D:\Android\AndroidStudioProjects\speechDemo\src\main\AndroidManifest.xml
+	android:targetSdkVersion
+		INJECTED from D:\Android\AndroidStudioProjects\speechDemo\src\main\AndroidManifest.xml
+		ADDED from D:\Android\AndroidStudioProjects\speechDemo\src\main\AndroidManifest.xml
+		INJECTED from D:\Android\AndroidStudioProjects\speechDemo\src\main\AndroidManifest.xml
+	android:minSdkVersion
+		INJECTED from D:\Android\AndroidStudioProjects\speechDemo\src\main\AndroidManifest.xml
+		ADDED from D:\Android\AndroidStudioProjects\speechDemo\src\main\AndroidManifest.xml
+		INJECTED from D:\Android\AndroidStudioProjects\speechDemo\src\main\AndroidManifest.xml

@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activity.VoiceSynthesisActivity"
+    android:orientation="vertical">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="9"
+        android:background="@drawable/gradient_button_down"
+        android:layout_marginHorizontal="10dp"
+        android:layout_marginTop="10dp"
+        android:orientation="vertical"
+        >
+        <TextView
+            android:id="@+id/playProgressInfo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="10sp"
+            android:text="播放进度"
+            android:visibility="gone"
+            android:textColor="@color/white"
+            tools:ignore="NestedWeights,SmallSp"
+            android:ellipsize="end"
+            />
+        <androidx.core.widget.NestedScrollView
+            android:id="@+id/scrollView"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="9"
+            android:scrollbars="vertical"
+            android:layout_gravity="top"
+           >
+
+            <EditText
+                android:id="@+id/et_input"
+                android:hint="@string/input_Hint"
+                android:inputType="textMultiLine"
+                android:background="@null"
+                android:paddingHorizontal="15dp"
+                android:layout_marginTop="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:textColor="@color/white"
+                android:gravity="start"
+                android:textColorHint="@color/common_text_hint_color"
+
+                />
+
+        </androidx.core.widget.NestedScrollView>
+    </LinearLayout>
+
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:layout_marginHorizontal="10dp"
+        android:layout_marginBottom="10dp"
+        android:background="@drawable/gradient_button_up">
+        <ImageButton
+            android:id="@+id/open_folder"
+            android:contentDescription="@string/open_folder"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:scaleType="centerInside"
+            android:src="@drawable/vector_drawable_folder"
+            android:background="#00000000"
+            />
+        <ImageButton
+            android:id="@+id/delete_input_text"
+            android:contentDescription="@string/delete_text"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:scaleType="centerInside"
+            android:src="@drawable/vector_drawable_delete_2"
+            android:background="#00000000"
+
+            />
+        <ImageButton
+            android:id="@+id/audio_control"
+            android:contentDescription="@string/audio_control"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:scaleType="centerInside"
+            android:src="@drawable/vector_drawable_start_synthesis"
+            android:background="#00000000"
+            />
+        <ImageButton
+            android:id="@+id/cancel_synthesis_task"
+            android:contentDescription="@string/cancel_synthesis_teak"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:scaleType="centerInside"
+            android:src="@drawable/vector_drawable_cancel_task"
+            android:background="#00000000"
+            />
+
+    </LinearLayout>
+</LinearLayout>

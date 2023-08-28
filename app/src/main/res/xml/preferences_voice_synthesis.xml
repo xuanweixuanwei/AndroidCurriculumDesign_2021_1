@@ -1,0 +1,49 @@
+<PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <PreferenceCategory app:title="@string/vs_messages_header">
+
+
+        <EditTextPreference
+            app:dialogTitle="请输入语速:在线(0-100)本地(0-200)"
+            app:key="speed_preference"
+            app:defaultValue="50"
+            app:summary="默认值：50 "
+            app:title="语速"
+            app:useSimpleSummaryProvider="true"
+            />
+        <EditTextPreference
+            app:dialogTitle="请输入音调(0-100)"
+            app:key="pitch_preference"
+            app:defaultValue="50"
+            app:summary="默认值：50 "
+            app:title="音调"
+            app:useSimpleSummaryProvider="true"/>
+        <EditTextPreference
+            app:dialogTitle="请输入音量(0-100)"
+            app:key="volume_preference"
+            app:defaultValue="50"
+            app:summary="默认值：50 "
+            app:title="音量"
+            app:useSimpleSummaryProvider="true"
+            />
+        <ListPreference
+            app:defaultValue="3"
+            app:entries="@array/stream_entries"
+            app:entryValues="@array/stream_values"
+            app:key="stream_preference"
+            app:title="音频流类型"
+            app:useSimpleSummaryProvider="true"/>
+
+        <ListPreference
+            app:defaultValue="1"
+            app:entries="@array/input_way_entries"
+            app:entryValues="@array/input_way_values"
+            app:key="file_input_way_preference"
+            app:title="选取文件后写入输入框的方式"
+            app:useSimpleSummaryProvider="true"/>
+
+    </PreferenceCategory>
+
+
+
+</PreferenceScreen>

@@ -1,0 +1,130 @@
+[
+    {
+        "merged": "D:\\Android\\AndroidStudioProjects\\speechDemo\\build\\intermediates\\merged_res\\debug\\layout_isrdemo.xml.flat",
+        "source": "D:\\Android\\AndroidStudioProjects\\speechDemo\\src\\main\\res\\layout\\isrdemo.xml"
+    },
+    {
+        "merged": "D:\\Android\\AndroidStudioProjects\\speechDemo\\build\\intermediates\\merged_res\\debug\\layout_ifly_layout_mnotice_image.xml.flat",
+        "source": "D:\\Android\\AndroidStudioProjects\\speechDemo\\src\\main\\res\\layout\\ifly_layout_mnotice_image.xml"
+    },
+    {
+        "merged": "D:\\Android\\AndroidStudioProjects\\speechDemo\\build\\intermediates\\merged_res\\debug\\drawable_setting_p.png.flat",
+        "source": "D:\\Android\\AndroidStudioProjects\\speechDemo\\src\\main\\res\\drawable\\setting_p.png"
+    },
+    {
+        "merged": "D:\\Android\\AndroidStudioProjects\\speechDemo\\build\\intermediates\\merged_res\\debug\\drawable-hdpi_no_photo.png.flat",
+        "source": "D:\\Android\\AndroidStudioProjects\\speechDemo\\src\\main\\res\\drawable-hdpi\\no_photo.png"
+    },
+    {
+        "merged": "D:\\Android\\AndroidStudioProjects\\speechDemo\\build\\intermediates\\merged_res\\debug\\drawable_list_bg_color.xml.flat",
+        "source": "D:\\Android\\AndroidStudioProjects\\speechDemo\\src\\main\\res\\drawable\\list_bg_color.xml"
+    },
+    {
+        "merged": "D:\\Android\\AndroidStudioProjects\\speechDemo\\build\\intermediates\\merged_res\\debug\\layout_activity_face_identify.xml.flat",
+        "source": "D:\\Android\\AndroidStudioProjects\\speechDemo\\src\\main\\res\\layout\\activity_face_identify.xml"
+    },
+    {
+        "merged": "D:\\Android\\AndroidStudioProjects\\speechDemo\\build\\intermediates\\merged_res\\debug\\layout_item_group.xml.flat",
+        "source": "D:\\Android\\AndroidStudioProjects\\speechDemo\\src\\main\\res\\layout\\item_group.xml"
+    },
+    {
+        "merged": "D:\\Android\\AndroidStudioProjects\\speechDemo\\build\\intermediates\\merged_res\\debug\\layout_group_header_layout.xml.flat",
+        "source": "D:\\Android\\AndroidStudioProjects\\speechDemo\\src\\main\\res\\layout\\group_header_layout.xml"
+    },
+    {
+        "merged": "D:\\Android\\AndroidStudioProjects\\speechDemo\\build\\intermediates\\merged_res\\debug\\xml_ise_settings.xml.flat",
+        "source": "D:\\Android\\AndroidStudioProjects\\speechDemo\\src\\main\\res\\xml\\ise_settings.xml"
+    },
+    {
+        "merged": "D:\\Android\\AndroidStudioProjects\\speechDemo\\build\\intermediates\\merged_res\\debug\\xml_iat_setting.xml.flat",
+        "source": "D:\\Android\\AndroidStudioProjects\\speechDemo\\src\\main\\res\\xml\\iat_setting.xml"
+    },
+    {
+        "merged": "D:\\Android\\AndroidStudioProjects\\speechDemo\\build\\intermediates\\merged_res\\debug\\drawable-hdpi_icon.png.flat",
+        "source": "D:\\Android\\AndroidStudioProjects\\speechDemo\\src\\main\\res\\drawable-hdpi\\icon.png"
+    },
+    {
+        "merged": "D:\\Android\\AndroidStudioProjects\\speechDemo\\build\\intermediates\\merged_res\\debug\\layout_activity_group_manager.xml.flat",
+        "source": "D:\\Android\\AndroidStudioProjects\\speechDemo\\src\\main\\res\\layout\\activity_group_manager.xml"
+    },
+    {
+        "merged": "D:\\Android\\AndroidStudioProjects\\speechDemo\\build\\intermediates\\merged_res\\debug\\layout_ttsdemo.xml.flat",
+        "source": "D:\\Android\\AndroidStudioProjects\\speechDemo\\src\\main\\res\\layout\\ttsdemo.xml"
+    },
+    {
+        "merged": "D:\\Android\\AndroidStudioProjects\\speechDemo\\build\\intermediates\\merged_res\\debug\\drawable-mdpi_icon.png.flat",
+        "source": "D:\\Android\\AndroidStudioProjects\\speechDemo\\src\\main\\res\\drawable-mdpi\\icon.png"
+    },
+    {
+        "merged": "D:\\Android\\AndroidStudioProjects\\speechDemo\\build\\intermediates\\merged_res\\debug\\drawable_main_setting_btn_np.xml.flat",
+        "source": "D:\\Android\\AndroidStudioProjects\\speechDemo\\src\\main\\res\\drawable\\main_setting_btn_np.xml"
+    },
+    {
+        "merged": "D:\\Android\\AndroidStudioProjects\\speechDemo\\build\\intermediates\\merged_res\\debug\\layout_isvdemo.xml.flat",
+        "source": "D:\\Android\\AndroidStudioProjects\\speechDemo\\src\\main\\res\\layout\\isvdemo.xml"
+    },
+    {
+        "merged": "D:\\Android\\AndroidStudioProjects\\speechDemo\\build\\intermediates\\merged_res\\debug\\layout_iatdemo.xml.flat",
+        "source": "D:\\Android\\AndroidStudioProjects\\speechDemo\\src\\main\\res\\layout\\iatdemo.xml"
+    },
+    {
+        "merged": "D:\\Android\\AndroidStudioProjects\\speechDemo\\build\\intermediates\\merged_res\\debug\\drawable-ldpi_icon.png.flat",
+        "source": "D:\\Android\\AndroidStudioProjects\\speechDemo\\src\\main\\res\\drawable-ldpi\\icon.png"
+    },
+    {
+        "merged": "D:\\Android\\AndroidStudioProjects\\speechDemo\\build\\intermediates\\merged_res\\debug\\layout_main.xml.flat",
+        "source": "D:\\Android\\AndroidStudioProjects\\speechDemo\\src\\main\\res\\layout\\main.xml"
+    },
+    {
+        "merged": "D:\\Android\\AndroidStudioProjects\\speechDemo\\build\\intermediates\\merged_res\\debug\\xml_tts_setting.xml.flat",
+        "source": "D:\\Android\\AndroidStudioProjects\\speechDemo\\src\\main\\res\\xml\\tts_setting.xml"
+    },
+    {
+        "merged": "D:\\Android\\AndroidStudioProjects\\speechDemo\\build\\intermediates\\merged_res\\debug\\drawable_setting.png.flat",
+        "source": "D:\\Android\\AndroidStudioProjects\\speechDemo\\src\\main\\res\\drawable\\setting.png"
+    },
+    {
+        "merged": "D:\\Android\\AndroidStudioProjects\\speechDemo\\build\\intermediates\\merged_res\\debug\\layout_title.xml.flat",
+        "source": "D:\\Android\\AndroidStudioProjects\\speechDemo\\src\\main\\res\\layout\\title.xml"
+    },
+    {
+        "merged": "D:\\Android\\AndroidStudioProjects\\speechDemo\\build\\intermediates\\merged_res\\debug\\layout_item_identify_result.xml.flat",
+        "source": "D:\\Android\\AndroidStudioProjects\\speechDemo\\src\\main\\res\\layout\\item_identify_result.xml"
+    },
+    {
+        "merged": "D:\\Android\\AndroidStudioProjects\\speechDemo\\build\\intermediates\\merged_res\\debug\\layout_understander.xml.flat",
+        "source": "D:\\Android\\AndroidStudioProjects\\speechDemo\\src\\main\\res\\layout\\understander.xml"
+    },
+    {
+        "merged": "D:\\Android\\AndroidStudioProjects\\speechDemo\\build\\intermediates\\merged_res\\debug\\layout_activity_result_identify.xml.flat",
+        "source": "D:\\Android\\AndroidStudioProjects\\speechDemo\\src\\main\\res\\layout\\activity_result_identify.xml"
+    },
+    {
+        "merged": "D:\\Android\\AndroidStudioProjects\\speechDemo\\build\\intermediates\\merged_res\\debug\\xml_url_setting.xml.flat",
+        "source": "D:\\Android\\AndroidStudioProjects\\speechDemo\\src\\main\\res\\xml\\url_setting.xml"
+    },
+    {
+        "merged": "D:\\Android\\AndroidStudioProjects\\speechDemo\\build\\intermediates\\merged_res\\debug\\drawable_user.png.flat",
+        "source": "D:\\Android\\AndroidStudioProjects\\speechDemo\\src\\main\\res\\drawable\\user.png"
+    },
+    {
+        "merged": "D:\\Android\\AndroidStudioProjects\\speechDemo\\build\\intermediates\\merged_res\\debug\\layout_isedemo.xml.flat",
+        "source": "D:\\Android\\AndroidStudioProjects\\speechDemo\\src\\main\\res\\layout\\isedemo.xml"
+    },
+    {
+        "merged": "D:\\Android\\AndroidStudioProjects\\speechDemo\\build\\intermediates\\merged_res\\debug\\layout_online_facedemo.xml.flat",
+        "source": "D:\\Android\\AndroidStudioProjects\\speechDemo\\src\\main\\res\\layout\\online_facedemo.xml"
+    },
+    {
+        "merged": "D:\\Android\\AndroidStudioProjects\\speechDemo\\build\\intermediates\\merged_res\\debug\\xml_file_paths.xml.flat",
+        "source": "D:\\Android\\AndroidStudioProjects\\speechDemo\\src\\main\\res\\xml\\file_paths.xml"
+    },
+    {
+        "merged": "D:\\Android\\AndroidStudioProjects\\speechDemo\\build\\intermediates\\merged_res\\debug\\xml_understand_setting.xml.flat",
+        "source": "D:\\Android\\AndroidStudioProjects\\speechDemo\\src\\main\\res\\xml\\understand_setting.xml"
+    },
+    {
+        "merged": "D:\\Android\\AndroidStudioProjects\\speechDemo\\build\\intermediates\\merged_res\\debug\\layout_list_items.xml.flat",
+        "source": "D:\\Android\\AndroidStudioProjects\\speechDemo\\src\\main\\res\\layout\\list_items.xml"
+    }
+]

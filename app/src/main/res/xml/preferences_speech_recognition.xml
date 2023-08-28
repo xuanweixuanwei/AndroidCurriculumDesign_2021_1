@@ -1,0 +1,41 @@
+<PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <PreferenceCategory app:title="@string/sr_messages_header">
+
+        <ListPreference
+            app:key="iat_language_preference"
+            app:title="语言设置"
+            app:entries="@array/language_entries"
+            app:entryValues="@array/language_values"
+            app:summary="支持：普通话，粤语，英语 "
+            app:defaultValue="mandarin" />
+
+        <EditTextPreference
+            app:key="iat_vadbos_preference"
+            app:title="前端点超时"
+            app:dialogTitle="请输入时间(0-10000)ms"
+            app:summary="默认值：短信转写5000，其他4000"
+            app:defaultValue="5000" />
+
+        <EditTextPreference
+            app:key="iat_vadeos_preference"
+            app:title="后端点超时"
+            app:dialogTitle="请输入时间(0-10000)ms"
+            app:summary="默认值：短信转写1800，其他700 "
+            app:defaultValue="1800" />
+
+        <ListPreference
+            app:key="iat_punc_preference"
+            app:title="标点符号"
+            app:entries="@array/punc_entries"
+            app:entryValues="@array/punc_values"
+            app:summary="默认值：有标点 "
+            app:defaultValue="1" />
+
+        <CheckBoxPreference
+            app:key="@string/pref_key_iat_show"
+            app:title="@string/pref_title_iat_show"
+            app:defaultValue="true" />
+    </PreferenceCategory>
+
+</PreferenceScreen>

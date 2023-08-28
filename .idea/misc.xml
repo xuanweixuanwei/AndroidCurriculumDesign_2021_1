@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/Android/AndroidStudioProjects/app/src/main/res/drawable/add_ic.xml" value="0.1" />
+        <entry key="..\:/Android/AndroidStudioProjects/app/src/main/res/drawable/compound_normal_ic.xml" value="0.26296296296296295" />
+        <entry key="..\:/Android/AndroidStudioProjects/app/src/main/res/drawable/gradient_button_down.xml" value="0.2601851851851852" />
+        <entry key="..\:/Android/AndroidStudioProjects/app/src/main/res/drawable/gradient_button_up.xml" value="0.2601851851851852" />
+        <entry key="..\:/Android/AndroidStudioProjects/app/src/main/res/drawable/ic_____.xml" value="0.21481481481481482" />
+        <entry key="..\:/Android/AndroidStudioProjects/app/src/main/res/drawable/ic_launcher_background.xml" value="0.15833333333333333" />
+        <entry key="..\:/Android/AndroidStudioProjects/app/src/main/res/drawable/rounded_rectangle.xml" value="0.21354166666666666" />
+        <entry key="..\:/Android/AndroidStudioProjects/app/src/main/res/drawable/rounded_rectangle_background.xml" value="0.1" />
+        <entry key="..\:/Android/AndroidStudioProjects/app/src/main/res/drawable/rounded_rectangle_border.xml" value="0.16574074074074074" />
+        <entry key="..\:/Android/AndroidStudioProjects/app/src/main/res/drawable/test.xml" value="0.1" />
+        <entry key="..\:/Android/AndroidStudioProjects/app/src/main/res/drawable/tips_error_ic.xml" value="0.1" />
+        <entry key="..\:/Android/AndroidStudioProjects/app/src/main/res/drawable/tips_finish_ic.xml" value="0.1" />
+        <entry key="..\:/Android/AndroidStudioProjects/app/src/main/res/drawable/transparent_selector.xml" value="0.1" />
+        <entry key="..\:/Android/AndroidStudioProjects/app/src/main/res/drawable/vector_drawable.xml" value="0.2677083333333333" />
+        <entry key="..\:/Android/AndroidStudioProjects/app/src/main/res/drawable/vector_drawable_back.xml" value="0.15833333333333333" />
+        <entry key="..\:/Android/AndroidStudioProjects/app/src/main/res/drawable/vector_drawable_camera.xml" value="0.15833333333333333" />
+        <entry key="..\:/Android/AndroidStudioProjects/app/src/main/res/drawable/vector_drawable_delete.xml" value="0.15833333333333333" />
+        <entry key="..\:/Android/AndroidStudioProjects/app/src/main/res/drawable/vector_drawable_delete_2.xml" value="0.31666666666666665" />
+        <entry key="..\:/Android/AndroidStudioProjects/app/src/main/res/drawable/vector_drawable_floder_open.xml" value="0.15833333333333333" />
+        <entry key="..\:/Android/AndroidStudioProjects/app/src/main/res/drawable/vector_drawable_folder.xml" value="0.2601851851851852" />
+        <entry key="..\:/Android/AndroidStudioProjects/app/src/main/res/drawable/vector_drawable_music.xml" value="0.13148148148148148" />
+        <entry key="..\:/Android/AndroidStudioProjects/app/src/main/res/drawable/vector_drawable_pause.xml" value="0.15833333333333333" />
+        <entry key="..\:/Android/AndroidStudioProjects/app/src/main/res/drawable/vector_drawable_photoalbum.xml" value="0.13148148148148148" />
+        <entry key="..\:/Android/AndroidStudioProjects/app/src/main/res/drawable/vector_drawable_settings.xml" value="0.16666666666666666" />
+        <entry key="..\:/Android/AndroidStudioProjects/app/src/main/res/drawable/vector_drawable_start_synthesis.xml" value="0.28854166666666664" />
+        <entry key="..\:/Android/AndroidStudioProjects/app/src/main/res/drawable/vector_drawable_startplaying.xml" value="0.28854166666666664" />
+        <entry key="..\:/Android/AndroidStudioProjects/app/src/main/res/drawable/vector_drawable_voice.xml" value="0.15833333333333333" />
+        <entry key="..\:/Android/AndroidStudioProjects/app/src/main/res/drawable/vector_drawable_voicer.xml" value="0.1" />
+        <entry key="..\:/Android/AndroidStudioProjects/app/src/main/res/drawable/vector_drawable_暂停播放.xml" value="0.2064814814814815" />
+        <entry key="..\:/Android/AndroidStudioProjects/app/src/main/res/layout/activity_character_recognition.xml" value="0.1" />
+        <entry key="..\:/Android/AndroidStudioProjects/app/src/main/res/layout/activity_main.xml" value="0.21197916666666666" />
+        <entry key="..\:/Android/AndroidStudioProjects/app/src/main/res/layout/activity_settings.xml" value="0.23097826086956522" />
+        <entry key="..\:/Android/AndroidStudioProjects/app/src/main/res/layout/activity_speech_recognition.xml" value="0.22864583333333333" />
+        <entry key="..\:/Android/AndroidStudioProjects/app/src/main/res/layout/activity_voice_synthesis.xml" value="0.2677083333333333" />
+        <entry key="..\:/Android/AndroidStudioProjects/app/src/main/res/layout/select_dialog.xml" value="0.12407407407407407" />
+        <entry key="..\:/Android/AndroidStudioProjects/app/src/main/res/layout/select_item.xml" value="0.22135416666666666" />
+        <entry key="..\:/Android/AndroidStudioProjects/app/src/main/res/layout/tips_dialog.xml" value="0.2203125" />
+        <entry key="..\:/Android/AndroidStudioProjects/app/src/main/res/layout/ui_dialog.xml" value="0.12407407407407407" />
+        <entry key="..\:/Android/AndroidStudioProjects/app/src/main/res/menu/speech_recognition_menu.xml" value="0.35520833333333335" />
+        <entry key="..\:/Android/AndroidStudioProjects/app/src/main/res/menu/voice_synthesis_menu.xml" value="0.3333333333333333" />
+        <entry key="..\:/Android/AndroidStudioProjects/app/src/main/res/menu/voice_ynthesis_menu.xml" value="0.11666666666666667" />
+        <entry key="..\:/Android/AndroidStudioProjects/app/src/main/res/xml/preferences_character_recognition.xml" value="0.2994791666666667" />
+        <entry key="..\:/Android/AndroidStudioProjects/app/src/main/res/xml/preferences_speech_recognition.xml" value="0.2994791666666667" />
+        <entry key="..\:/Android/AndroidStudioProjects/app/src/main/res/xml/preferences_voice_synthesis.xml" value="0.18575851393188855" />
+        <entry key="..\:/Android/AndroidStudioProjects/app/src/main/res/xml/root_preferences.xml" value="0.20697463768115942" />
+        <entry key="..\:/Android/AndroidStudioProjects/app/src/main/res/xml/speech_recognition_preferences.xml" value="0.17274569402228976" />
+        <entry key="..\:/Android/AndroidStudioProjects/app/src/main/res/xml/voice_synthesis_preferences.xml" value="0.17274569402228976" />
+        <entry key="..\:/Android/AndroidStudioProjects/speechDemo/src/main/res/layout/ttsdemo.xml" value="0.21240942028985507" />
+        <entry key="..\:/Android/AndroidStudioProjects/speechDemo/src/main/res/xml/iat_setting.xml" value="0.35520833333333335" />
+        <entry key="..\:/Android/AndroidStudioProjects/speechDemo/src/main/res/xml/tts_setting.xml" value="0.213768115942029" />
+      </map>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/build/classes" />
+  </component>
+  <component name="ProjectType">
+    <option name="id" value="Android" />
+  </component>
+</project>

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.myapplication">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+
+    <application
+        android:name=".meteorApp"
+        android:allowBackup="true"
+        android:fullBackupOnly="true"
+        android:icon="@drawable/meteor"
+        android:label="@string/app_name"
+        android:roundIcon="@drawable/meteor"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.MyApplication">
+        <activity
+            android:name=".activity.SettingsActivity"
+            android:exported="true" />
+        <activity
+            android:name=".activity.VoiceSynthesisActivity"
+            android:exported="true" />
+        <activity
+            android:name=".activity.SpeechRecognitionActivity"
+            android:exported="true" />
+        <activity
+            android:name=".activity.CharacterRecognitionActivity"
+            android:exported="true" />
+        <activity
+            android:name=".MainActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+    </application>
+
+</manifest>
