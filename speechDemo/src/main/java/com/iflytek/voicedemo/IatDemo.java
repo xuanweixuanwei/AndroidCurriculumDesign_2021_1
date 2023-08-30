@@ -145,7 +145,7 @@ public class IatDemo extends Activity implements OnClickListener {
             case R.id.iat_recognize_stream:
                 executeStream();
                 break;
-            case R.id.languageText:
+           /* case R.id.languageText:
                 setLanguage(view);
                 break;
             // 停止听写
@@ -157,7 +157,7 @@ public class IatDemo extends Activity implements OnClickListener {
             case R.id.iat_cancel:
                 mIat.cancel();
                 showTip("取消听写");
-                break;
+                break;*/
             // 上传用户词表
             case R.id.iat_upload_userwords:
                 String contents = FucUtil.readFile(IatDemo.this, "userwords", "utf-8");
@@ -395,25 +395,26 @@ public class IatDemo extends Activity implements OnClickListener {
         // 设置音频来源为外部文件
         mIat.setParameter(SpeechConstant.AUDIO_SOURCE, "-1");
         // 也可以像以下这样直接设置音频文件路径识别（要求设置文件在sdcard上的全路径）：
-        // mIat.setParameter(SpeechConstant.AUDIO_SOURCE, "-2");
-        // mIat.setParameter(SpeechConstant.ASR_SOURCE_PATH, "sdcard/XXX/XXX.pcm");
+//         mIat.setParameter(SpeechConstant.AUDIO_SOURCE, "-2");
+//         mIat.setParameter(SpeechConstant.ASR_SOURCE_PATH, filePath);
         ret = mIat.startListening(mRecognizerListener);
         if (ret != ErrorCode.SUCCESS) {
             showTip("识别失败,错误码：" + ret + ",请点击网址https://www.xfyun.cn/document/error-code查询解决方案");
             return;
         }
-        try {
-            InputStream open = getAssets().open("iattest.wav");
-            byte[] buff = new byte[1280];
-            while (open.available() > 0) {
-                int read = open.read(buff);
-                mIat.writeAudio(buff, 0, read);
-            }
-            mIat.stopListening();
-        } catch (IOException e) {
-            mIat.cancel();
-            showTip("读取音频流失败");
-        }
+        mIat.stopListening();
+//        try {
+///*            InputStream open = getAssets().open("iattest.wav");
+//            byte[] buff = new byte[1280];
+//            while (open.available() > 0) {
+//                int read = open.read(buff);
+//                mIat.writeAudio(buff, 0, read);
+//            }*/
+//            mIat.stopListening();
+//        } catch (IOException e) {
+//            mIat.cancel();
+//            showTip("读取音频流失败");
+//        }
     }
 
     @Override

@@ -23,7 +23,7 @@
             android:visibility="gone"
             android:textColor="@color/white"
             tools:ignore="NestedWeights,SmallSp"
-            android:ellipsize="end"
+
             />
         <androidx.core.widget.NestedScrollView
             android:id="@+id/scrollView"
@@ -63,7 +63,7 @@
         android:layout_marginBottom="10dp"
         android:background="@drawable/gradient_button_up">
         <ImageButton
-            android:id="@+id/open_folder"
+            android:id="@+id/open_folder_for_text"
             android:contentDescription="@string/open_folder"
             android:layout_width="0dp"
             android:layout_height="match_parent"

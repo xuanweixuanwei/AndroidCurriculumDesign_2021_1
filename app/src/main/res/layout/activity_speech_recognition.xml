@@ -58,7 +58,7 @@
             android:padding="2dp"
             />
         <ImageButton
-            android:id="@+id/delete_text"
+            android:id="@+id/delete_result"
             android:contentDescription="@string/delete_text"
             android:layout_width="0dp"
             android:layout_height="match_parent"
@@ -75,20 +75,20 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:scaleType="centerInside"
-            android:src="@drawable/vector_drawable_voice"
+            android:src="@drawable/vector_drawable_voice_1"
             android:background="#00000000"
+
             />
+
         <ImageButton
             android:id="@+id/copy_text"
-            android:contentDescription="@string/cancel_synthesis_teak"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:scaleType="centerInside"
-            android:src="@drawable/vector_drawable_copy"
             android:background="#00000000"
-            android:padding="3dp"
-            />
+            android:contentDescription="@string/cancel_synthesis_teak"
+            android:scaleType="centerInside"
+            android:src="@drawable/vector_drawable_copy_text" />
 
     </LinearLayout>
 </LinearLayout>

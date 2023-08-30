@@ -102,10 +102,10 @@ public class VoiceSynthesisActivity extends AppCompatActivity implements ToastAc
         @Override
         public void onClick(View view) {
             switch (view.getId()) {
-                case R.id.open_folder:
+                case R.id.open_folder_for_text:
                     pickFile();
                     break;
-                case R.id.delete_text:
+                case R.id.delete_input_text:
                     ed_input.setText("");
                     changeEditTextHeight(ed_input);
 
@@ -201,7 +201,7 @@ public class VoiceSynthesisActivity extends AppCompatActivity implements ToastAc
         playProgressInfo = findViewById(R.id.playProgressInfo);
         scrollView = findViewById(R.id.scrollView);
         //给底部四个按钮设置监听器
-        findViewById(R.id.open_folder).setOnClickListener(listener);
+        findViewById(R.id.open_folder_for_text).setOnClickListener(listener);
         findViewById(R.id.delete_input_text).setOnClickListener(listener);
         findViewById(R.id.audio_control).setOnClickListener(listener);
         findViewById(R.id.cancel_synthesis_task).setOnClickListener(listener);

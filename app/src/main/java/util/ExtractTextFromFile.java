@@ -1,15 +1,14 @@
 package util;
 
+import static util.FileUtils.getFileExtension;
+
 import android.content.ContentResolver;
 import android.net.Uri;
 
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.apache.poi.openxml4j.opc.OPCPackage;
-import org.apache.poi.xwpf.usermodel.XWPFDocument;
-import org.apache.poi.xwpf.usermodel.XWPFParagraph;
 
 import java.io.BufferedReader;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -118,7 +117,7 @@ public class ExtractTextFromFile {
             case doc:
                 return doc;
             default:
-                return new FileUtils().getFileNameAndExtension(contentResolver,fileUri);
+                return getFileExtension(contentResolver,fileUri);
         }
     }
 }
