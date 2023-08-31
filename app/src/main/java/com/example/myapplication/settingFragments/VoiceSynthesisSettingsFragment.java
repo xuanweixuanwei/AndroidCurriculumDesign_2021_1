@@ -11,7 +11,7 @@ import androidx.preference.PreferenceFragmentCompat;
 
 import com.example.myapplication.R;
 
-import util.InputFilterMinMax;
+import com.example.myapplication.util.InputFilterMinMax;
 
 public class VoiceSynthesisSettingsFragment extends PreferenceFragmentCompat {
 

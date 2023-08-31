@@ -1,4 +1,4 @@
-package util;
+package com.example.myapplication.util;
 
 import android.content.ContentResolver;
 import android.content.ContentUris;

@@ -1,6 +1,6 @@
-package util;
+package com.example.myapplication.util;
 
-import static util.FileUtils.getFileExtension;
+import static com.example.myapplication.util.FileUtils.getFileExtension;
 
 import android.content.ContentResolver;
 import android.net.Uri;

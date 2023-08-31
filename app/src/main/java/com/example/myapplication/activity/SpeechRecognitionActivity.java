@@ -1,6 +1,6 @@
 package com.example.myapplication.activity;
 
-import static util.FileUtils.getFileExtension;
+import static com.example.myapplication.util.FileUtils.getFileExtension;
 
 import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
@@ -11,7 +11,6 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.preference.PreferenceManager;
 
-import android.Manifest;
 import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Context;
@@ -46,10 +45,9 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
-import java.util.Objects;
 
 import timber.log.Timber;
-import util.JsonParser;
+import com.example.myapplication.util.JsonParser;
 
 public class SpeechRecognitionActivity extends AppCompatActivity {
 

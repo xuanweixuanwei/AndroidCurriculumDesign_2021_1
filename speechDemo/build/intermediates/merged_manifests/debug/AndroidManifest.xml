@@ -18,8 +18,7 @@
         android:appComponentFactory="androidx.core.app.CoreComponentFactory"
         android:debuggable="true"
         android:icon="@drawable/icon"
-        android:label="讯飞语音示例"
-        android:testOnly="true" >
+        android:label="讯飞语音示例" >
         <provider
             android:name="androidx.core.content.FileProvider"
             android:authorities="com.iflytek.voicedemo.fileprovider"

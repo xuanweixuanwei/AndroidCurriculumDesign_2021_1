@@ -4,7 +4,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".activity.SpeechRecognitionActivity"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="@drawable/rounded_background"
+    android:layout_margin="10dp">
 
         <androidx.core.widget.NestedScrollView
             android:id="@+id/scrollView"
@@ -13,9 +15,7 @@
             android:layout_weight="9"
             android:scrollbars="vertical"
             android:layout_gravity="top"
-            android:layout_marginHorizontal="10dp"
-            android:layout_marginTop="10dp"
-            android:background="@drawable/gradient_button_down"
+
             >
 
             <EditText
@@ -28,7 +28,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ellipsize="end"
-                android:textColor="@color/white"
+                android:textColor="@color/steel_blue"
                 android:gravity="start"
                 android:textColorHint="@color/common_text_hint_color"
 
@@ -43,9 +43,8 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:layout_marginHorizontal="10dp"
-        android:layout_marginBottom="10dp"
-        android:background="@drawable/gradient_button_up">
+
+      >
         <ImageButton
             android:id="@+id/open_folder_for_audio"
             android:contentDescription="@string/open_folder"
@@ -54,7 +53,8 @@
             android:layout_weight="1"
             android:scaleType="centerInside"
             android:src="@drawable/vector_drawable_folder"
-            android:background="#00000000"
+            android:background="@drawable/no_boundary_ripple"
+            android:backgroundTint="@color/powder_blue"
             android:padding="2dp"
             />
         <ImageButton
@@ -65,7 +65,8 @@
             android:layout_weight="1"
             android:scaleType="centerInside"
             android:src="@drawable/vector_drawable_delete_2"
-            android:background="#00000000"
+            android:background="@drawable/no_boundary_ripple"
+            android:backgroundTint="@color/powder_blue"
 
             />
         <ImageButton
@@ -76,7 +77,8 @@
             android:layout_weight="1"
             android:scaleType="centerInside"
             android:src="@drawable/vector_drawable_voice_1"
-            android:background="#00000000"
+            android:background="@drawable/no_boundary_ripple"
+            android:backgroundTint="@color/powder_blue"
 
             />
 
@@ -85,7 +87,8 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:background="#00000000"
+            android:background="@drawable/no_boundary_ripple"
+            android:backgroundTint="@color/powder_blue"
             android:contentDescription="@string/cancel_synthesis_teak"
             android:scaleType="centerInside"
             android:src="@drawable/vector_drawable_copy_text" />

@@ -55,7 +55,7 @@ import java.util.TimerTask;
 
 
 
-import util.ExtractTextFromFile;
+import com.example.myapplication.util.ExtractTextFromFile;
 
 public class VoiceSynthesisActivity extends AppCompatActivity implements ToastAction{
 

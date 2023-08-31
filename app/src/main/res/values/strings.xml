@@ -278,4 +278,10 @@
         如果还有其他疑问，请在主页的介绍信息处添加开发者联系方式进行反馈\n
 
 </string>
+    <string name="picture_description">通用文字识别的目标图片</string>
+    <string name="character_recognition_instruction">欢迎使用</string>
+    <string name="pick_picture_description">点击后选择拍照或打开手机相册来获取文字识别的目标图片</string>
+    <string name="copy_text_description">点击后复制当前的识别结果到剪切板</string>
+    <string name="pick_photo">选择图片</string>
+    <string name="copy_result">复制结果</string>
 </resources>
