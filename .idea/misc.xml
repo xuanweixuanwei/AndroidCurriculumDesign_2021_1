@@ -4,6 +4,8 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Android/AndroidStudioProjects/app/src/main/res/drawable/add_ic.xml" value="0.1" />
+        <entry key="..\:/Android/AndroidStudioProjects/app/src/main/res/drawable/button_circle_selector.xml" value="0.13796296296296295" />
+        <entry key="..\:/Android/AndroidStudioProjects/app/src/main/res/drawable/button_rect_selector.xml" value="0.12222222222222222" />
         <entry key="..\:/Android/AndroidStudioProjects/app/src/main/res/drawable/checkbox_checked_ic.xml" value="0.34629629629629627" />
         <entry key="..\:/Android/AndroidStudioProjects/app/src/main/res/drawable/checkbox_disable_ic.xml" value="0.34629629629629627" />
         <entry key="..\:/Android/AndroidStudioProjects/app/src/main/res/drawable/checkbox_selector.xml" value="0.34629629629629627" />
@@ -16,6 +18,7 @@
         <entry key="..\:/Android/AndroidStudioProjects/app/src/main/res/drawable/ic_launcher_background.xml" value="0.15833333333333333" />
         <entry key="..\:/Android/AndroidStudioProjects/app/src/main/res/drawable/ic_voice_1.xml" value="0.3104166666666667" />
         <entry key="..\:/Android/AndroidStudioProjects/app/src/main/res/drawable/ic_voice_3__1_.xml" value="0.3104166666666667" />
+        <entry key="..\:/Android/AndroidStudioProjects/app/src/main/res/drawable/login_wechat_ic.xml" value="0.22962962962962963" />
         <entry key="..\:/Android/AndroidStudioProjects/app/src/main/res/drawable/no_boundary_ripple.xml" value="0.2856410256410256" />
         <entry key="..\:/Android/AndroidStudioProjects/app/src/main/res/drawable/popup_shape.xml" value="0.1" />
         <entry key="..\:/Android/AndroidStudioProjects/app/src/main/res/drawable/ripple_view.xml" value="0.2856410256410256" />
@@ -49,7 +52,11 @@
         <entry key="..\:/Android/AndroidStudioProjects/app/src/main/res/drawable/vector_drawable_voicer.xml" value="0.1" />
         <entry key="..\:/Android/AndroidStudioProjects/app/src/main/res/drawable/vector_drawable_暂停播放.xml" value="0.2064814814814815" />
         <entry key="..\:/Android/AndroidStudioProjects/app/src/main/res/layout/activity_character_recognition.xml" value="0.3333333333333333" />
+        <entry key="..\:/Android/AndroidStudioProjects/app/src/main/res/layout/activity_character_recognition_2.xml" value="0.2504528985507246" />
+        <entry key="..\:/Android/AndroidStudioProjects/app/src/main/res/layout/activity_login.xml" value="0.1" />
+        <entry key="..\:/Android/AndroidStudioProjects/app/src/main/res/layout/activity_login2.xml" value="0.2552083333333333" />
         <entry key="..\:/Android/AndroidStudioProjects/app/src/main/res/layout/activity_main.xml" value="0.21197916666666666" />
+        <entry key="..\:/Android/AndroidStudioProjects/app/src/main/res/layout/activity_register.xml" value="0.1" />
         <entry key="..\:/Android/AndroidStudioProjects/app/src/main/res/layout/activity_settings.xml" value="0.23097826086956522" />
         <entry key="..\:/Android/AndroidStudioProjects/app/src/main/res/layout/activity_speech_recognition.xml" value="0.22" />
         <entry key="..\:/Android/AndroidStudioProjects/app/src/main/res/layout/activity_voice_synthesis.xml" value="0.2677083333333333" />
@@ -67,6 +74,13 @@
         <entry key="..\:/Android/AndroidStudioProjects/app/src/main/res/xml/root_preferences.xml" value="0.20697463768115942" />
         <entry key="..\:/Android/AndroidStudioProjects/app/src/main/res/xml/speech_recognition_preferences.xml" value="0.17274569402228976" />
         <entry key="..\:/Android/AndroidStudioProjects/app/src/main/res/xml/voice_synthesis_preferences.xml" value="0.17274569402228976" />
+        <entry key="..\:/Android/AndroidStudioProjects/communityservice/src/main/res/layout/activity_main.xml" value="0.19429347826086957" />
+        <entry key="..\:/Android/AndroidStudioProjects/communityservice/src/main/res/layout/activity_main2.xml" value="0.19429347826086957" />
+        <entry key="..\:/Android/AndroidStudioProjects/communityservice/src/main/res/layout/camera.xml" value="0.19429347826086957" />
+        <entry key="..\:/Android/AndroidStudioProjects/fragmentdemo/src/main/res/layout/fragment_two.xml" value="0.3020833333333333" />
+        <entry key="..\:/Android/AndroidStudioProjects/recyclerviewdemo/src/main/res/layout/activity_main.xml" value="0.1" />
+        <entry key="..\:/Android/AndroidStudioProjects/recyclerviewdemo/src/main/res/layout/recyclerview_row_item.xml" value="0.22" />
+        <entry key="..\:/Android/AndroidStudioProjects/recyclerviewdemo/src/main/res/menu/crud_menu.xml" value="0.1" />
         <entry key="..\:/Android/AndroidStudioProjects/speechDemo/src/main/res/drawable/gradient_button_down.xml" value="0.29010416666666666" />
         <entry key="..\:/Android/AndroidStudioProjects/speechDemo/src/main/res/layout/iatdemo.xml" value="0.35520833333333335" />
         <entry key="..\:/Android/AndroidStudioProjects/speechDemo/src/main/res/layout/isrdemo.xml" value="0.35520833333333335" />

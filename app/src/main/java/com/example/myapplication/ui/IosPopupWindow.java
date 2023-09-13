@@ -40,11 +40,9 @@ public class IosPopupWindow  extends PopupWindow {
         View view = LayoutInflater.from(context).inflate(R.layout.ios_popup_window_layout, null);
         setContentView(view);
 
-        Animation animation = new ScaleAnimation(
-                1f, 1.5f, 1f, 1.5f,
-                Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
-        animation.setDuration(500);
-        animation.setRepeatCount(Animation.INFINITE);
+//        Animation animation = new ScaleAnimation(R.style.popupWindow_show);
+//        animation.setDuration(500);
+//        animation.setRepeatCount(Animation.INFINITE);
 
         // 为了避免部分机型不显示，我们需要重新设置一下宽高
         setWidth( RelativeLayout.LayoutParams.MATCH_PARENT);
@@ -64,7 +62,7 @@ public class IosPopupWindow  extends PopupWindow {
         setOutsideTouchable(true);
 
         //设置动画
-        view.setAnimation(animation);
+        setAnimationStyle(R.style.popupWindow_show);
 
 //        setAnimationStyle(R.style.ios_PopupWindow);
 

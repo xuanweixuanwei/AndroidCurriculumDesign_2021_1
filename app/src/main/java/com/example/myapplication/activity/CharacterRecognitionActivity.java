@@ -12,6 +12,7 @@ import androidx.core.content.FileProvider;
 
 import android.Manifest;
 import android.app.Activity;
+import android.app.Dialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.res.Resources;
@@ -22,10 +23,14 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.text.Editable;
+import android.text.Layout;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -127,7 +132,7 @@ APPID f1d1cefd
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_character_recognition);
+        setContentView(R.layout.activity_character_recognition_2);
 
         initView();
         createFileDirectory();
@@ -144,6 +149,7 @@ APPID f1d1cefd
         }*/
 
     }
+
 
 
     private void request() {
@@ -173,21 +179,24 @@ APPID f1d1cefd
 //                            et_text_result.setText(textBase64Decode);
 
                             et_text_result.setText("");
+                            StringBuilder result_string_buffer = new StringBuilder();
                             for (Page page :
                                     pages) {
                                 for (Line line :
                                         page.lines) {
                                     if (line.words == null) {
-                                        et_text_result.append("\n");
+                                        result_string_buffer.append("\n");
                                     } else {
                                         for (Word word :
                                                 line.words) {
 
-                                            et_text_result.append(word.content);
+                                            result_string_buffer.append(word.content);
                                         }
                                     }
                                 }
                             }
+                            et_text_result.setText(result_string_buffer.toString().trim());
+                            changeEditTextHeight(et_text_result);
                         }
                     });
 
@@ -237,6 +246,45 @@ APPID f1d1cefd
         });
 
         ib_pick_picture.setOnClickListener(listener);
+        iv_picture.setOnClickListener(listener);
+
+        et_text_result.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                changeEditTextHeight(et_text_result);
+                Log.w(TAG, "beforeTextChanged: change height" );
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
+    }
+    private void changeEditTextHeight(EditText editText){
+        ViewGroup.LayoutParams layoutParams = editText.getLayoutParams();
+        layoutParams.height = getTextHeight(editText);
+        editText.setLayoutParams(layoutParams);
+
+    }
+
+    private int getTextHeight(EditText editText) {
+        Layout layout = editText.getLayout();
+        if (layout != null) {
+            int totalLineCount = layout.getLineCount();
+            int paddingTop = editText.getPaddingTop();
+            int paddingBottom = editText.getPaddingBottom();
+
+            int lineHeight = layout.getLineBottom(totalLineCount - 1) - layout.getLineTop(0);
+            Log.w(TAG, "getTextHeight: "+paddingBottom+"   "+paddingTop +"  "+lineHeight);
+            return lineHeight + paddingTop + paddingBottom;
+        }
+        return 0;
     }
 
     public static final int REQUEST_TAKEPHOTO_CODE = 1;
@@ -330,9 +378,34 @@ APPID f1d1cefd
                 case R.id.ib_pick_picture:
                     choosePicturePopupWindow.show(LayoutInflater.from(getApplicationContext()).inflate(R.layout.activity_character_recognition, null));
                     break;
+                case R.id.iv_picture:
+                    final Dialog dialog = new Dialog(CharacterRecognitionActivity.this, android.R.style.Theme_Black_NoTitleBar_Fullscreen); // 系统全屏样式
+
+                    ImageView target_picture = getImageView();
+                    dialog.setContentView(target_picture);
+                    dialog.show();
+                    target_picture.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            dialog.dismiss();
+                        }
+                    });
+                    break;
             }
         }
     };
+
+    private ImageView getImageView(){
+        ImageView imageView = new ImageView(CharacterRecognitionActivity.this);
+        imageView.setLayoutParams(new ActionBar.LayoutParams(ActionBar.LayoutParams.MATCH_PARENT,
+                                                              ActionBar.LayoutParams.MATCH_PARENT  ));
+        if (photoBitmap!=null) {
+            imageView.setImageBitmap(photoBitmap);
+        }else {
+            imageView.setImageDrawable(getDrawable(R.drawable.meteor));
+        }
+        return imageView;
+    }
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {

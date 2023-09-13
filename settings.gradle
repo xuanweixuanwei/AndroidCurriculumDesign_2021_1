@@ -10,7 +10,10 @@ dependencyResolutionManagement {
 rootProject.name = "My Application"
 include ':app'
 include ':speechDemo'
+include ':fragmentdemo'
 include ':library'
 include ':library:base'
 include ':library:base'
 include ':library:widget'
+include ':communityservice'
+include ':recyclerviewdemo'

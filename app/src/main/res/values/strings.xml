@@ -284,4 +284,22 @@
     <string name="copy_text_description">点击后复制当前的识别结果到剪切板</string>
     <string name="pick_photo">选择图片</string>
     <string name="copy_result">复制结果</string>
+    <string name="title_activity_login">LoginActivity</string>
+    <string name="prompt_email">Email</string>
+    <string name="prompt_password">Password</string>
+    <string name="action_sign_in">Sign in or register</string>
+    <string name="action_sign_in_short">Sign in</string>
+    <string name="welcome">"Welcome !"</string>
+    <string name="invalid_username">Not a valid username</string>
+    <string name="invalid_password">Password must be >5 characters</string>
+    <string name="login_failed">"Login failed"</string>
+    <string name="register">注册</string>
+    <string name="common_phone_input_hint">邮箱号</string>
+    <string name="common_password_input_error">请输入密码</string>
+    <string name="login_forget">忘记密码？</string>
+    <string name="login_text">登录</string>
+    <string name="login_other">其他登陆方式</string>
+    <string name="register_hint">邮箱仅仅作为注册凭证\n暂不支持使用邮箱进行登陆</string>
+    <string name="register_password_hint2">再次输入密码</string>
+    <string name="register_password_hint1">设置6–18位仅包含英文字母和阿拉伯数字的密码</string>
 </resources>
