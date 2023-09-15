@@ -164,10 +164,14 @@ public class Account {
         this.answerMD5 = ByteString.encodeUtf8(answer).md5().toString();
     }
 
-    public int getId() {
+
+    public int getRowid() {
         return rowid;
     }
 
+    public void setRowid(int rowid) {
+        this.rowid = rowid;
+    }
 
     public String getEmail() {
         return email;

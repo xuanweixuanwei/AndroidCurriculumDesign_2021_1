@@ -7,23 +7,48 @@ import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.ForeignKey;
 import androidx.room.Fts4;
+import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
 
 @Fts4
 @Entity(foreignKeys = {
-        @ForeignKey(entity = KeyWord.class,parentColumns = "rowid",childColumns = "keywordId",onDelete = CASCADE,onUpdate = CASCADE),
-        @ForeignKey(entity = OcrResult.class,parentColumns = "rowid",childColumns = "resultId",onDelete = CASCADE,onUpdate = CASCADE)}
-        )
+        @ForeignKey(
+                entity = KeyWord.class,
+                parentColumns = "rowid",
+                childColumns = "keywordId",
+                onDelete = CASCADE,
+                onUpdate = CASCADE),
+        @ForeignKey(
+                entity = OcrResult.class,
+                parentColumns = "rowid",
+                childColumns = "resultId",
+                onDelete = CASCADE,
+                onUpdate = CASCADE)
+}
+)
 public class KeywordForOcr {
 
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "rowid")
     private int rowid;
-
+    /**
+     * 关键词id
+     */
     private int keywordId;
-
+    /**
+     * ocr图片识文结果result
+     */
     private int resultId;
+
+    public KeywordForOcr() {
+    }
+
+    @Ignore
+    public KeywordForOcr(int keywordId, int resultId) {
+        this.keywordId = keywordId;
+        this.resultId = resultId;
+    }
 
     public int getRowid() {
         return rowid;

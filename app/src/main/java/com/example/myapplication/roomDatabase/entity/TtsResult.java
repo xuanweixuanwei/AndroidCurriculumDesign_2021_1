@@ -8,19 +8,32 @@ import androidx.room.PrimaryKey;
 
 /**
  * 语音合成的请求结果信息
- * */
-@Entity(foreignKeys = @ForeignKey(entity = Account.class,parentColumns = "rowid",childColumns = "userId"))
+ */
+@Entity(foreignKeys = @ForeignKey(entity = Account.class, parentColumns = "rowid", childColumns = "userId"))
 @Fts4
 public class TtsResult {
 
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "rowid")
     private int rowid;
-
+    /**
+     * 用户id
+     */
     private int userId;
 
+    /**
+     * 进行语音合成的内容
+     */
     private String requestText;
 
+    /**
+     * 发音人信息
+     */
+    private String voicer;
+
+    /**
+     * 创建文件的时间，设想：根据创建时间来查找手机内存中的文件
+     */
     private long createTime;
 
     public int getRowid() {
@@ -53,5 +66,13 @@ public class TtsResult {
 
     public void setCreateTime(long createTime) {
         this.createTime = createTime;
+    }
+
+    public String getVoicer() {
+        return voicer;
+    }
+
+    public void setVoicer(String voicer) {
+        this.voicer = voicer;
     }
 }

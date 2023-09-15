@@ -3,6 +3,13 @@
     <PreferenceCategory app:title="@string/sr_messages_header">
 
         <ListPreference
+            app:key="iat_language_type_preference"
+            app:title="语种语言设置"
+            app:entries="@array/language_type_entries"
+            app:entryValues="@array/language_type_values"
+            app:summary="在线听写支持多种小语种设置。支持语言类型如下： "
+            app:defaultValue="zh_cn" />
+        <ListPreference
             app:key="iat_language_preference"
             app:title="语言设置"
             app:entries="@array/language_entries"

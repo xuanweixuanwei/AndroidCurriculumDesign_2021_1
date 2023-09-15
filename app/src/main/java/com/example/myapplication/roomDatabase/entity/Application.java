@@ -11,43 +11,82 @@ import androidx.room.PrimaryKey;
 
 import java.util.Calendar;
 
+/**
+ * userId参照account表的rowid
+ * adminId参照account表的rowid
+ * <p>
+ * 未设置onDelete = CASCADE
+ * 查询到的管理员和用户id对应的账号可能已经注销
+ */
 @Fts4
 @Entity(tableName = "APPLICATION",
         foreignKeys = {
-            @ForeignKey(
-                entity = Account.class,
-                parentColumns = "id",
-                childColumns = "userId",
-                onUpdate = CASCADE,
-                onDelete = CASCADE),
-             @ForeignKey(entity = Account.class,
-                    parentColumns = "rowid",
-                    childColumns = "adminId",
-                    onUpdate = CASCADE,
-                    onDelete = CASCADE)
+                @ForeignKey(
+                        entity = Account.class,
+                        parentColumns = "rowid",
+                        childColumns = "userId",
+                        onUpdate = CASCADE),
+                @ForeignKey(entity = Account.class,
+                        parentColumns = "rowid",
+                        childColumns = "adminId",
+                        onUpdate = CASCADE)
         }
 )
 public class Application {
+
+    /**
+     * Application表的主码
+     * 1.rowid属于添加fts4注解的要求，
+     * 2.由于一个用户可以提交多个申请，
+     * //多个管理员可以同时处理不同的申请
+     * 所以主码直接设置为id
+     * 否则需要以{userId,createTime}为主码
+     */
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "rowid")
-    private int id;
+    private int rowid;
 
+    /**
+     * 申请的提交时间
+     */
     private long createTime;
-
+    /**
+     * 申请处理完毕的时间,未完成则为null
+     */
     private long processedTime;
-
+    /**
+     * 标记是否正在处理，取值为false表明未开始处理或者已经处理完毕
+     */
     private boolean isProcess = false;
-
+    /**
+     * 标记是否通过
+     */
     private boolean isPassed = false;
-
+    /**
+     * 提交申请的用户id
+     */
     private int userId;
-
+    /**
+     * 处理申请的管理员id，
+     * 在管理员处选择进行处理时需要及时修改application，
+     * 在管理员提交处理结果时也需要再一次查询application状态，
+     * 如果已经被处理，就不再处理
+     * 如果未被处理就提交update application
+     */
     private int adminId;
 
+    /**
+     * 申请的信息
+     */
     private String applicationMessage;
 
+    /**
+     * 标记是否包含图片信息
+     */
     private boolean withPicture = false;
-
+    /**
+     * 如果包含图片，pictureBitmap存储图片bitmap转换的string值
+     */
     private String pictureBitmap;
 
     public Application() {
@@ -70,8 +109,12 @@ public class Application {
         this.applicationMessage = applicationMessage;
     }
 
-    public int getId() {
-        return id;
+    public int getRowid() {
+        return rowid;
+    }
+
+    public void setRowid(int rowid) {
+        this.rowid = rowid;
     }
 
     public long getCreateTime() {
@@ -114,11 +157,11 @@ public class Application {
         this.userId = userId;
     }
 
-    public String getApplicationmMessage() {
+    public String getApplicationMessage() {
         return applicationMessage;
     }
 
-    public void setApplicationmMessage(String applicationmMessage) {
+    public void setApplicationMessage(String applicationmMessage) {
         this.applicationMessage = applicationmMessage;
     }
 
@@ -136,5 +179,13 @@ public class Application {
 
     public void setPictureBitmap(String pictureBitmap) {
         this.pictureBitmap = pictureBitmap;
+    }
+
+    public int getAdminId() {
+        return adminId;
+    }
+
+    public void setAdminId(int adminId) {
+        this.adminId = adminId;
     }
 }

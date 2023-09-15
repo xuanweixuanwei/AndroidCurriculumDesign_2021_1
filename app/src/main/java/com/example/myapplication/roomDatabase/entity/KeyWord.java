@@ -3,6 +3,7 @@ package com.example.myapplication.roomDatabase.entity;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.Fts4;
+import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
 @Entity
@@ -13,7 +14,18 @@ public class KeyWord {
     @ColumnInfo(name = "rowid")
     private int rowid;
 
+/**
+ * 关键词字符串，传入前需要trim
+ * */
     private String keyword;
+
+    public KeyWord() {
+    }
+
+    @Ignore
+    public KeyWord(String keyword) {
+        this.keyword = keyword;
+    }
 
     public int getRowid() {
         return rowid;
@@ -31,3 +43,5 @@ public class KeyWord {
         this.keyword = keyword;
     }
 }
+
+

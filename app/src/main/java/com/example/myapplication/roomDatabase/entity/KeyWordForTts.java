@@ -6,8 +6,16 @@ import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.ForeignKey;
 import androidx.room.Fts4;
+import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
+/**
+ * 语音合成tts的结果和keyword的关联表
+ * resultId参照TtsResult表的rowid
+ * keywordId参照KeyWord表的rowid
+ * <p>
+ * 不提供直接删除和修改keyword的操作
+ */
 @Fts4
 @Entity(foreignKeys = {
         @ForeignKey(
@@ -29,9 +37,23 @@ public class KeyWordForTts {
     @ColumnInfo(name = "rowid")
     private int rowid;
 
+    /**
+     * 关键词id
+     */
     private int keywordId;
-
+    /**
+     * tts语音合成的结果id
+     */
     private int resultId;
+
+    public KeyWordForTts() {
+    }
+
+    @Ignore
+    public KeyWordForTts(int keywordId, int resultId) {
+        this.keywordId = keywordId;
+        this.resultId = resultId;
+    }
 
     public int getRowid() {
         return rowid;

@@ -13,6 +13,9 @@ import androidx.core.content.FileProvider;
 import android.Manifest;
 import android.app.Activity;
 import android.app.Dialog;
+import android.content.ClipData;
+import android.content.ClipboardManager;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.res.Resources;
@@ -117,7 +120,7 @@ APPID f1d1cefd
     //解析json
     private static Gson gson = new Gson();
 
-    private ImageButton ib_pick_picture, ib_copy_text;
+    private ImageButton ib_pick_picture, copy_text_result;
     private EditText et_text_result;
     private ImageView iv_picture;
 
@@ -216,7 +219,7 @@ APPID f1d1cefd
         actionBar.setDisplayHomeAsUpEnabled(true);//在ActionBar最左边显示返回箭头按钮
 
         ib_pick_picture = findViewById(R.id.ib_pick_picture);
-        ib_copy_text = findViewById(R.id.copy_text_result);
+        copy_text_result = findViewById(R.id.copy_text_result);
         et_text_result = findViewById(R.id.et_text_result);
         iv_picture = findViewById(R.id.iv_picture);
 
@@ -391,9 +394,42 @@ APPID f1d1cefd
                         }
                     });
                     break;
+                case R.id.copy_text_result:
+                    copyText(et_text_result);
+                    break;
             }
         }
     };
+
+    /**
+     * 将识别结果复制到手机剪切板中
+     * 写入剪切板不需要动态获取权限
+     */
+    private void copyText(EditText et_result) {
+
+        // Gets a handle to the clipboard service.
+        ClipboardManager clipboard = (ClipboardManager)
+                getSystemService(Context.CLIPBOARD_SERVICE);
+        // Creates a new text clip to put on the clipboard
+        ClipData clip = ClipData.newPlainText("recognition result", et_result.getText());
+
+        // Set the clipboard's primary clip.
+        clipboard.setPrimaryClip(clip);
+        // Only show a toast for Android 12 and lower.
+        //        因为测试过程发现即使真机是安卓13，在调用剪切板复制以后也没有弹窗，所以统一不做判断直接弹窗复制的信息
+        // if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.S_V2){  }
+
+        String str = et_result.getText().toString();
+        if (str.length() < 20)
+            showTip("复制了“" + str + "”");
+        else {
+            //            在复制的文本过多时，做一个字符串的截取和拼接
+            String limitedStr = String.format("%s...%s", str.substring(0, 7), str.substring(str.length() - 7));
+            showTip("复制了“" + limitedStr + "”");
+        }
+
+    }
+
 
     private ImageView getImageView(){
         ImageView imageView = new ImageView(CharacterRecognitionActivity.this);

@@ -255,7 +255,7 @@ public class SpeechRecognitionActivity extends AppCompatActivity {
                         }
                         break;
                     case R.id.copy_text:
-                        copyText();
+                        copyText(et_result);
                         break;
                     case R.id.delete_result:
                         new AlertDialog.Builder(SpeechRecognitionActivity.this)
@@ -288,7 +288,7 @@ public class SpeechRecognitionActivity extends AppCompatActivity {
      * 将识别结果复制到手机剪切板中
      * 写入剪切板不需要动态获取权限
      */
-    private void copyText() {
+    private void copyText(EditText et_result) {
 
         // Gets a handle to the clipboard service.
         ClipboardManager clipboard = (ClipboardManager)
@@ -358,7 +358,8 @@ public class SpeechRecognitionActivity extends AppCompatActivity {
         mIat.setParameter(SpeechConstant.ENGINE_TYPE, mEngineType);
         // 设置返回结果格式
         mIat.setParameter(SpeechConstant.RESULT_TYPE, resultType);
-
+        //TODO 需要测试
+        language = mSharedPreferences.getString("iat_language_type_preference","zh_cn");
         if (language.equals("zh_cn")) {
             String lag = mSharedPreferences.getString("iat_language_preference",
                     "mandarin");

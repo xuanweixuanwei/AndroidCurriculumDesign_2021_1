@@ -64,8 +64,6 @@ public class VoiceSynthesisActivity extends AppCompatActivity implements ToastAc
     // 语音合成对象
     private SpeechSynthesizer mTts;
 
-
-
     // 默认发音人
     private String voicer = "xiaoyan";
 

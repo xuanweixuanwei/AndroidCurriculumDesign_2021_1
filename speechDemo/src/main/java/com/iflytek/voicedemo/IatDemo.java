@@ -352,6 +352,7 @@ public class IatDemo extends Activity implements OnClickListener {
         // 设置返回结果格式
         mIat.setParameter(SpeechConstant.RESULT_TYPE, resultType);
 
+
         if (language.equals("zh_cn")) {
             String lag = mSharedPreferences.getString("iat_language_preference",
                     "mandarin");
