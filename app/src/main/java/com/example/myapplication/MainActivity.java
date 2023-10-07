@@ -1,22 +1,24 @@
 package com.example.myapplication;
 
-import androidx.activity.result.ActivityResultCallback;
+
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.Manifest;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
 import com.example.myapplication.activity.CharacterRecognitionActivity;
+import com.example.myapplication.activity.InfoActivity;
 import com.example.myapplication.activity.SpeechRecognitionActivity;
 import com.example.myapplication.activity.VoiceSynthesisActivity;
-
-import java.util.Map;
 import java.util.Objects;
 
 public class MainActivity extends AppCompatActivity {
@@ -29,27 +31,48 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         initView();
+//        申请网络权限等
         requestPermissions();
 
 
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.main_activity_menu,menu);
+        return super.onCreateOptionsMenu(menu);
+    }
 
-    private final ActivityResultLauncher permissionLauncher2 = registerForActivityResult(
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()) {
+
+
+            case R.id.exit_account:
+//           TODO      exit();
+                break;
+            case R.id.user_info_setting:
+                startActivity(new Intent(MainActivity.this, InfoActivity.class));
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    private final ActivityResultLauncher permissionLauncher = registerForActivityResult(
             new ActivityResultContracts.RequestMultiplePermissions(),
             result -> {
                 if (result.get(Manifest.permission.INTERNET) != null
-                        && result.get(Manifest.permission.RECORD_AUDIO) != null
-                        && result.get(Manifest.permission.CAMERA) != null
+//                        && result.get(Manifest.permission.RECORD_AUDIO) != null
+//                        && result.get(Manifest.permission.CAMERA) != null
                         && result.get(Manifest.permission.READ_PHONE_STATE) != null) {
                     if (Objects.requireNonNull(result.get(Manifest.permission.INTERNET)).equals(true)
-                            && Objects.requireNonNull(result.get(Manifest.permission.RECORD_AUDIO)).equals(true)
-                            && Objects.requireNonNull(result.get(Manifest.permission.CAMERA)).equals(true)
+//                            && Objects.requireNonNull(result.get(Manifest.permission.RECORD_AUDIO)).equals(true)
+//                            && Objects.requireNonNull(result.get(Manifest.permission.CAMERA)).equals(true)
                             && Objects.requireNonNull(result.get(Manifest.permission.READ_PHONE_STATE)).equals(true)) {
-                        Toast.makeText(MainActivity.this, "权限获取成功", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(MainActivity.this, "联网和获取手机状态权限获取成功", Toast.LENGTH_SHORT).show();
                         //权限全部获取到之后的动作
                     } else {
-                        Toast.makeText(MainActivity.this, "权限获取失败，可能存在部分功能无法实现", Toast.LENGTH_SHORT).show();
+//                        TODO 改成alertdialog，选择手动开启就跳转系统权限设置界面
+                        Toast.makeText(MainActivity.this, "可能存在部分权限获取失败，语音合成等功能无法实现", Toast.LENGTH_SHORT).show();
 
 //                          有权限没有获取到的动作
                     }
@@ -61,12 +84,9 @@ public class MainActivity extends AppCompatActivity {
         //权限数组
         String[] permissions = new String[]{
                 Manifest.permission.INTERNET,
-                Manifest.permission.RECORD_AUDIO,
-                Manifest.permission.CAMERA,
                 Manifest.permission.READ_PHONE_STATE
         };
-
-        permissionLauncher2.launch(permissions);
+        permissionLauncher.launch(permissions);
     }
 
     private void initView() {

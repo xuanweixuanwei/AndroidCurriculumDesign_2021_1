@@ -7,9 +7,10 @@ import androidx.room.Entity;
 import androidx.room.ForeignKey;
 import androidx.room.Fts4;
 import androidx.room.Ignore;
+import androidx.room.Index;
 import androidx.room.PrimaryKey;
 
-@Fts4
+
 @Entity(foreignKeys = {
         @ForeignKey(
                 entity = KeyWord.class,
@@ -25,19 +26,20 @@ import androidx.room.PrimaryKey;
                 onDelete = CASCADE,
                 onUpdate = CASCADE
         )
-}
+        },
+        indices = @Index(value = {"rowid"})
 )
 public class KeyWordForAsr {
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "rowid")
     private int rowid;
-/**
- * 关键词id
- * */
+    /**
+     * 关键词id
+     */
     private int keywordId;
-/**
- * asr结果的id
- * */
+    /**
+     * asr结果的id
+     */
     private int resultId;
 
     public KeyWordForAsr() {

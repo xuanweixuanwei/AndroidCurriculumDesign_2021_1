@@ -10,5 +10,5 @@
         android:id="@+id/tts_preference_setting"
         app:showAsAction="always|withText"
         android:icon="@drawable/vector_drawable_settings"
-        android:title="发音人设置"/>
+        android:title="合成参数设置"/>
 </menu>

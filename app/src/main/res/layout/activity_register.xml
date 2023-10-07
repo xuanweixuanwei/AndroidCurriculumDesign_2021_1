@@ -24,7 +24,8 @@
             android:layout_marginTop="@dimen/dp_40"
             android:text="@string/register"
             android:textColor="@color/black60"
-            android:textSize="@dimen/sp_23" />
+            android:textSize="@dimen/sp_23"
+          />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:layout_width="wrap_content"
@@ -106,12 +107,13 @@
             style="@style/EditTextStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="答案"
+            android:hint="答案(未输入上面的验证问题则无效)"
             android:inputType="text"
             android:maxLines="30"
             android:background="@null"
             android:singleLine="true"
             android:layout_marginTop="@dimen/dp_20"
+            android:enabled="false"
             />
 
 

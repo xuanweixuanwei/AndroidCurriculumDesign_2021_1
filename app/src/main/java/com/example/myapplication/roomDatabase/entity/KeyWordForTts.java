@@ -7,6 +7,7 @@ import androidx.room.Entity;
 import androidx.room.ForeignKey;
 import androidx.room.Fts4;
 import androidx.room.Ignore;
+import androidx.room.Index;
 import androidx.room.PrimaryKey;
 
 /**
@@ -16,7 +17,6 @@ import androidx.room.PrimaryKey;
  * <p>
  * 不提供直接删除和修改keyword的操作
  */
-@Fts4
 @Entity(foreignKeys = {
         @ForeignKey(
                 entity = KeyWord.class,
@@ -30,7 +30,9 @@ import androidx.room.PrimaryKey;
                 childColumns = "resultId",
                 onDelete = CASCADE,
                 onUpdate = CASCADE)
-}
+        },
+            indices = @Index(value = {"rowid"})
+
 )
 public class KeyWordForTts {
     @PrimaryKey(autoGenerate = true)
@@ -40,10 +42,12 @@ public class KeyWordForTts {
     /**
      * 关键词id
      */
+    @ColumnInfo(index = true)
     private int keywordId;
     /**
      * tts语音合成的结果id
      */
+    @ColumnInfo(index = true)
     private int resultId;
 
     public KeyWordForTts() {

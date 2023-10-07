@@ -3,7 +3,9 @@ package com.example.myapplication.roomDatabase.dao;
 import androidx.room.Dao;
 import androidx.room.Query;
 
+import com.example.myapplication.roomDatabase.entity.AsrResult;
 import com.example.myapplication.roomDatabase.entity.OcrResult;
+import com.example.myapplication.roomDatabase.entity.TtsResult;
 
 import java.util.List;
 
@@ -14,19 +16,19 @@ public interface ResultDao {
     List<OcrResult> findAllOcrResult(int userId);
 
     @Query("SELECT * FROM AsrResult WHERE userId = :userId")
-    List<OcrResult> findAllAsrResult(int userId);
+    List<AsrResult> findAllAsrResult(int userId);
 
-    @Query("SELECT * FROM OcrResult WHERE userId = :userId")
-    List<OcrResult> findAllTtsResult(int userId);
+    @Query("SELECT * FROM TtsResult WHERE userId = :userId")
+    List<TtsResult> findAllTtsResult(int userId);
 
     @Query("SELECT * FROM OcrResult WHERE rowid = :resultId")
-    List<OcrResult> findOcrResult(int resultId);
+    OcrResult findOcrResult(int resultId);
 
     @Query("SELECT * FROM AsrResult WHERE rowid = :resultId")
-    List<OcrResult> findAsrResult(int resultId);
+    AsrResult findAsrResult(int resultId);
 
     @Query("SELECT * FROM OcrResult WHERE rowid = :resultId")
-    List<OcrResult> findTtsResult(int resultId);
+    OcrResult findTtsResult(int resultId);
 
 
 }

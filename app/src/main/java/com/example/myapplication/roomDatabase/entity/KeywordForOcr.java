@@ -8,10 +8,11 @@ import androidx.room.Entity;
 import androidx.room.ForeignKey;
 import androidx.room.Fts4;
 import androidx.room.Ignore;
+import androidx.room.Index;
 import androidx.room.PrimaryKey;
 
 
-@Fts4
+
 @Entity(foreignKeys = {
         @ForeignKey(
                 entity = KeyWord.class,
@@ -25,7 +26,8 @@ import androidx.room.PrimaryKey;
                 childColumns = "resultId",
                 onDelete = CASCADE,
                 onUpdate = CASCADE)
-}
+        },
+        indices = @Index(value = {"rowid"})
 )
 public class KeywordForOcr {
 
@@ -35,10 +37,12 @@ public class KeywordForOcr {
     /**
      * 关键词id
      */
+    @ColumnInfo(index = true)
     private int keywordId;
     /**
-     * ocr图片识文结果result
+     * ocr图片识文结果result的id
      */
+    @ColumnInfo(index = true)
     private int resultId;
 
     public KeywordForOcr() {

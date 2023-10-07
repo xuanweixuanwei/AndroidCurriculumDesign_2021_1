@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activity.InfoActivity"
+    android:orientation="vertical">
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="100dp"/>
+
+
+    <com.hjq.widget.layout.SettingBar
+        android:id="@+id/fl_person_data_avatar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/white_selector"
+        android:layout_marginTop="10dp"
+        app:bar_leftText="@string/personal_data_avatar">
+
+        <ImageView
+            android:id="@+id/iv_person_data_avatar"
+            android:layout_width="@dimen/dp_70"
+            android:layout_height="@dimen/dp_70"
+            android:layout_gravity="end|center_vertical"
+            android:layout_margin="@dimen/dp_20"
+            android:scaleType="centerCrop"
+            android:src="@drawable/vector_drawable_avatar"
+            android:contentDescription="@string/avatar_description" />
+
+    </com.hjq.widget.layout.SettingBar>
+
+    <com.hjq.widget.layout.SettingBar
+        android:id="@+id/sb_person_data_id"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_10"
+        android:background="@color/white"
+        app:bar_leftText="@string/personal_data_id"
+        app:bar_rightText="10001"
+        />
+
+    <com.hjq.widget.layout.SettingBar
+        android:id="@+id/sb_person_data_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:bar_leftText="@string/personal_data_name"
+        app:bar_rightTextHint="@string/personal_data_name_hint"
+        tools:bar_rightText="meteor_" />
+
+    <com.hjq.widget.layout.SettingBar
+        android:id="@+id/sb_person_data_birthday"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:bar_leftText="@string/personal_data_address"
+        app:bar_rightTextHint="@string/personal_data_birthday_hint" />
+
+    <com.hjq.widget.layout.SettingBar
+        android:id="@+id/sb_person_data_sex"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:bar_leftText="@string/personal_data_sex"
+        app:bar_rightTextHint="@string/personal_data_sex_default" />
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="10dp"/>
+    <com.hjq.widget.layout.SettingBar
+        android:id="@+id/sb_person_data_tts_usage_count"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:bar_leftText="@string/personal_data_tts_usage_count"
+        app:bar_rightText="@string/personal_data_usage_count" />
+
+    <com.hjq.widget.layout.SettingBar
+        android:id="@+id/sb_person_data_ocr_usage_count"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:bar_leftText="@string/personal_ocr_usage_count"
+        app:bar_rightText="@string/personal_data_usage_count" />
+    <com.hjq.widget.layout.SettingBar
+        android:id="@+id/sb_person_data_asr_usage_count"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:bar_leftText="@string/personal_data_asr_usage_count"
+        app:bar_rightText="@string/personal_data_usage_count" />
+    <com.hjq.widget.layout.SettingBar
+        android:id="@+id/sb_person_data_tts_usage"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:bar_leftText="@string/personal_data_tts_usage"
+        app:bar_rightText="@string/personal_data_usage_hint" />
+
+    <com.hjq.widget.layout.SettingBar
+        android:id="@+id/sb_person_data_ocr_usage"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:bar_leftText="@string/personal_ocr_usage"
+        app:bar_rightText="@string/personal_data_usage_hint" />
+    <com.hjq.widget.layout.SettingBar
+        android:id="@+id/sb_person_data_asr_usage"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:bar_leftText="@string/personal_data_asr_usage"
+        app:bar_rightText="@string/personal_data_usage_hint" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="10dp"/>
+    <com.hjq.widget.layout.SettingBar
+        android:id="@+id/sb_person_application"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:bar_leftText="@string/to_application"
+        app:bar_rightText="@string/application_Hint"
+        app:bar_rightDrawable="@drawable/arrows_right_ic"
+        />
+    <com.hjq.widget.layout.SettingBar
+        android:id="@+id/sb_person_feedback"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:bar_leftText="@string/to_feedback"
+        app:bar_rightText="@string/feedback_Hint"
+        app:bar_rightDrawable="@drawable/arrows_right_ic"
+        />
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        />
+</LinearLayout>
+
+
+</androidx.core.widget.NestedScrollView>

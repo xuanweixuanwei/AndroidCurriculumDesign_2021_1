@@ -10,7 +10,6 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.preference.PreferenceManager;
-
 import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Context;

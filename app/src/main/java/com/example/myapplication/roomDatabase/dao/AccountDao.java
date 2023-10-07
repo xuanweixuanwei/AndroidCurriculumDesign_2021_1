@@ -1,16 +1,29 @@
 package com.example.myapplication.roomDatabase.dao;
 
 import androidx.room.Dao;
+import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.Query;
+import androidx.room.Update;
 
 import com.example.myapplication.roomDatabase.entity.Account;
 
 @Dao
 public interface AccountDao {
 //    注册时，通过email查找account
-    @Query("SELECT * FROM ACCOUNT WHERE email = :EMAIL")
+    @Query("SELECT * FROM ACCOUNT WHERE email = :EMAIL AND passwordSHA = :PASSWORD")
+    Account findAccountByPassword(String EMAIL, String PASSWORD);
+
+    @Query("SELECT * FROM ACCOUNT WHERE email = :EMAIL ")
     Account findAccountByEmail(String EMAIL);
+
+    @Update
+    int updateAccount(Account accountToUpdate);
+
+    @Query("DELETE from ACCOUNT")
+    void clearAccount();
+    @Delete
+    void deleteAccount(Account account);
 
 //修改密码
 // Room 使用主键将传递的实体实例与数据库中的行进行匹配。
@@ -27,6 +40,8 @@ public interface AccountDao {
 
     @Insert
     void insert(Account account);
+
+
 
 
 }

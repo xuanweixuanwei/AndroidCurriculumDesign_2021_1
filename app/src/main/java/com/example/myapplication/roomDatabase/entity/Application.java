@@ -7,6 +7,7 @@ import androidx.room.Entity;
 import androidx.room.ForeignKey;
 import androidx.room.Fts4;
 import androidx.room.Ignore;
+import androidx.room.Index;
 import androidx.room.PrimaryKey;
 
 import java.util.Calendar;
@@ -18,7 +19,7 @@ import java.util.Calendar;
  * 未设置onDelete = CASCADE
  * 查询到的管理员和用户id对应的账号可能已经注销
  */
-@Fts4
+
 @Entity(tableName = "APPLICATION",
         foreignKeys = {
                 @ForeignKey(
@@ -30,7 +31,8 @@ import java.util.Calendar;
                         parentColumns = "rowid",
                         childColumns = "adminId",
                         onUpdate = CASCADE)
-        }
+        },
+        indices = @Index(value = {"userId", "adminId"})
 )
 public class Application {
 
@@ -65,6 +67,7 @@ public class Application {
     /**
      * 提交申请的用户id
      */
+    @ColumnInfo(index = true)
     private int userId;
     /**
      * 处理申请的管理员id，
@@ -73,6 +76,7 @@ public class Application {
      * 如果已经被处理，就不再处理
      * 如果未被处理就提交update application
      */
+    @ColumnInfo(index = true)
     private int adminId;
 
     /**

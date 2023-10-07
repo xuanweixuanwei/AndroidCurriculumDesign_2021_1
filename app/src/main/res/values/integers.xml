@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Activity 转场动画时间 -->
+    <integer name="activity_anim_duration">200</integer>
+
+    <!-- 短信验证码的长度 -->
+    <integer name="sms_code_length">4</integer>
+    <integer name="duration_long">350</integer>
+
+    <integer name="default_sex">999</integer>
+    <integer name="male">666</integer>
+    <integer name="female">888</integer>
+
+</resources>

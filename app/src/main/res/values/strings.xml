@@ -170,6 +170,16 @@
     <string name="text_cn_word">"磁铁，率领，脆弱，动手，古筝"</string>
     <string name="text_cn_sentence">"一座座雪峰插入云霄，峰顶银光闪闪，大大小小的湖泊，像颗颗宝石镶嵌在彩带般的沟谷中。"</string>
     <string name="text_cn_chapter">"床前明月光，疑是地上霜。举头望明月，低头思故乡。"</string>
+    <!-- Reply Preference -->
+    <string-array name="reply_entries">
+        <item>Reply</item>
+        <item>Reply to all</item>
+    </string-array>
+
+    <string-array name="reply_values">
+        <item>reply</item>
+        <item>reply_all</item>
+    </string-array>
     <string-array name="ise_language_entries">
         <item>英语</item>
         <item>汉语</item>
@@ -240,7 +250,16 @@
         <item>fr_fr</item>
         <item>ko_kr</item>
     </string-array>
-
+    <string-array name="sex_entries">
+        <item>@string/personal_data_sex_default</item>
+        <item>@string/personal_data_sex_male</item>
+        <item>@string/personal_data_sex_female</item>
+    </string-array>
+    <integer-array name="sex_values">
+        <item>@integer/default_sex</item>
+        <item>@integer/male</item>
+        <item>@integer/female</item>
+    </integer-array>
 
     <!-- 语言 -->
     <string-array name="machine_entries">
@@ -323,5 +342,65 @@
     <string name="login_other">其他登陆方式</string>
     <string name="register_hint">邮箱仅仅作为注册凭证\n暂不支持使用邮箱进行登陆</string>
     <string name="register_password_hint2">再次输入密码</string>
-    <string name="register_password_hint1">设置6–18位仅包含英文字母和阿拉伯数字的密码</string>
+    <string name="register_password_hint1">设置8–18位仅包含英文字母和阿拉伯数字的密码</string>
+    <string name="personal_data_title">个人信息</string>
+    <string name="personal_data_avatar">头像</string>
+    <string name="personal_data_id">用户ID</string>
+    <string name="personal_data_name">昵称</string>
+    <string name="personal_data_name_hint">设置昵称</string>
+    <string name="personal_data_address">生日</string>
+    <string name="personal_data_birthday_hint">2023年8月14日</string>
+    <string name="personal_data_tts_usage">语音合成今日用量</string>
+    <string name="personal_ocr_usage">图像识文今日用量</string>
+    <string name="personal_data_asr_usage">语音识别今日用量</string>
+    <string name="personal_data_tts_usage_count">语音合成总用量</string>
+    <string name="personal_ocr_usage_count">图像识文总用量</string>
+    <string name="personal_data_asr_usage_count">语音识别总用量</string>
+    <string name="personal_data_usage_count">NAN</string>
+    <string name="personal_data_usage_hint">暂不可用</string>
+
+    <string name="personal_data_sex">性别</string>
+    <string name="personal_data_sex_default">神秘(O_o)??</string>
+    <string name="personal_data_sex_male">男</string>
+    <string name="personal_data_sex_female">女</string>
+    <string-array name="sex">
+        <item>@string/personal_data_sex_default</item>
+        <item>@string/personal_data_sex_male</item>
+        <item>@string/personal_data_sex_female</item>
+    </string-array>
+
+
+    <string name="to_feedback">使用中遇到问题？</string>
+    <string name="to_application">\t\t每日用量不够？</string>
+    <string name="application_Hint">去申请</string>
+    <string name="feedback_Hint">去反馈</string>
+    <string name="ocr_production">通用文字识别</string>
+    <string name="asr_production">语音合成</string>
+    <string name="tts_production">语音识别</string>
+    <string name="avatar_description">avatar</string>
+    <string name="status_layout_no_data">空空如也</string>
+    <string name="status_layout_error_request">请求出错，请重试</string>
+    <string name="status_layout_error_network">网络错误，请重试</string>
+    <string name="status_layout_retry">重试</string>
+    <string name="image_select_all">所有图片</string>
+
+    <string name="image_select_total">共 %d 张</string>
+
+    <string name="image_select_max_hint">本次最多只能选择 %d 张图片</string>
+
+    <string name="image_select_error">无法选中，该图片已经被删除</string>
+
+    <!-- 裁剪图片 -->
+    <string name="image_crop_error_not_support">裁剪失败，当前手机不支持裁剪图片</string>
+    <string name="common_loading">加载中…</string>
+    <string name="common_unknown_error">未知错误</string>
+    <!-- 拍照和拍摄 -->
+    <string name="camera_launch_fail">无法启动相机</string>
+    <string name="camera_image_error">目标地址错误</string>
+    <string name="image_select_title">图片选择</string>
+    <string name="meteor_day">\t\t来到Meteor的第%d天 ʕ ᵔᴥᵔ ʔ
+</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
 </resources>

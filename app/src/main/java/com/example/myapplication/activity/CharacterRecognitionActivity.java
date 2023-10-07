@@ -18,7 +18,6 @@ import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
@@ -61,7 +60,6 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Base64;
 import java.util.Date;
-import java.util.List;
 import java.util.Locale;
 import java.util.TimeZone;
 import java.util.concurrent.ExecutorService;
@@ -100,14 +98,12 @@ signature 是使用加密算法对参与签名的参数签名后并使用base64�
 APIKey b02aa25c9c52fdf36cf809d300959d7c
 APISecret MWQ0MWIyNGUxMzhhOWQxYWI5NjlhOTJj
 APPID f1d1cefd
-
-
 */
+
+
 
     private static final String TAG = CharacterRecognitionActivity.class.getSimpleName();
     private Bitmap photoBitmap;
-
-
 
     //控制台获取以下信息
     private static String APPID = "f1d1cefd";
@@ -135,7 +131,7 @@ APPID f1d1cefd
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_character_recognition_2);
+        setContentView(R.layout.activity_character_recognition);
 
         initView();
         createFileDirectory();
@@ -192,9 +188,9 @@ APPID f1d1cefd
                                     } else {
                                         for (Word word :
                                                 line.words) {
-
                                             result_string_buffer.append(word.content);
                                         }
+                                        result_string_buffer.append("\n");
                                     }
                                 }
                             }
@@ -202,8 +198,6 @@ APPID f1d1cefd
                             changeEditTextHeight(et_text_result);
                         }
                     });
-
-
                 } catch (Exception e) {
                     e.printStackTrace();
                 }

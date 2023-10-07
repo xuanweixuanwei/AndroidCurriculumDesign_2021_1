@@ -11,41 +11,48 @@
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_marginHorizontal="5dp"
-        android:layout_marginTop="5dp"
-        android:layout_weight="5"
-        android:paddingTop="20dp"
-        >
-
-        <ImageView
-
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:scaleType="centerCrop"
-            android:contentDescription="@string/picture_description"
-            android:src="@drawable/meteor" />
-    </androidx.core.widget.NestedScrollView>
-
-    <androidx.core.widget.NestedScrollView
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="5"
         android:layout_marginHorizontal="10dp"
         android:layout_marginTop="5dp"
-        android:background="@drawable/rounded_rectangle_background"
+        android:layout_weight="10"
         >
-
-        <EditText
-
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_margin="5dp"
-            android:background="@null"
-            android:hint="@string/character_recognition_instruction"
-            android:inputType="textMultiLine"
-            android:textSize="20sp"
-            tools:ignore="TouchTargetSizeCheck" />
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <ImageView
+                android:id="@+id/iv_picture"
+                android:layout_width="wrap_content"
+                android:layout_height="300dp"
+                android:scaleType="fitCenter"
+                android:maxHeight="300dp"
+                android:contentDescription="@string/picture_description"
+                android:src="@drawable/meteor"
+                />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="5dp"
+                android:layout_marginVertical="10dp"
+                android:padding="10dp"
+                android:background="@drawable/rounded_rectangle_background"
+                android:minHeight="280dp">
+                <EditText
+                    android:id="@+id/et_text_result"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp"
+                    android:minHeight="280dp"
+                   android:background="@null"
+                    android:gravity="start"
+                    android:hint="@string/character_recognition_instruction"
+                    android:inputType="textMultiLine"
+                    android:textSize="20sp"
+                    tools:ignore="TouchTargetSizeCheck" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+
 
     </androidx.core.widget.NestedScrollView>
 
@@ -54,58 +61,66 @@
         android:layout_height="@dimen/line_size"
         android:layout_marginTop="@dimen/dp_10"
         android:background="@color/common_line_color" />
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/BOTTOM_END"
-        android:layout_width="412dp"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_gravity="center"
         android:layout_weight="2"
-        tools:layout_editor_absoluteY="640dp">
-
-        <ImageButton
-            android:id="@+id/ib_pick_picture"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
-            android:layout_gravity="center"
-          android:contentDescription="@string/pick_picture_description"
-            android:layout_marginStart="100dp"
-            android:layout_marginTop="8dp"
-            android:background="@drawable/ripple_view"
-            android:scaleType="centerInside"
-            android:src="@drawable/vector_drawable_photoalbum"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <ImageButton
-            android:id="@+id/copy_text_result"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
-            android:layout_gravity="center"
-            android:contentDescription="@string/copy_text_description"
-            android:layout_marginStart="60dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="100dp"
-            android:background="@drawable/ripple_view"
-            android:scaleType="centerInside"
-            android:src="@drawable/vector_drawable_copy_text"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/ib_pick_picture"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
+        android:paddingVertical="10dp"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:background="#01000000"
+        >
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/pick_photo"
-            app:layout_constraintEnd_toEndOf="@+id/ib_pick_picture"
-            app:layout_constraintStart_toStartOf="@+id/ib_pick_picture"
-            app:layout_constraintTop_toBottomOf="@+id/ib_pick_picture" />
-
-        <TextView
+            android:orientation="vertical"
+            android:layout_marginHorizontal="50dp"
+            android:paddingHorizontal="10dp"
+            android:paddingVertical="5dp"
+            android:background="@drawable/rounded_rectangle_background"
+            >
+            <ImageButton
+                android:id="@+id/ib_pick_picture"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_gravity="center"
+                android:contentDescription="@string/pick_picture_description"
+                android:background="@drawable/ripple_view"
+                android:scaleType="centerInside"
+                android:src="@drawable/vector_drawable_photoalbum"
+            />
+            <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/copy_result"
-            app:layout_constraintEnd_toEndOf="@+id/copy_text_result"
-            app:layout_constraintStart_toStartOf="@+id/copy_text_result"
-            app:layout_constraintTop_toBottomOf="@+id/copy_text_result" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            android:text="@string/pick_photo"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginHorizontal="50dp"
+            android:paddingHorizontal="10dp"
+            android:paddingVertical="5dp"
+            android:background="@drawable/rounded_rectangle_background"
+            >
+            <ImageButton
+                android:id="@+id/copy_text_result"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_gravity="center"
+                android:contentDescription="@string/pick_picture_description"
+                android:background="@drawable/ripple_view"
+                android:scaleType="centerInside"
+                android:src="@drawable/vector_drawable_copy_text"
+
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/copy_result"/>
+        </LinearLayout>
+    </LinearLayout>
+
+
 </LinearLayout>
