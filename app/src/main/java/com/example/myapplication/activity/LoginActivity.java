@@ -30,6 +30,8 @@ import com.hjq.widget.view.SubmitButton;
 
 import java.util.Calendar;
 import java.util.Objects;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 import okio.ByteString;
 import timber.log.Timber;
@@ -57,7 +59,7 @@ public class LoginActivity extends AppCompatActivity implements HandlerAction {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         db = AppDatabase.getInstance(this);
-        sharedPreferences = getSharedPreferences(LoginActivity.class.getSimpleName(),MODE_PRIVATE);
+        sharedPreferences = getSharedPreferences(AppConstant.preferenceFileName,MODE_PRIVATE);
         initView();
         initListener();
     }
@@ -121,10 +123,7 @@ public class LoginActivity extends AppCompatActivity implements HandlerAction {
         postDelayed(() -> {
             btn_login_commit.showSucceed();
             postDelayed(() -> {
-                getSharedPreferences(AppConstant.preferenceFileName, Context.MODE_PRIVATE).edit()
-                        .putString(AppConstant.userEmail,et_login_email.getText().toString().trim())
-                        .putString(AppConstant.userPasswordSHA,ByteString.encodeUtf8(et_login_password.getText().toString().trim()).sha256().toString())
-                        .apply();
+
                 startActivity(new Intent(LoginActivity.this, MainActivity.class));
             }, 1000);
         }, 2000);
@@ -150,50 +149,63 @@ public class LoginActivity extends AppCompatActivity implements HandlerAction {
     }
 
     private boolean Login(String email, String password){
-        Account accountByEmail=db.AccountDao().findAccountByEmail(email);
-        Account account = db.AccountDao().findAccountByPassword(email,ByteString.encodeUtf8(password).sha256().toString());//通过email和password查询
-        if (account!=null) {//账号和密码正确，判断账号是否处于封锁状态：注销5天内或者某日密码错误超过次数还处于封禁日期内（也是5天）
-            if (account.isLocked()) {//账号被锁
-                if (account.getLogoutTime()==0) {//未被注销，说明可能在封锁期间
-                    if (account.getErrorTimes()>4) {//今日错误次数超过4次
-                        accountStateError();
-                        showTip("账户由于输入密码错误次数超过4次已被禁用，解锁时间为"+ DateUtil.MillisToStr(account.getLockedTime()));
-                    }else {
-                        showTip("系统出错，请稍后再试或联系管理员");
-                        Timber.e("Login:account.getLockedTime(): %s", account.getLockedTime());
-                        Timber.e("Login:account.getLastErrorTime() %s", account.getLastErrorTime());
-                        Timber.e("Login:account.getEmail() %s", account.getEmail());
-                        Timber.e("Login:account.getPasswordSHA() %s", account.getPasswordSHA());
-                        Timber.e("Login:account.isLocked() %s", account.isLocked());
-                        Timber.e("Login: account.getErrorTimes() %s", account.getErrorTimes());
-                    }
-                }else {
-                    if (account.getLogoutTime()> Calendar.getInstance().getTimeInMillis()) {//如果注销时间未到
-                        accountStateError();
-                        showTip("当前账号于五日内被注销，如有疑问请联系管理员");
-                    }else {//已注销，删除用户信息
+
+        ExecutorService executor = Executors.newSingleThreadExecutor();
+        executor.submit(new Runnable() {
+            @Override
+            public void run() {
+                Account accountByEmail=db.AccountDao().findAccountByEmail(email);
+                Account account = db.AccountDao().findAccountByPassword(email,ByteString.encodeUtf8(password).sha256().toString());//通过email和password查询
+                if (account!=null) {//账号和密码正确，判断账号是否处于封锁状态：注销5天内或者某日密码错误超过次数还处于封禁日期内（也是5天）
+                    if (account.isLocked()) {//账号被锁
+                        if (account.getLogoutTime()==0) {//未被注销，说明可能在封锁期间
+                            if (account.getErrorTimes()>4) {//今日错误次数超过4次
+                                accountStateError();
+                                showTip("账户由于输入密码错误次数超过4次已被禁用，解锁时间为"+ DateUtil.MillisToStr(account.getLockedTime()));
+                            }else {
+                                showTip("系统出错，请稍后再试或联系管理员");
+                                Timber.e("Login:account.getLockedTime(): %s", account.getLockedTime());
+                                Timber.e("Login:account.getLastErrorTime() %s", account.getLastErrorTime());
+                                Timber.e("Login:account.getEmail() %s", account.getEmail());
+                                Timber.e("Login:account.getPasswordSHA() %s", account.getPasswordSHA());
+                                Timber.e("Login:account.isLocked() %s", account.isLocked());
+                                Timber.e("Login: account.getErrorTimes() %s", account.getErrorTimes());
+                            }
+                        }else {
+                            if (account.getLogoutTime()> Calendar.getInstance().getTimeInMillis()) {//如果注销时间未到
+                                accountStateError();
+                                showTip("当前账号于五日内被注销，如有疑问请联系管理员");
+                            }else {//已注销，删除用户信息
 //                        TODO 为确保表的onDelete = CASCADE 生效，应该再实现其他表的删除
-                        db.AccountDao().deleteAccount(account);
-                       loginError();
+                                db.AccountDao().deleteAccount(account);
+                                loginError();
+                            }
+                        }
+
+                    }else {
+                        sharedPreferences.edit()
+                                .putString(AppConstant.userEmail,et_login_email.getText().toString().trim())
+                                .putString(AppConstant.userPasswordSHA,ByteString.encodeUtf8(et_login_password.getText().toString().trim()).sha256().toString())
+                                .putBoolean(AppConstant.loginState,true)
+                                .apply();
+                    }
+
+                }else {
+//            账号、密码错误
+                    loginError();
+
+//            如果存在对应账号，记录错误次数
+                    if (accountByEmail!=null) {
+                        accountByEmail.passwordError();
+                        db.AccountDao().updateAccount(accountByEmail);
                     }
                 }
 
-            }else {
-                sharedPreferences.edit().putString("email",email).putString("password",ByteString.encodeUtf8(password).sha256().toString()).apply();
-                return true;
             }
+        });
+        executor.shutdown();
 
-        }else {
-//            账号、密码错误
-            loginError();
-
-//            如果存在对应账号，记录错误次数
-            if (accountByEmail!=null) {
-                accountByEmail.passwordError();
-                db.AccountDao().updateAccount(accountByEmail);
-            }
-        }
-        return false;
+        return sharedPreferences.getBoolean(AppConstant.loginState,false);
     }
 
     private void loginError(){

@@ -24,6 +24,8 @@ import com.hjq.widget.view.PasswordEditText;
 import com.hjq.widget.view.SubmitButton;
 
 import java.util.Objects;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 import com.example.myapplication.util.HandlerAction;
 
@@ -163,56 +165,65 @@ public class RegisterActivity extends AppCompatActivity implements HandlerAction
                 Objects.requireNonNull(et_register_password1.getText()).toString().trim();
         String password2 =
                 Objects.requireNonNull(et_register_password2.getText()).toString().trim();
-        if (db.AccountDao().findAccountByEmail(email)!=null) {
-            et_register_email.setAnimation(AnimationUtils.loadAnimation(getApplicationContext(),R.anim.shake_anim));
-            btn_register_commit.showError(3000);
-            showTip("该邮箱已被注册");
-            return;
-        }
-
-        if (email.matches(emailPattern)) {
-            if (password1.equals(password2)) {
-                if (password1.length()>=8&&password1.length()<18) {
-                    if(Objects.requireNonNull(et_register_question.getText()).length()==0){
-                        btn_register_commit.showProgress();
-                        db.AccountDao().insert(new Account(email,password1));
-
-                    }else {
-                        String question = et_register_question.getText().toString().trim();
-                        String answer = Objects.requireNonNull(et_register_answer.getText()).toString().trim();
-                        db.AccountDao().insert(new Account(email,password1,question,answer));
-                    }
-                    showTip("注册成功");
-                    postDelayed(() -> {
-                        btn_register_commit.showSucceed();
-                        postDelayed(() -> {
-
-                            setResult(RESULT_OK, new Intent()
-                                    .putExtra(INTENT_KEY_EMAIL, email)
-                                    .putExtra(INTENT_KEY_PASSWORD, password1));
-                            finish();
-                        }, 1000);
-                    }, 2000);
-                }else {
-                    et_register_password1.setAnimation(AnimationUtils.loadAnimation(getApplicationContext(),R.anim.shake_anim));
-                    et_register_password2.setAnimation(AnimationUtils.loadAnimation(getApplicationContext(),R.anim.shake_anim));
+        ExecutorService executor = Executors.newSingleThreadExecutor();
+        executor.submit(new Runnable() {
+            @Override
+            public void run() {
+                if (db.AccountDao().findAccountByEmail(email)!=null) {
+                    et_register_email.setAnimation(AnimationUtils.loadAnimation(getApplicationContext(),R.anim.shake_anim));
                     btn_register_commit.showError(3000);
-                    showTip("密码需要包含8-18位的英文字母或阿拉伯数字");
+                    showTip("该邮箱已被注册");
                     return;
                 }
-            }else {
-                et_register_password1.setAnimation(AnimationUtils.loadAnimation(getApplicationContext(),R.anim.shake_anim));
-                et_register_password2.setAnimation(AnimationUtils.loadAnimation(getApplicationContext(),R.anim.shake_anim));
-                btn_register_commit.showError(3000);
-                showTip("请检查两次输入的密码是否一致");
-                return;
+
+                if (email.matches(emailPattern)) {
+                    if (password1.equals(password2)) {
+                        if (password1.length()>=8&&password1.length()<18) {
+                            if(Objects.requireNonNull(et_register_question.getText()).length()==0){
+                                btn_register_commit.showProgress();
+                                db.AccountDao().insert(new Account(email,password1));
+
+                            }else {
+                                String question = et_register_question.getText().toString().trim();
+                                String answer = Objects.requireNonNull(et_register_answer.getText()).toString().trim();
+                                db.AccountDao().insert(new Account(email,password1,question,answer));
+                            }
+                            showTip("注册成功");
+                            postDelayed(() -> {
+                                btn_register_commit.showSucceed();
+                                postDelayed(() -> {
+
+                                    setResult(RESULT_OK, new Intent()
+                                            .putExtra(INTENT_KEY_EMAIL, email)
+                                            .putExtra(INTENT_KEY_PASSWORD, password1));
+                                    finish();
+                                }, 1000);
+                            }, 2000);
+                        }else {
+                            et_register_password1.setAnimation(AnimationUtils.loadAnimation(getApplicationContext(),R.anim.shake_anim));
+                            et_register_password2.setAnimation(AnimationUtils.loadAnimation(getApplicationContext(),R.anim.shake_anim));
+                            btn_register_commit.showError(3000);
+                            showTip("密码需要包含8-18位的英文字母或阿拉伯数字");
+                            return;
+                        }
+                    }else {
+                        et_register_password1.setAnimation(AnimationUtils.loadAnimation(getApplicationContext(),R.anim.shake_anim));
+                        et_register_password2.setAnimation(AnimationUtils.loadAnimation(getApplicationContext(),R.anim.shake_anim));
+                        btn_register_commit.showError(3000);
+                        showTip("请检查两次输入的密码是否一致");
+                        return;
+                    }
+                }else {
+                    et_register_email.setAnimation(AnimationUtils.loadAnimation(getApplicationContext(),R.anim.shake_anim));
+                    btn_register_commit.showError(3000);
+                    showTip("请检查邮箱格式");
+                    return;
+                }
+
             }
-        }else {
-            et_register_email.setAnimation(AnimationUtils.loadAnimation(getApplicationContext(),R.anim.shake_anim));
-            btn_register_commit.showError(3000);
-            showTip("请检查邮箱格式");
-            return;
-        }
+        });
+        executor.shutdown();
+
 
     }
 
