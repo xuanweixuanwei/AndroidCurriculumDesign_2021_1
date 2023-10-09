@@ -2,14 +2,10 @@ package com.example.myapplication.roomDatabase.database;
 
 import android.content.Context;
 
-import androidx.annotation.NonNull;
+
 import androidx.room.Database;
-import androidx.room.DatabaseConfiguration;
-import androidx.room.InvalidationTracker;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
-import androidx.sqlite.db.SupportSQLiteOpenHelper;
-
 import com.example.myapplication.roomDatabase.dao.AccountDao;
 import com.example.myapplication.roomDatabase.dao.ApplicationDao;
 import com.example.myapplication.roomDatabase.dao.ResultDao;
@@ -30,7 +26,7 @@ import com.example.myapplication.roomDatabase.entity.TtsResult;
         KeyWord.class,
         KeywordForOcr.class
         },
-        version = 4,
+        version = 5,
         exportSchema = false)
 public abstract class AppDatabase extends RoomDatabase {
         public static final String DB_NAME = "AppDatabase.db";
@@ -48,7 +44,6 @@ public abstract class AppDatabase extends RoomDatabase {
                         context,
                         AppDatabase.class,
                         DB_NAME)
-                        .allowMainThreadQueries()
                         .fallbackToDestructiveMigration()
                         .build();
           /*如果从旧版本到新版本的迁移规则无法找到，
