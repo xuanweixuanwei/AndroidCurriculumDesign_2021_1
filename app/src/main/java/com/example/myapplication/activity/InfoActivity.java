@@ -17,7 +17,6 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.PostProcessor;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Environment;
@@ -43,13 +42,12 @@ import com.example.myapplication.roomDatabase.database.AppDatabase;
 import com.example.myapplication.roomDatabase.entity.Account;
 import com.example.myapplication.ui.IosPopupWindow;
 import com.hjq.base.BaseDialog;
-import com.hjq.base.action.HandlerAction;
+
 import com.hjq.widget.layout.SettingBar;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
-import java.nio.charset.StandardCharsets;
 import java.util.Base64;
 import java.util.Calendar;
 import java.util.HashMap;
@@ -58,7 +56,7 @@ import java.util.concurrent.Executors;
 
 import timber.log.Timber;
 
-public class InfoActivity extends AppActivity implements HandlerAction {
+public class InfoActivity extends AppActivity  {
     private static final int REQUEST_TAKEPHOTO_CODE = 1;
     private ViewGroup mAvatarLayout;
     private ImageView mAvatarView;
@@ -66,9 +64,13 @@ public class InfoActivity extends AppActivity implements HandlerAction {
     private SettingBar mNameView;
     private SettingBar mBirthdayView;
     private SettingBar mSexView;
-    private SettingBar mTtsUsageView;
-    private SettingBar mOcrUsageView;
-    private SettingBar mAsrUsageView;
+    private SettingBar mTtsDailyUsageView;
+    private SettingBar mOcrDailyUsageView;
+    private SettingBar mAsrDailyUsageView;
+
+    private SettingBar mTtsCountUsageView;
+    private SettingBar mOcrCountUsageView;
+    private SettingBar mAsrCountUsageView;
     private IosPopupWindow chooseAvatarPopupWindow;
 
     private SettingBar mApplicationView;
@@ -186,9 +188,13 @@ public class InfoActivity extends AppActivity implements HandlerAction {
         mFeedBackView = findViewById(R.id.sb_person_feedback);
 
         mIdView = findViewById(R.id.sb_person_data_id);
-        mTtsUsageView = findViewById(R.id.sb_person_data_tts_usage);
-        mOcrUsageView = findViewById(R.id.sb_person_data_ocr_usage);
-        mAsrUsageView = findViewById(R.id.sb_person_data_asr_usage);
+        mTtsDailyUsageView = findViewById(R.id.sb_person_data_tts_usage);
+        mOcrDailyUsageView = findViewById(R.id.sb_person_data_ocr_usage);
+        mAsrDailyUsageView = findViewById(R.id.sb_person_data_asr_usage);
+        mTtsCountUsageView = findViewById(R.id.sb_person_data_tts_usage_count);
+        mOcrCountUsageView = findViewById(R.id.sb_person_data_ocr_usage_count);
+        mAsrCountUsageView = findViewById(R.id.sb_person_data_asr_usage_count);
+
         createFileDirectory();
 
         setOnClickListener(mAvatarLayout,mNameView,mSexView,mAvatarView,mBirthdayView);
@@ -218,6 +224,9 @@ public class InfoActivity extends AppActivity implements HandlerAction {
                             mSexView.setRightText(sexEntries[currentUser.getSex()]);
                             mNameView.setRightText(currentUser.getName()==null?"昵称还未设置哦":currentUser.getName());
                             mBirthdayView.setRightText(currentUser.getBirthday()==null?"来设置生日吧":currentUser.getBirthday());
+                            mAsrCountUsageView.setRightText(currentUser.getAsrUsageCount()+"");
+                            mOcrCountUsageView.setRightText(currentUser.getOcrUsageCount()+"");
+                            mTtsCountUsageView.setRightText(currentUser.getTtsUsageCount()+"");
                         }
                     });
 
