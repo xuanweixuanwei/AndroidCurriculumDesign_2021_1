@@ -10,6 +10,7 @@ import androidx.preference.PreferenceManager;
 
 import android.app.AlertDialog;
 
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -33,9 +34,15 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
+import com.example.myapplication.AppConstant;
 import com.example.myapplication.R;
 import com.example.myapplication.action.ToastAction;
 import com.example.myapplication.dialog.TipsDialog;
+import com.example.myapplication.roomDatabase.dao.AccountDao;
+import com.example.myapplication.roomDatabase.database.AppDatabase;
+import com.example.myapplication.roomDatabase.entity.Account;
 import com.iflytek.cloud.ErrorCode;
 import com.iflytek.cloud.InitListener;
 import com.iflytek.cloud.SpeechConstant;
@@ -45,19 +52,22 @@ import com.iflytek.cloud.SpeechSynthesizer;
 import com.iflytek.cloud.SynthesizerListener;
 
 
-
 import java.io.File;
 import java.io.IOException;
 
 import java.io.RandomAccessFile;
+import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
+import java.util.Base64;
 import java.util.Timer;
 import java.util.TimerTask;
-
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 
 import com.example.myapplication.util.ExtractTextFromFile;
 
-public class VoiceSynthesisActivity extends AppCompatActivity implements ToastAction{
+public class VoiceSynthesisActivity extends AppCompatActivity implements ToastAction {
 
     public static String TAG = "VoiceSynthesisActivity";
 
@@ -84,10 +94,11 @@ public class VoiceSynthesisActivity extends AppCompatActivity implements ToastAc
 
     private ImageButton audioControl;
     private TextView playProgressInfo;
-    private NestedScrollView scrollView ;
+    private NestedScrollView scrollView;
 
 
-    private String docx_type = "application/vnd.openxmlformats-officedocument.wordprocessingml.document";
+    private String docx_type = "application/vnd.openxmlformats-officedocument.wordprocessingml" +
+            ".document";
     // 引擎类型
     private String mEngineType = SpeechConstant.TYPE_CLOUD;
 
@@ -95,6 +106,9 @@ public class VoiceSynthesisActivity extends AppCompatActivity implements ToastAc
     private SharedPreferences mSharedPreferences;
     private File pcmFile;
     private Timer timer = new Timer();
+    private Account currentUser;
+    private AccountDao accountDao;
+    private String userEmail;
 
     private View.OnClickListener listener = new View.OnClickListener() {
         @Override
@@ -127,6 +141,7 @@ public class VoiceSynthesisActivity extends AppCompatActivity implements ToastAc
             }
         }
     };
+
 
 
     //改变播放状态
@@ -163,7 +178,6 @@ public class VoiceSynthesisActivity extends AppCompatActivity implements ToastAc
         }
 
 
-
         initData();
         initView();
 
@@ -181,6 +195,19 @@ public class VoiceSynthesisActivity extends AppCompatActivity implements ToastAc
         //获取默认的偏好信息
         mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
 
+        userEmail=getSharedPreferences(AppConstant.preferenceFileName, Context.MODE_PRIVATE)
+                .getString(AppConstant.userEmail,"");
+
+
+        ExecutorService executor = Executors.newSingleThreadExecutor();
+        executor.submit(new Runnable() {
+            @Override
+            public void run() {
+                accountDao= AppDatabase.getInstance(getApplicationContext()).AccountDao();
+                currentUser=accountDao.findAccountByEmail(userEmail);
+            }
+        });
+        executor.shutdown();
     }
 
     @Override
@@ -207,7 +234,7 @@ public class VoiceSynthesisActivity extends AppCompatActivity implements ToastAc
         ed_input.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                    changeEditTextHeight(ed_input);
+                changeEditTextHeight(ed_input);
             }
 
             @Override
@@ -222,7 +249,7 @@ public class VoiceSynthesisActivity extends AppCompatActivity implements ToastAc
             }
         });
 
-        timer.schedule(timerTask,0,5000);
+        timer.schedule(timerTask, 0, 5000);
         //测试偏好数据
         //TODO 上线前需要增加更丰富的提示信息
     }
@@ -233,12 +260,15 @@ public class VoiceSynthesisActivity extends AppCompatActivity implements ToastAc
         ViewGroup.LayoutParams layoutParams = ed_input.getLayoutParams();
 
         // 测量EditText的宽度和高度
-        int widthMeasureSpec = View.MeasureSpec.makeMeasureSpec(ed_input.getWidth(), View.MeasureSpec.EXACTLY);
-        int heightMeasureSpec = View.MeasureSpec.makeMeasureSpec(ed_input.getHeight(), View.MeasureSpec.UNSPECIFIED);
+        int widthMeasureSpec = View.MeasureSpec.makeMeasureSpec(ed_input.getWidth(),
+                View.MeasureSpec.EXACTLY);
+        int heightMeasureSpec = View.MeasureSpec.makeMeasureSpec(ed_input.getHeight(),
+                View.MeasureSpec.UNSPECIFIED);
         ed_input.measure(widthMeasureSpec, heightMeasureSpec);
 
-        layoutParams.width = View.MeasureSpec.makeMeasureSpec(ed_input.getWidth(), View.MeasureSpec.EXACTLY);
-        layoutParams.height =  View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED);
+        layoutParams.width = View.MeasureSpec.makeMeasureSpec(ed_input.getWidth(),
+                View.MeasureSpec.EXACTLY);
+        layoutParams.height = View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED);
 
 //        // 获取测量后的高度
 //        int measuredHeight = ed_input.getMeasuredHeight();
@@ -270,7 +300,8 @@ public class VoiceSynthesisActivity extends AppCompatActivity implements ToastAc
             case R.id.tts_preference_setting:
 //                跳转到音量、音调、语速和音频流类型的页面
                 Intent intent = new Intent(VoiceSynthesisActivity.this, SettingsActivity.class);
-                intent.putExtra(getString(R.string.class_name), VoiceSynthesisActivity.class.getSimpleName());
+                intent.putExtra(getString(R.string.class_name),
+                        VoiceSynthesisActivity.class.getSimpleName());
                 startActivity(intent);
                 Log.w(TAG, "onOptionsItemSelected: " + "点击了Speaker_setting");
 
@@ -293,18 +324,19 @@ public class VoiceSynthesisActivity extends AppCompatActivity implements ToastAc
                             public void onClick(DialogInterface dialog,
                                                 int which) { // 点击了哪一项
                                 voicer = mCloudVoicersValue[which];
-                                if ("catherine".equals(voicer) || "henry".equals(voicer) || "vimary".equals(voicer)) {
+                                if ("catherine".equals(voicer) || "henry".equals(voicer) ||
+                                        "vimary".equals(voicer)) {
 //                                            如果选择的是英文发言人
 
-                                    if(ed_input.getText().length()==0){
+                                    if (ed_input.getText().length() == 0) {
                                         ed_input.setText(R.string.text_tts_source_en);
                                         showTip("英文发音人只能朗读英文，中文无法朗读，已默认导入英文示例");
 
-                                    }else{
+                                    } else {
                                         showTip("英文发音人只能朗读英文，中文无法朗读");
                                     }
                                 } else {
-                                    if(ed_input.getText().length()==0){
+                                    if (ed_input.getText().length() == 0) {
                                         ed_input.setText(R.string.text_tts_source);
                                         showTip("已默认导入中文示例");
                                     }
@@ -335,11 +367,14 @@ public class VoiceSynthesisActivity extends AppCompatActivity implements ToastAc
             // 设置在线合成发音人
             mTts.setParameter(SpeechConstant.VOICE_NAME, voicer);
             //设置合成语速
-            mTts.setParameter(SpeechConstant.SPEED, mSharedPreferences.getString("speed_preference", "50"));
+            mTts.setParameter(SpeechConstant.SPEED, mSharedPreferences.getString(
+                    "speed_preference", "50"));
             //设置合成音调
-            mTts.setParameter(SpeechConstant.PITCH, mSharedPreferences.getString("pitch_preference", "50"));
+            mTts.setParameter(SpeechConstant.PITCH, mSharedPreferences.getString(
+                    "pitch_preference", "50"));
             //设置合成音量
-            mTts.setParameter(SpeechConstant.VOLUME, mSharedPreferences.getString("volume_preference", "50"));
+            mTts.setParameter(SpeechConstant.VOLUME, mSharedPreferences.getString(
+                    "volume_preference", "50"));
         } else {
             mTts.setParameter(SpeechConstant.ENGINE_TYPE, SpeechConstant.TYPE_LOCAL);
             mTts.setParameter(SpeechConstant.VOICE_NAME, "");
@@ -347,7 +382,8 @@ public class VoiceSynthesisActivity extends AppCompatActivity implements ToastAc
         }
 
         //设置播放器音频流类型
-        mTts.setParameter(SpeechConstant.STREAM_TYPE, mSharedPreferences.getString("stream_preference", "3"));
+        mTts.setParameter(SpeechConstant.STREAM_TYPE, mSharedPreferences.getString(
+                "stream_preference", "3"));
         // 设置播放合成音频打断音乐播放，默认为true
         mTts.setParameter(SpeechConstant.KEY_REQUEST_FOCUS, "false");
 
@@ -365,7 +401,8 @@ public class VoiceSynthesisActivity extends AppCompatActivity implements ToastAc
         public void onInit(int code) {
             Log.d(TAG, "InitListener init() code = " + code);
             if (code != ErrorCode.SUCCESS) {
-                showTip("初始化失败,错误码：" + code + ",请点击网址https://www.xfyun.cn/document/error-code查询解决方案");
+                showTip("初始化失败,错误码：" + code + ",请点击网址https://www.xfyun" +
+                        ".cn/document/error-code查询解决方案");
             } else {
                 // 初始化成功，之后可以调用startSpeaking方法
                 // 注：有的开发者在onCreate方法中创建完合成对象之后马上就调用startSpeaking进行合成，
@@ -429,14 +466,13 @@ public class VoiceSynthesisActivity extends AppCompatActivity implements ToastAc
 //
 //showTip(ed_input.getHeight()/1000*percent+"");
 
-                //todo 加一个计时器任务
-
-
+            //todo 加一个计时器任务
 
 
             SpannableStringBuilder style = new SpannableStringBuilder(texts);
             Log.e(TAG, "beginPos = " + beginPos + "  endPos = " + endPos);
-            style.setSpan(new BackgroundColorSpan(Color.RED), beginPos, endPos, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+            style.setSpan(new BackgroundColorSpan(Color.RED), beginPos, endPos,
+                    Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
             ((EditText) findViewById(R.id.et_input)).setText(style);
         }
 
@@ -523,41 +559,41 @@ public class VoiceSynthesisActivity extends AppCompatActivity implements ToastAc
 
 
     private void startSpeaking() {
-//        changeToTextView();
 
-//        changeEditTextHeight(ed_input);
+        ExecutorService executor = Executors.newSingleThreadExecutor();
+        executor.submit(new Runnable() {
+            @Override
+            public void run() {
+//                 增加OCR使用次数
 
-        texts = ed_input.getText().toString().trim();
-
-
-        if (texts.isEmpty()) {
-            showTip("请先输入文本再点击合成播放~");
-        } else {
-            //设置参数
-            setParam();
-            //修改状态
-            isSpeaking = true;
-            isPrepared = true;
-/*            //修改按钮图标
-            audio_control.setImageResource(R.drawable.vector_drawable_pause);*/
-            //调用合成播放方法
-            mTts.startSpeaking(texts, mTtsListener);
-
-
-
-
-
-        }
-
-
+                if ((currentUser = accountDao.findAccountByEmail(userEmail)) != null) {
+                    accountDao.updateAccount(currentUser.useTts());
+                    texts = ed_input.getText().toString().trim();
+                    if (texts.isEmpty()) {
+                        showTip("请先输入文本再点击合成播放~");
+                    } else {
+                        //设置参数
+                        setParam();
+                        //修改状态
+                        isSpeaking = true;
+                        isPrepared = true;
+                        //调用合成播放方法
+                        mTts.startSpeaking(texts, mTtsListener);
+                    }
+                } else {
+                    showTip("登陆信息失效，请重新登陆后使用");
+                }
+            }
+        });
+        executor.shutdown();
     }
-
 
     TimerTask timerTask = new TimerTask() {
         @Override
         public void run() {
-            if(isSpeaking)
-            scrollView.smoothScrollTo(0,ed_input.getHeight()/100*mPercentForPlaying);
+            if (isSpeaking)
+                scrollView.smoothScrollTo(0,
+                        ed_input.getHeight() / 100 * mPercentForPlaying);
         }
     };
 
@@ -573,8 +609,6 @@ public class VoiceSynthesisActivity extends AppCompatActivity implements ToastAc
         isSpeaking = true;
         setParam();
         mTts.resumeSpeaking();
-
-
     }
 
 
@@ -583,15 +617,14 @@ public class VoiceSynthesisActivity extends AppCompatActivity implements ToastAc
         isSpeaking = false;
         mTts.stopSpeaking();
         playingCompleted();
-
     }
 
 
     @Override
     protected void onDestroy() {
         if (null != mTts) {
-           cancel();
-           timer.cancel();
+            cancel();
+            timer.cancel();
             // 退出时释放连接
             mTts.destroy();
         }
@@ -604,13 +637,13 @@ public class VoiceSynthesisActivity extends AppCompatActivity implements ToastAc
     }
 
 
-    private void unfocused(){
+    private void unfocused() {
 //        NestedScrollView scrollView = (NestedScrollView) findViewById(R.id.scrollView);
         ed_input.setFocusable(false);
     }
 
 
-    private void focusable(){
+    private void focusable() {
         ed_input.setFocusable(true);
         ed_input.setFocusableInTouchMode(true);
         ed_input.requestFocus();
@@ -632,12 +665,12 @@ public class VoiceSynthesisActivity extends AppCompatActivity implements ToastAc
     }
 
 
-    private void changeEditTextHeight(EditText editText){
-    ViewGroup.LayoutParams layoutParams = editText.getLayoutParams();
-    layoutParams.height = getTextHeight(editText);
-    editText.setLayoutParams(layoutParams);
+    private void changeEditTextHeight(EditText editText) {
+        ViewGroup.LayoutParams layoutParams = editText.getLayoutParams();
+        layoutParams.height = getTextHeight(editText);
+        editText.setLayoutParams(layoutParams);
 
-}
+    }
 
 
     private static final int REQUEST_CODE_PICK_FILE = 1;
@@ -646,7 +679,8 @@ public class VoiceSynthesisActivity extends AppCompatActivity implements ToastAc
     private void pickFile() {
         Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
         intent.setType("*/*");
-        String[] mimeTypes = {"application/vnd.openxmlformats-officedocument.wordprocessingml.document","application/msword", "text/plain"};
+        String[] mimeTypes = {"application/vnd.openxmlformats-officedocument.wordprocessingml" +
+                ".document", "application/msword", "text/plain"};
         intent.putExtra(Intent.EXTRA_MIME_TYPES, mimeTypes);
         intent.addCategory(Intent.CATEGORY_OPENABLE);
         intent.putExtra(Intent.EXTRA_LOCAL_ONLY, true);
@@ -662,9 +696,9 @@ public class VoiceSynthesisActivity extends AppCompatActivity implements ToastAc
             String readFromFile = new ExtractTextFromFile(getContentResolver()).getText(uri);
             if (readFromFile.isEmpty()) {
                 showTip("文件可能为空");
-            }else{
-                if(mSharedPreferences.getString("file_input_way_preference","1").equals("1"))
-                ed_input.append(readFromFile);
+            } else {
+                if (mSharedPreferences.getString("file_input_way_preference", "1").equals("1"))
+                    ed_input.append(readFromFile);
                 else
                     ed_input.setText(readFromFile);
             }

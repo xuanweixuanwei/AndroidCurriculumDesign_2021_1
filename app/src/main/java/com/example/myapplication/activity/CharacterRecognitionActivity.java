@@ -40,7 +40,11 @@ import android.widget.Toast;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
+import com.example.myapplication.AppConstant;
 import com.example.myapplication.R;
+import com.example.myapplication.roomDatabase.dao.AccountDao;
+import com.example.myapplication.roomDatabase.database.AppDatabase;
+import com.example.myapplication.roomDatabase.entity.Account;
 import com.example.myapplication.ui.IosPopupWindow;
 import com.google.gson.Gson;
 
@@ -123,7 +127,9 @@ APPID f1d1cefd
     public static String mImageName = "";
 
     private String photoBase64str;
-
+private String userEmail;
+private AccountDao accountDao;
+private Account currentUser;
 
     private IosPopupWindow choosePicturePopupWindow;
     private String textBase64Decode = null;
@@ -134,6 +140,7 @@ APPID f1d1cefd
         setContentView(R.layout.activity_character_recognition);
 
         initView();
+        initData();
         createFileDirectory();
 /*//
         try {
@@ -149,6 +156,21 @@ APPID f1d1cefd
 
     }
 
+    private void initData() {
+        userEmail=getSharedPreferences(AppConstant.preferenceFileName, Context.MODE_PRIVATE)
+                .getString(AppConstant.userEmail,"");
+
+        ExecutorService executor = Executors.newSingleThreadExecutor();
+        executor.submit(new Runnable() {
+            @Override
+            public void run() {
+                accountDao= AppDatabase.getInstance(getApplicationContext()).AccountDao();
+                currentUser=accountDao.findAccountByEmail(userEmail);
+            }
+        });
+        executor.shutdown();
+
+    }
 
 
     private void request() {
@@ -156,51 +178,59 @@ APPID f1d1cefd
         executor.submit(new Runnable() {
             @Override
             public void run() {
+//                 增加OCR使用次数
 
-                try {
-                    String resp = doRequest();
-                    Log.w(TAG, "request: " + "resp=>" + resp);
-                    JsonResult myJsonResult = gson.fromJson(resp, JsonResult.class);
-
+                if (currentUser!=null) {
+                        accountDao.updateAccount(currentUser.useOcr());
                     try {
-                        textBase64Decode = new String(Base64.getDecoder().decode(myJsonResult.payload.result.text), "UTF-8");
-                    } catch (UnsupportedEncodingException e) {
-                        e.printStackTrace();
-                    }
+                        String resp = doRequest();
+                        Log.w(TAG, "request: " + "resp=>" + resp);
+                        JsonResult myJsonResult = gson.fromJson(resp, JsonResult.class);
 
-                    JSONObject jsonObject = JSON.parseObject(textBase64Decode);
-                    Log.w(TAG, "request: " + "text字段Base64解码后=>" + jsonObject);
+                        try {
+                            textBase64Decode = new String(Base64.getDecoder().decode(myJsonResult.payload.result.text), "UTF-8");
+                        } catch (UnsupportedEncodingException e) {
+                            e.printStackTrace();
+                        }
 
-                    ArrayList<Page> pages = gson.fromJson(textBase64Decode, Text.class).pages;
-                    runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
+                        JSONObject jsonObject = JSON.parseObject(textBase64Decode);
+                        Log.w(TAG, "request: " + "text字段Base64解码后=>" + jsonObject);
+
+                        ArrayList<Page> pages = gson.fromJson(textBase64Decode, Text.class).pages;
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
 //                            et_text_result.setText(textBase64Decode);
 
-                            et_text_result.setText("");
-                            StringBuilder result_string_buffer = new StringBuilder();
-                            for (Page page :
-                                    pages) {
-                                for (Line line :
-                                        page.lines) {
-                                    if (line.words == null) {
-                                        result_string_buffer.append("\n");
-                                    } else {
-                                        for (Word word :
-                                                line.words) {
-                                            result_string_buffer.append(word.content);
+                                et_text_result.setText("");
+                                StringBuilder result_string_buffer = new StringBuilder();
+                                for (Page page :
+                                        pages) {
+                                    for (Line line :
+                                            page.lines) {
+                                        if (line.words == null) {
+                                            result_string_buffer.append("\n");
+                                        } else {
+                                            for (Word word :
+                                                    line.words) {
+                                                result_string_buffer.append(word.content);
+                                            }
+                                            result_string_buffer.append("\n");
                                         }
-                                        result_string_buffer.append("\n");
                                     }
                                 }
+                                et_text_result.setText(result_string_buffer.toString().trim());
+                                changeEditTextHeight(et_text_result);
                             }
-                            et_text_result.setText(result_string_buffer.toString().trim());
-                            changeEditTextHeight(et_text_result);
-                        }
-                    });
-                } catch (Exception e) {
-                    e.printStackTrace();
+                        });
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }else {
+                    showTip("登陆信息失效，请重新登陆后使用");
                 }
+
+
             }
         });
         executor.shutdown();

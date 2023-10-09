@@ -26,7 +26,11 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
+import com.example.myapplication.AppConstant;
 import com.example.myapplication.R;
+import com.example.myapplication.roomDatabase.dao.AccountDao;
+import com.example.myapplication.roomDatabase.database.AppDatabase;
+import com.example.myapplication.roomDatabase.entity.Account;
 import com.iflytek.cloud.ErrorCode;
 import com.iflytek.cloud.InitListener;
 import com.iflytek.cloud.RecognizerListener;
@@ -44,6 +48,9 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
+import java.util.concurrent.Executor;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 import timber.log.Timber;
 import com.example.myapplication.util.JsonParser;
@@ -78,6 +85,9 @@ public class SpeechRecognitionActivity extends AppCompatActivity {
     private StringBuffer buffer = new StringBuffer();
     private int ret = 0; // 函数调用返回值
 
+    private String userEmail;
+    private Account currentUser;
+    private AccountDao accountDao;
     /**
      * 初始化监听器
      */
@@ -280,7 +290,26 @@ public class SpeechRecognitionActivity extends AppCompatActivity {
         findViewById(R.id.audio_record).setOnClickListener(listener);
         findViewById(R.id.copy_text).setOnClickListener(listener);
         findViewById(R.id.open_folder_for_audio).setOnClickListener(listener);
+
+        initData();
+
+    }
+
+    private void initData() {
         mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+
+        userEmail=getSharedPreferences(AppConstant.preferenceFileName, Context.MODE_PRIVATE)
+                .getString(AppConstant.userEmail,"");
+
+        ExecutorService executor = Executors.newSingleThreadExecutor();
+        executor.submit(new Runnable() {
+            @Override
+            public void run() {
+                accountDao= AppDatabase.getInstance(getApplicationContext()).AccountDao();
+                currentUser=accountDao.findAccountByEmail(userEmail);
+            }
+        });
+        executor.shutdown();
     }
 
     /**
@@ -316,34 +345,48 @@ public class SpeechRecognitionActivity extends AppCompatActivity {
      * 有（无）UI语音听写
      **/
     private void recognize() {
-        isListening = true;
+        ExecutorService executor = Executors.newSingleThreadExecutor();
+        executor.submit(new Runnable() {
+            @Override
+            public void run() {
 
-        Log.e(TAG, "recognize");
-        buffer.setLength(0);
-        et_result.setText(null);// 清空显示内容
-        mIatResults.clear();
-        // 设置参数
-        setParam();
-        boolean isShowDialog = mSharedPreferences.getBoolean(
-                getString(R.string.pref_key_iat_show), true);
-        if (isShowDialog) {
-            Log.e(TAG, "recognize: " + isShowDialog);
-            // 显示听写对话框
-            mIatDialog.setListener(mRecognizerDialogListener);
-            mIatDialog.show();
-            showTip(getString(R.string.text_begin));
-        } else {
-            Log.e(TAG, "recognize: " + isShowDialog);
+                if (currentUser!=null){
+                    accountDao.updateAccount(currentUser.useAsr());
+                    isListening = true;
 
-            // 不显示听写对话框
-            ret = mIat.startListening(mRecognizerListener);
-            if (ret != ErrorCode.SUCCESS) {
-                showTip("听写失败,错误码：" + ret + ",请点击网址https://www.xfyun.cn/document/error-code查询解决方案");
-            } else {
-                showTip(getString(R.string.text_begin));
+                    Log.e(TAG, "recognize");
+                    buffer.setLength(0);
+                    et_result.setText(null);// 清空显示内容
+                    mIatResults.clear();
+                    // 设置参数
+                    setParam();
+                    boolean isShowDialog = mSharedPreferences.getBoolean(
+                            getString(R.string.pref_key_iat_show), true);
+                    if (isShowDialog) {
+                        Log.e(TAG, "recognize: " + isShowDialog);
+                        // 显示听写对话框
+                        mIatDialog.setListener(mRecognizerDialogListener);
+                        mIatDialog.show();
+                        showTip(getString(R.string.text_begin));
+                    } else {
+                        Log.e(TAG, "recognize: " + isShowDialog);
+
+                        // 不显示听写对话框
+                        ret = mIat.startListening(mRecognizerListener);
+                        if (ret != ErrorCode.SUCCESS) {
+                            showTip("听写失败,错误码：" + ret + ",请点击网址https://www.xfyun.cn/document/error-code查询解决方案");
+                        } else {
+                            showTip(getString(R.string.text_begin));
+                        }
+                    }
+                    isListening = true;
+                } else {
+                    showTip("登陆信息失效，请重新登陆后使用");
+
+                }
             }
-        }
-        isListening = true;
+        });
+        executor.shutdown();
     }
 
     /**
