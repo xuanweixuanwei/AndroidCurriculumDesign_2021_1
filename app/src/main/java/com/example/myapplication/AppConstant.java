@@ -17,4 +17,5 @@ public class AppConstant {
     public static String preferenceFileName = "Meteor_user_preferences";
     public static String userEmail = "user_email";
     public static String userPasswordSHA = "user_password";
+    public static String loginState = "login_state";
 }
