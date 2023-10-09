@@ -150,13 +150,18 @@ public class Account {
         this.email = email;
         this.passwordSHA = ByteString.encodeUtf8(password).sha256().toString();
         this.createTime = Calendar.getInstance().getTimeInMillis();
-        this.name = new String("Meteor_"+this.rowid);
+        this.name = "Meteor_" + this.createTime;
+        this.ocrUsageCount=0;
+        this.asrUsageCount=0;
+        this.ttsUsageCount=0;
+        this.errorTimes=0;
+        this.isLocked=false;
     }
 
     /**
      * 注册账号时，设置了密保问题和答案时调用的构造方法
      *
-     * @Param answer 用户输入的问题答案，存储时会转换为SHA256值
+     *  answer 用户输入的问题答案，存储时会转换为SHA256值
      */
     @Ignore
     public Account(String email, String password, String question, String answer) {
@@ -434,5 +439,18 @@ public class Account {
         this.avatarStr = avatarStr;
     }
 
+    public Account useOcr(){
+        this.ocrUsageCount++;
+        return this;
+    }
+    public Account useAsr(){
+        this.asrUsageCount++;
+        return this;
 
+    }
+    public Account useTts(){
+        this.ttsUsageCount++;
+        return this;
+
+    }
 }
