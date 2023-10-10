@@ -35,13 +35,13 @@
                 android:layout_marginVertical="10dp"
                 android:padding="10dp"
                 android:background="@drawable/rounded_rectangle_background"
-                android:minHeight="280dp">
+                android:minHeight="200dp">
                 <EditText
                     android:id="@+id/et_text_result"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:padding="10dp"
-                    android:minHeight="280dp"
+                    android:minHeight="250dp"
                    android:background="@null"
                     android:gravity="start"
                     android:hint="@string/character_recognition_instruction"

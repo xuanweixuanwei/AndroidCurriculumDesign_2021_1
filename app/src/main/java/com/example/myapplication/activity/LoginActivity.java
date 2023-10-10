@@ -30,6 +30,8 @@ import com.hjq.widget.view.SubmitButton;
 
 import java.util.Calendar;
 import java.util.Objects;
+import java.util.Timer;
+import java.util.TimerTask;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -102,21 +104,35 @@ public class LoginActivity extends AppCompatActivity implements HandlerAction {
                                 RegisterActivity.class);
                         registerLauncher.launch(registerIntent);
                         break;
+                    case R.id.tv_login_forget:
+                        startActivity(new Intent(LoginActivity.this,RestPasswordActivity.class));
+                        break;
                     case R.id.btn_login_commit:
                         btn_login_commit.showProgress();
                         String email = Objects.requireNonNull(et_login_email.getText()).toString().trim();
                         String password = Objects.requireNonNull(et_login_password.getText()).toString().trim();
                         if (email.matches(emailPattern)&&
                                 password.length()>=8) {
-                            if (Login(email,password)) {
-                                    success();//跳转
-                            }else         btn_login_commit.showError(3000);
+                            ExecutorService executorService = Executors.newSingleThreadExecutor();
+                            executorService.submit(new Runnable() {
+                                @Override
+                                public void run() {
+                                    Login(email,password);
+                                    if (sharedPreferences.getBoolean(AppConstant.loginState,false)) {
+                                        success();
+                                    }else {
+                                        btn_login_commit.showError(3000);
+                                    }
+                                }
+                            });
+                            executorService.shutdown();
                         }
                 }
             }
         };
         tv_register.setOnClickListener(listener);
         btn_login_commit.setOnClickListener(listener);
+        tv_login_forget.setOnClickListener(listener);
     }
 
     private void success() {
@@ -148,12 +164,22 @@ public class LoginActivity extends AppCompatActivity implements HandlerAction {
         btn_login_commit.reset();
     }
 
-    private boolean Login(String email, String password){
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        Logout();
+    }
 
-        ExecutorService executor = Executors.newSingleThreadExecutor();
-        executor.submit(new Runnable() {
-            @Override
-            public void run() {
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        Logout();
+    }
+
+    private void Login(String email, String password){
+
+
+                Boolean loginCheck = false;
                 Account accountByEmail=db.AccountDao().findAccountByEmail(email);
                 Account account = db.AccountDao().findAccountByPassword(email,ByteString.encodeUtf8(password).sha256().toString());//通过email和password查询
                 if (account!=null) {//账号和密码正确，判断账号是否处于封锁状态：注销5天内或者某日密码错误超过次数还处于封禁日期内（也是5天）
@@ -183,11 +209,7 @@ public class LoginActivity extends AppCompatActivity implements HandlerAction {
                         }
 
                     }else {
-                        sharedPreferences.edit()
-                                .putString(AppConstant.userEmail,et_login_email.getText().toString().trim())
-                                .putString(AppConstant.userPasswordSHA,ByteString.encodeUtf8(et_login_password.getText().toString().trim()).sha256().toString())
-                                .putBoolean(AppConstant.loginState,true)
-                                .apply();
+                       loginCheck = true;
                     }
 
                 }else {
@@ -200,13 +222,16 @@ public class LoginActivity extends AppCompatActivity implements HandlerAction {
                         db.AccountDao().updateAccount(accountByEmail);
                     }
                 }
-
+//                commit方法同步执行IO操作
+                if (!sharedPreferences.edit()
+                       .putString(AppConstant.userEmail,et_login_email.getText().toString().trim())
+                       .putString(AppConstant.userPasswordSHA, ByteString.encodeUtf8(et_login_password.getText().toString().trim()).sha256().toString())
+                       .putBoolean(AppConstant.loginState,loginCheck)
+                       .commit()) {
+                    showTip("数据异常，请联系管理员或清理内存后重启APP");
+                }
             }
-        });
-        executor.shutdown();
 
-        return sharedPreferences.getBoolean(AppConstant.loginState,false);
-    }
 
     private void loginError(){
         et_login_password.setAnimation(AnimationUtils.loadAnimation(getApplicationContext(),R.anim.shake_anim));
@@ -217,6 +242,22 @@ public class LoginActivity extends AppCompatActivity implements HandlerAction {
     private void accountStateError(){
         et_login_email.setAnimation(AnimationUtils.loadAnimation(getApplicationContext(),R.anim.shake_anim));
 
+    }
+
+    private void Logout() {
+        Timer timer = new Timer();
+        TimerTask task = new TimerTask() {
+            @Override
+            public void run() {
+                getSharedPreferences(AppConstant.preferenceFileName,MODE_PRIVATE).edit()
+                        .putBoolean(AppConstant.loginState,false)
+                        .putString(AppConstant.userEmail,"")
+                        .putString(AppConstant.userPasswordSHA,"")
+                        .apply();
+                finish();
+            }
+        };
+        timer.schedule(task,1000);
     }
 
 }
