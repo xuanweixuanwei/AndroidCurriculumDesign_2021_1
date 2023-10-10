@@ -13,6 +13,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.example.myapplication.activity.CharacterRecognitionActivity;
@@ -23,14 +24,20 @@ import java.util.Objects;
 
 public class MainActivity extends AppCompatActivity {
     private Intent intent;
-
-
+    private View.OnClickListener listener;
+    private Button toCharacterRecognition;
+    private Button toSpeechRecognition;
+    private Button toVoiceSynthesis;
+    private LinearLayout tts_view ;
+    private LinearLayout asr_view ;
+    private LinearLayout ocr_view ;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
         initView();
+        initListener();
 //        申请网络权限等
         requestPermissions();
 
@@ -49,12 +56,21 @@ public class MainActivity extends AppCompatActivity {
 
 
             case R.id.exit_account:
-//           TODO      exit();
+                       Logout();
                 break;
             case R.id.user_info_setting:
                 startActivity(new Intent(MainActivity.this, InfoActivity.class));
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    private void Logout() {
+        getSharedPreferences(AppConstant.preferenceFileName,MODE_PRIVATE).edit()
+                .putBoolean(AppConstant.loginState,false)
+                .putString(AppConstant.userEmail,"")
+                .putString(AppConstant.userPasswordSHA,"")
+                .apply();
+        finish();
     }
 
     private final ActivityResultLauncher permissionLauncher = registerForActivityResult(
@@ -89,33 +105,37 @@ public class MainActivity extends AppCompatActivity {
         permissionLauncher.launch(permissions);
     }
 
-    private void initView() {
-        Button toCharacterRecognition = findViewById(R.id.toCharacterRecognitionActivity);
-        Button toSpeechRecognition = findViewById(R.id.toSpeechRecognitionActivity);
-        Button toVoiceSynthesis = findViewById(R.id.toVoiceSynthesisActivity);
+   private void initView() {
+         toCharacterRecognition = findViewById(R.id.toCharacterRecognitionActivity);
+         toSpeechRecognition = findViewById(R.id.toSpeechRecognitionActivity);
+         toVoiceSynthesis = findViewById(R.id.toVoiceSynthesisActivity);
+         tts_view = findViewById(R.id.tts_view);
+         asr_view = findViewById(R.id.asr_view);
+         ocr_view = findViewById(R.id.ocr_view);
 
-        View.OnClickListener listener = view -> {
-            switch (view.getId()) {
-                case R.id.toCharacterRecognitionActivity:
-                    intent = new Intent(MainActivity.this, CharacterRecognitionActivity.class);
-                    startActivity(intent);
-                    break;
-                case R.id.toSpeechRecognitionActivity:
-                    intent = new Intent(MainActivity.this, SpeechRecognitionActivity.class);
-                    startActivity(intent);
-                    break;
-                case R.id.toVoiceSynthesisActivity:
-                    intent = new Intent(MainActivity.this, VoiceSynthesisActivity.class);
-                    startActivity(intent);
-                    break;
-                default:
-                    break;
+
+    }
+    private void initListener(){
+        listener = view -> {
+            if (view==toCharacterRecognition||view==ocr_view) {
+                intent = new Intent(MainActivity.this, CharacterRecognitionActivity.class);
+                startActivity(intent);
+            }else if (view==toSpeechRecognition||view==asr_view) {
+                intent = new Intent(MainActivity.this, SpeechRecognitionActivity.class);
+                startActivity(intent);
+            }else if (view==toVoiceSynthesis||view==tts_view) {
+                intent = new Intent(MainActivity.this, VoiceSynthesisActivity.class);
+                startActivity(intent);
             }
         };
-
-        toVoiceSynthesis.setOnClickListener(listener);
-        toSpeechRecognition.setOnClickListener(listener);
+        asr_view.setOnClickListener(listener);
+        tts_view.setOnClickListener(listener);
+        ocr_view.setOnClickListener(listener);
         toCharacterRecognition.setOnClickListener(listener);
+        toSpeechRecognition.setOnClickListener(listener);
+        toVoiceSynthesis.setOnClickListener(listener);
     }
 }
+
+
 
