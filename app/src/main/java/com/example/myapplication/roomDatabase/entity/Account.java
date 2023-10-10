@@ -426,7 +426,14 @@ public class Account {
     public void setAnswerSHA(String answerSHA) {
         this.answerSHA = answerSHA;
     }
+/*    public void setAnswer(String answer) {
+        this.answerSHA = ByteString.encodeUtf8(answer).sha256().toString();
+    }*/
 
+    public Account setPassword(String password){
+        this.passwordSHA = ByteString.encodeUtf8(password).sha256().toString();
+        return this;
+    }
     public void setErrorTimes(short errorTimes) {
         this.errorTimes = errorTimes;
     }
