@@ -18,4 +18,6 @@ public class AppConstant {
     public static String userEmail = "user_email";
     public static String userPasswordSHA = "user_password";
     public static String loginState = "login_state";
+    public static final String INTENT_KEY_EMAIL = "email";
+    public static final String INTENT_KEY_PASSWORD = "password";
 }
