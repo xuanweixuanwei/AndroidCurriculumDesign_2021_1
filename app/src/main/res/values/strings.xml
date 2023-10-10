@@ -416,5 +416,6 @@
     <string name="answer_input_hint">密保问题答案</string>
     <string name="answer">\t\t密保问题</string>
     <string name="common_step_next">重置</string>
+    <string name="reset_password">重置密码</string>
 
 </resources>
