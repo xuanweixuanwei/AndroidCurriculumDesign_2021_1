@@ -9,25 +9,30 @@
 
 
     <LinearLayout
+        android:id="@+id/asr_view"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
         android:orientation="horizontal"
-        android:background="@color/powder_blue"
-        android:layout_marginTop="10dp">
+        android:background="@drawable/powder_blue_ripple"
+        android:layout_marginTop="10dp"
+        android:clickable="true">
         <ImageView
             android:layout_weight="1"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_marginHorizontal="10dp"
-            android:src="@drawable/vector_drawable_306_rasr"/>
+            android:contentDescription="@string/asr_production"
+            android:src="@drawable/vector_drawable_306_rasr"
+            />
         <TextView
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="4"
             android:textColor="@color/black"
-            android:text="@string/tts_production"
-            android:padding="15dp"
+            android:text="@string/asr_production"
+            android:paddingVertical="12dp"
+            android:labelFor="@id/toSpeechRecognitionActivity"
             />
         <Button
             android:id="@+id/toSpeechRecognitionActivity"
@@ -40,7 +45,9 @@
             />
     </LinearLayout>
     <LinearLayout
-        android:background="@color/gradient_3_up"
+        android:id="@+id/tts_view"
+        android:clickable="true"
+        android:background="@drawable/three_up_ripple"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
@@ -51,14 +58,18 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_marginHorizontal="10dp"
-            android:src="@drawable/vector_drawable_320_sis_tts"/>
+            android:src="@drawable/vector_drawable_320_sis_tts"
+            android:contentDescription="@string/tts_production"/>
         <TextView
-            android:padding="15dp"
+            android:paddingVertical="12dp"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="4"
             android:textColor="@color/black"
-            android:text="@string/asr_production"/>
+            android:text="@string/tts_production"
+            android:labelFor="@id/toVoiceSynthesisActivity"
+
+            />
 
         <Button
             android:id="@+id/toVoiceSynthesisActivity"
@@ -67,13 +78,16 @@
             android:layout_gravity="center"
             android:layout_weight="1"
             android:background="@drawable/main_activity_ripple_background"
-            android:src="@drawable/arrows_right_ic" />
+            android:src="@drawable/arrows_right_ic"
+            android:contentDescription="@string/tts_production"/>
     </LinearLayout>
     <LinearLayout
+        android:id="@+id/ocr_view"
+        android:clickable="true"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:background="@color/mediumPurple"
+        android:background="@drawable/medium_purple_ripple"
         android:orientation="horizontal"
         android:layout_marginVertical="10dp">
         <ImageView
@@ -81,14 +95,18 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_margin="10dp"
-            android:src="@drawable/vector_drawable_244_generalocr"/>
+            android:src="@drawable/vector_drawable_244_generalocr"
+            android:contentDescription="@string/ocr_production"/>
         <TextView
-            android:padding="15dp"
+            android:padding="12dp"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="5"
             android:textColor="@color/black"
-            android:text="@string/ocr_production"/>
+            android:text="@string/ocr_production"
+            android:labelFor="@id/toCharacterRecognitionActivity"
+            />
+
         <Button
             android:id="@+id/toCharacterRecognitionActivity"
             android:layout_width="4dp"
