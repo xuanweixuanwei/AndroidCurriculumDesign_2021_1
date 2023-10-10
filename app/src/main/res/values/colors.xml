@@ -87,6 +87,8 @@
     <color name="violet">#EE82EE</color>
     <color name="dark_salmon">#E9967A</color>
     <color name="lavender">#E6E6FA</color>
+    <color name="_lavender">#AACFB0FA</color>
+
     <color name="light_cyan">#E0FFFF</color>
     <color name="burlyWood">#DEB887</color>
     <color name="plum">#DDA0DD</color>

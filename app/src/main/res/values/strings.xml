@@ -374,9 +374,19 @@
     <string name="to_application">\t\t每日用量不够？</string>
     <string name="application_Hint">去申请</string>
     <string name="feedback_Hint">去反馈</string>
-    <string name="ocr_production">通用文字识别</string>
-    <string name="asr_production">语音合成</string>
-    <string name="tts_production">语音识别</string>
+    <string name="ocr_production">
+    \t\t通用文字识别（Universal Character Recognition）
+        \n基于深度神经网络模型的端到端文字识别系统，将图片中印刷或手写的文字转化为计算机可编码的文字（目前支持中文、英文）,图片格式支持jpg格式、jpeg格式、png格式、bmp格式</string>
+    <string name="asr_production">
+        \t\t本应用集成使用科大讯飞Android MSC进行语音听写，
+        是基于自然语言处理，将自然语言音频转换为文本输出的技术。
+语音听写的功能是可以识别60S以内的短音频，
+听写sdk目前支持的格式是 pcm 和 wav 格式、音频采样率要是 16k 或者 8k、采样精度16 位、单声道音频。
+        </string>
+    <string name="tts_production">\t\t与语音听写相反，语音合成是将一段文字转换为语音，可根据需要合成出不同音色、语速和语调的声音，让机器像人一样开口说话。
+        \n
+    在线语音合成目前支持的语种、方言：中文、英文、粤语、四川话、湖南话、河南话、东北话、陕西话、台湾普通话、山东话、湖北话、合肥话、内蒙古方言。\n
+    SDK接口一次限制8192字节</string>
     <string name="avatar_description">avatar</string>
     <string name="status_layout_no_data">空空如也</string>
     <string name="status_layout_error_request">请求出错，请重试</string>
@@ -402,5 +412,9 @@
 </string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="password_forget_title">忘记密码</string>
+    <string name="answer_input_hint">密保问题答案</string>
+    <string name="answer">\t\t密保问题</string>
+    <string name="common_step_next">重置</string>
 
 </resources>
