@@ -9,6 +9,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.Manifest;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -20,7 +21,15 @@ import com.example.myapplication.activity.CharacterRecognitionActivity;
 import com.example.myapplication.activity.InfoActivity;
 import com.example.myapplication.activity.SpeechRecognitionActivity;
 import com.example.myapplication.activity.VoiceSynthesisActivity;
+import com.example.myapplication.roomDatabase.database.AppDatabase;
+import com.example.myapplication.util.HandlerAction;
+
 import java.util.Objects;
+import java.util.Timer;
+import java.util.TimerTask;
+import java.util.concurrent.Executor;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 public class MainActivity extends AppCompatActivity {
     private Intent intent;
@@ -35,13 +44,33 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        initAccount();
         initView();
         initListener();
 //        申请网络权限等
         requestPermissions();
 
+    }
 
+    private void initAccount() {
+        ExecutorService executorService = Executors.newSingleThreadExecutor();
+        executorService.submit(new Runnable() {
+            @Override
+            public void run() {
+                if (AppDatabase.getInstance(getApplicationContext())
+                        .AccountDao()
+                        .findAccountByEmail(
+                                getSharedPreferences(AppConstant.preferenceFileName,MODE_PRIVATE)
+                                        .getString(AppConstant.userEmail,"")
+                        ) ==null) {
+
+                    Toast.makeText(MainActivity.this,"用户登陆信息失效，请重新登陆",Toast.LENGTH_SHORT).show();
+                    Logout();
+                }
+
+            }
+        });
+        executorService.shutdown();
     }
 
     @Override
@@ -65,12 +94,19 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void Logout() {
-        getSharedPreferences(AppConstant.preferenceFileName,MODE_PRIVATE).edit()
-                .putBoolean(AppConstant.loginState,false)
-                .putString(AppConstant.userEmail,"")
-                .putString(AppConstant.userPasswordSHA,"")
-                .apply();
-        finish();
+        Timer timer = new Timer();
+        TimerTask task = new TimerTask() {
+            @Override
+            public void run() {
+                getSharedPreferences(AppConstant.preferenceFileName,MODE_PRIVATE).edit()
+                        .putBoolean(AppConstant.loginState,false)
+                        .putString(AppConstant.userEmail,"")
+                        .putString(AppConstant.userPasswordSHA,"")
+                        .apply();
+                finish();
+            }
+        };
+        timer.schedule(task,1000);
     }
 
     private final ActivityResultLauncher permissionLauncher = registerForActivityResult(
