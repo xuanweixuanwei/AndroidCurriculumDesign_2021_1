@@ -14,6 +14,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.view.animation.AnimationUtils;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.example.myapplication.AppConstant;
@@ -52,7 +53,6 @@ public class LoginActivity extends AppCompatActivity implements HandlerAction {
     private Toast mToast;
     public static final String emailPattern = "\\w+@\\w+\\.\\w+";
     public static final String TAG = LoginActivity.class.getSimpleName();
-
     private SharedPreferences sharedPreferences;
 
 
@@ -76,8 +76,8 @@ public class LoginActivity extends AppCompatActivity implements HandlerAction {
                         if (resultData != null) {
 //                        et_login_email.setText(resultData.getExtras().getString("email"));
 //                        TODO 注册成功后，填写注册时填写的邮箱，密码不填写
-                            et_login_email.setText( resultData.getStringExtra("email"));
-                            et_login_password.setText( resultData.getStringExtra("password"));
+                            et_login_email.setText( resultData.getStringExtra(AppConstant.INTENT_KEY_EMAIL));
+                            et_login_password.setText( resultData.getStringExtra(AppConstant.INTENT_KEY_PASSWORD));
                         }
                     }
                 }
@@ -100,12 +100,11 @@ public class LoginActivity extends AppCompatActivity implements HandlerAction {
             public void onClick(View view) {
                 switch (view.getId()) {
                     case R.id.tv_register:
-                        Intent registerIntent = new Intent(LoginActivity.this,
-                                RegisterActivity.class);
-                        registerLauncher.launch(registerIntent);
+                        registerLauncher.launch(new Intent(LoginActivity.this,
+                                RegisterActivity.class));
                         break;
                     case R.id.tv_login_forget:
-                        startActivity(new Intent(LoginActivity.this,RestPasswordActivity.class));
+                        registerLauncher.launch(new Intent(LoginActivity.this,RestPasswordActivity.class));
                         break;
                     case R.id.btn_login_commit:
                         btn_login_commit.showProgress();
@@ -121,7 +120,7 @@ public class LoginActivity extends AppCompatActivity implements HandlerAction {
                                     if (sharedPreferences.getBoolean(AppConstant.loginState,false)) {
                                         success();
                                     }else {
-                                        btn_login_commit.showError(3000);
+                                        btn_login_commit.showError(2000);
                                     }
                                 }
                             });
