@@ -16,6 +16,7 @@ import android.view.View;
 import android.view.animation.AnimationUtils;
 import android.widget.Toast;
 
+import com.example.myapplication.AppConstant;
 import com.example.myapplication.R;
 import com.example.myapplication.roomDatabase.database.AppDatabase;
 import com.example.myapplication.roomDatabase.entity.Account;
@@ -30,8 +31,7 @@ import java.util.concurrent.Executors;
 import com.example.myapplication.util.HandlerAction;
 
 public class RegisterActivity extends AppCompatActivity implements HandlerAction{
-    private static final String INTENT_KEY_EMAIL = "email";
-    private static final String INTENT_KEY_PASSWORD = "password";
+
     private ClearEditText et_register_email, et_register_question, et_register_answer;
     private PasswordEditText et_register_password1, et_register_password2;
     private SubmitButton btn_register_commit;
@@ -41,14 +41,13 @@ public class RegisterActivity extends AppCompatActivity implements HandlerAction
     private Toast mToast;
     public static final String emailPattern = "\\w+@\\w+\\.\\w+";
     public static final String TAG = RegisterActivity.class.getSimpleName();
-    private Intent data;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
         db = AppDatabase.getInstance(this);
-        data = getIntent();
         initView();
         initListener();
     }
@@ -194,8 +193,8 @@ public class RegisterActivity extends AppCompatActivity implements HandlerAction
                                 postDelayed(() -> {
 
                                     setResult(RESULT_OK, new Intent()
-                                            .putExtra(INTENT_KEY_EMAIL, email)
-                                            .putExtra(INTENT_KEY_PASSWORD, password1));
+                                            .putExtra(AppConstant.INTENT_KEY_EMAIL, email)
+                                            .putExtra(AppConstant.INTENT_KEY_PASSWORD, password1));
                                     finish();
                                 }, 1000);
                             }, 2000);
