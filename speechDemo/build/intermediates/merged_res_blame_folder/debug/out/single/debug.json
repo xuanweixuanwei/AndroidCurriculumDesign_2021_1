@@ -20,16 +20,16 @@
         "source": "D:\\Android\\AndroidStudioProjects\\speechDemo\\src\\main\\res\\drawable\\list_bg_color.xml"
     },
     {
-        "merged": "D:\\Android\\AndroidStudioProjects\\speechDemo\\build\\intermediates\\merged_res\\debug\\layout_activity_face_identify.xml.flat",
-        "source": "D:\\Android\\AndroidStudioProjects\\speechDemo\\src\\main\\res\\layout\\activity_face_identify.xml"
+        "merged": "D:\\Android\\AndroidStudioProjects\\speechDemo\\build\\intermediates\\merged_res\\debug\\layout_group_header_layout.xml.flat",
+        "source": "D:\\Android\\AndroidStudioProjects\\speechDemo\\src\\main\\res\\layout\\group_header_layout.xml"
     },
     {
         "merged": "D:\\Android\\AndroidStudioProjects\\speechDemo\\build\\intermediates\\merged_res\\debug\\layout_item_group.xml.flat",
         "source": "D:\\Android\\AndroidStudioProjects\\speechDemo\\src\\main\\res\\layout\\item_group.xml"
     },
     {
-        "merged": "D:\\Android\\AndroidStudioProjects\\speechDemo\\build\\intermediates\\merged_res\\debug\\layout_group_header_layout.xml.flat",
-        "source": "D:\\Android\\AndroidStudioProjects\\speechDemo\\src\\main\\res\\layout\\group_header_layout.xml"
+        "merged": "D:\\Android\\AndroidStudioProjects\\speechDemo\\build\\intermediates\\merged_res\\debug\\layout_activity_face_identify.xml.flat",
+        "source": "D:\\Android\\AndroidStudioProjects\\speechDemo\\src\\main\\res\\layout\\activity_face_identify.xml"
     },
     {
         "merged": "D:\\Android\\AndroidStudioProjects\\speechDemo\\build\\intermediates\\merged_res\\debug\\xml_ise_settings.xml.flat",
