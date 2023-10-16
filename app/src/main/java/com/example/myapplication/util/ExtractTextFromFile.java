@@ -17,7 +17,7 @@ import org.apache.poi.xwpf.extractor.XWPFWordExtractor;
 //import org.apache.poi.hwpf.HWPFDocument;
 //import org.apache.poi.hwpf.extractor.WordExtractor;
 
-public class ExtractTextFromFile {
+public class ExtractTextFromFile{
     public static final String docx_mimetype = "application/vnd.openxmlformats-officedocument.wordprocessingml.document";
     public static final String txt_mimetype = "text/plain";
     public static final String doc_mimetype = "application/msword";
@@ -33,6 +33,8 @@ public class ExtractTextFromFile {
 
     public String getFileMimetype(Uri fileUri){
         String mimeType =  contentResolver.getType(fileUri);
+
+
         switch (mimeType) {
             case docx_mimetype:
                 return docx;

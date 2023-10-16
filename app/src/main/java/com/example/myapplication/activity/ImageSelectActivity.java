@@ -1,6 +1,5 @@
 package com.example.myapplication.activity;
 
-import androidx.appcompat.app.AppCompatActivity;
 import android.content.ContentResolver;
 import android.content.Intent;
 import android.database.Cursor;
@@ -12,7 +11,7 @@ import android.view.animation.AnimationUtils;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-import android.os.Bundle;
+
 import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -31,7 +30,7 @@ import com.example.myapplication.manager.ThreadPoolManager;
 import com.example.myapplication.util.GridSpaceDecoration;
 import com.example.myapplication.adapter.ImageSelectAdapter;
 import com.example.myapplication.dialog.AlbumDialog;
-import com.example.myapplication.wiget.StatusLayout;
+import com.example.myapplication.ui.StatusLayout;
 import com.hjq.permissions.Permission;
 import com.hjq.permissions.XXPermissions;
 import com.hjq.widget.view.FloatActionButton;

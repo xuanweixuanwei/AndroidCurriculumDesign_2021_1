@@ -10,7 +10,7 @@ import androidx.annotation.StringRes;
 import androidx.core.content.ContextCompat;
 
 import com.example.myapplication.R;
-import com.example.myapplication.wiget.StatusLayout;
+import com.example.myapplication.ui.StatusLayout;
 
 /**
  *    desc   : 状态布局意图

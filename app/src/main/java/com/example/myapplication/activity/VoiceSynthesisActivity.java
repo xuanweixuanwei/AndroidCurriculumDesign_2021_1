@@ -50,8 +50,6 @@ import com.iflytek.cloud.SpeechError;
 import com.iflytek.cloud.SpeechEvent;
 import com.iflytek.cloud.SpeechSynthesizer;
 import com.iflytek.cloud.SynthesizerListener;
-
-
 import java.io.File;
 import java.io.IOException;
 
@@ -669,7 +667,6 @@ public class VoiceSynthesisActivity extends AppCompatActivity implements ToastAc
         ViewGroup.LayoutParams layoutParams = editText.getLayoutParams();
         layoutParams.height = getTextHeight(editText);
         editText.setLayoutParams(layoutParams);
-
     }
 
 
@@ -694,7 +691,7 @@ public class VoiceSynthesisActivity extends AppCompatActivity implements ToastAc
         if (requestCode == REQUEST_CODE_PICK_FILE && resultCode == RESULT_OK && data != null) {
             Uri uri = data.getData();
             String readFromFile = new ExtractTextFromFile(getContentResolver()).getText(uri);
-            if (readFromFile.isEmpty()) {
+            if (readFromFile==null) {
                 showTip("文件可能为空");
             } else {
                 if (mSharedPreferences.getString("file_input_way_preference", "1").equals("1"))

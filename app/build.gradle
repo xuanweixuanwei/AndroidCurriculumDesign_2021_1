@@ -69,7 +69,7 @@ dependencies {
     implementation 'com.github.getActivity:TitleBar:9.2'
     // 权限请求框架：https://github.com/getActivity/XXPermissions
     implementation 'com.github.getActivity:XXPermissions:12.3'
-//    implementation 'com.google.code.gson:gson:2.10.1'
+    //implementation 'com.google.code.gson:gson:2.10.1'
     implementation 'com.squareup.okio:okio:2.2.2'
     implementation 'com.squareup.okhttp3:okhttp:3.12.13'
 

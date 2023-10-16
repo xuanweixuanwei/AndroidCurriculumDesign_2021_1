@@ -23,7 +23,6 @@
             android:visibility="gone"
             android:textColor="@color/white"
             tools:ignore="NestedWeights,SmallSp"
-
             />
         <androidx.core.widget.NestedScrollView
             android:id="@+id/scrollView"
@@ -33,10 +32,9 @@
             android:scrollbars="vertical"
             android:layout_gravity="top"
            >
-
             <EditText
                 android:id="@+id/et_input"
-                android:hint="@string/input_Hint"
+                android:hint="@string/voice_synthesis_hint"
                 android:inputType="textMultiLine"
                 android:background="@null"
                 android:paddingHorizontal="15dp"
@@ -44,16 +42,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ellipsize="end"
+                android:textSize="15sp"
                 android:textColor="@color/white"
                 android:gravity="start"
                 android:textColorHint="@color/common_text_hint_color"
 
                 />
-
         </androidx.core.widget.NestedScrollView>
     </LinearLayout>
-
-
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -103,6 +99,5 @@
             android:src="@drawable/vector_drawable_cancel_task"
             android:background="#00000000"
             />
-
     </LinearLayout>
 </LinearLayout>

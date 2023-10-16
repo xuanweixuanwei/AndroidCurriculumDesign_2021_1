@@ -1,6 +1,7 @@
 package com.example.myapplication.activity;
 
 import static com.example.myapplication.util.FileUtils.getFileExtension;
+import static com.hjq.http.EasyUtils.postDelayed;
 
 import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
@@ -51,6 +52,7 @@ import java.util.LinkedHashMap;
 import java.util.concurrent.Executor;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
 
 import timber.log.Timber;
 import com.example.myapplication.util.JsonParser;
@@ -290,7 +292,6 @@ public class SpeechRecognitionActivity extends AppCompatActivity {
         findViewById(R.id.audio_record).setOnClickListener(listener);
         findViewById(R.id.copy_text).setOnClickListener(listener);
         findViewById(R.id.open_folder_for_audio).setOnClickListener(listener);
-
         initData();
 
     }
@@ -345,15 +346,16 @@ public class SpeechRecognitionActivity extends AppCompatActivity {
      * 有（无）UI语音听写
      **/
     private void recognize() {
-        ExecutorService executor = Executors.newSingleThreadExecutor();
-        executor.submit(new Runnable() {
-            @Override
-            public void run() {
-
                 if (currentUser!=null){
-                    accountDao.updateAccount(currentUser.useAsr());
+                    ExecutorService executorService = Executors.newSingleThreadExecutor();
+                    executorService.submit(new Runnable() {
+                        @Override
+                        public void run() {
+                            accountDao.updateAccount(currentUser.useAsr());
+                        }
+                    });
+                    executorService.shutdown();
                     isListening = true;
-
                     Log.e(TAG, "recognize");
                     buffer.setLength(0);
                     et_result.setText(null);// 清空显示内容
@@ -384,9 +386,6 @@ public class SpeechRecognitionActivity extends AppCompatActivity {
                     showTip("登陆信息失效，请重新登陆后使用");
 
                 }
-            }
-        });
-        executor.shutdown();
     }
 
     /**
@@ -410,6 +409,7 @@ public class SpeechRecognitionActivity extends AppCompatActivity {
             mIat.setParameter(SpeechConstant.LANGUAGE, "zh_cn");
             // 设置语言区域
             mIat.setParameter(SpeechConstant.ACCENT, lag);
+            mIat.setParameter("dwa", "wpgs");
         } else {
             mIat.setParameter(SpeechConstant.LANGUAGE, language);
         }
@@ -506,10 +506,15 @@ public class SpeechRecognitionActivity extends AppCompatActivity {
                 public void onActivityResult(Uri result) {
                     if(result!=null){
                         String extensionName = getFileExtension(getContentResolver(),result);
-                        if(extensionName.equals("pcm")||extensionName.equals("wav"))
+                        if(extensionName.equals("pcm")||extensionName.equals("wav")){
                             executeStream(result);
-                    }else showTip("请选择文件~");
+                        }else {
+                            showTip("文件格式有误");
+                        }
 
+                    }else {
+                        showTip("请选择文件~");
+                    }
                 }
             }
     );

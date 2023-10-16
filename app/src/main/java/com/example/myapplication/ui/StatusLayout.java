@@ -1,4 +1,4 @@
-package com.example.myapplication.wiget;
+package com.example.myapplication.ui;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.drawable.Drawable;

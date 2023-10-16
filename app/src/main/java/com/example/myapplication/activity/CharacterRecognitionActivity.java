@@ -274,7 +274,7 @@ private Account currentUser;
 
         ib_pick_picture.setOnClickListener(listener);
         iv_picture.setOnClickListener(listener);
-
+        copy_text_result.setOnClickListener(listener);
         et_text_result.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {

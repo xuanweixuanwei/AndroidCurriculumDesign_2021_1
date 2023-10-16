@@ -165,11 +165,7 @@ public class Account {
      */
     @Ignore
     public Account(String email, String password, String question, String answer) {
-
         this(email,password);
-/*        this.email = email;
-        this.passwordSHA = ByteString.encodeUtf8(password).sha256().toString();
-        this.createTime = Calendar.getInstance().getTimeInMillis();*/
         this.question = question;
         this.answerSHA = ByteString.encodeUtf8(answer).sha256().toString();
     }
