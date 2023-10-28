@@ -1,7 +1,6 @@
 package com.example.myapplication.activity;
 
 import static com.example.myapplication.util.FileUtils.getFileExtension;
-import static com.hjq.http.EasyUtils.postDelayed;
 
 import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
@@ -11,6 +10,7 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.preference.PreferenceManager;
+
 import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Context;
@@ -38,6 +38,7 @@ import com.iflytek.cloud.RecognizerListener;
 import com.iflytek.cloud.RecognizerResult;
 import com.iflytek.cloud.SpeechConstant;
 import com.iflytek.cloud.SpeechError;
+import com.iflytek.cloud.SpeechEvent;
 import com.iflytek.cloud.SpeechRecognizer;
 import com.iflytek.cloud.ui.RecognizerDialog;
 import com.iflytek.cloud.ui.RecognizerDialogListener;
@@ -49,22 +50,22 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
-import java.util.concurrent.Executor;
+
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-import java.util.concurrent.Future;
+
 
 import timber.log.Timber;
+
 import com.example.myapplication.util.JsonParser;
 
 public class SpeechRecognitionActivity extends AppCompatActivity {
 
     private Toast mToast;
-    private View.OnClickListener listener;
     private EditText et_result;
     private ImageButton ib_audio_record;
 
-    private static String TAG = SpeechRecognitionActivity.class.getSimpleName();
+    private static final String TAG = SpeechRecognitionActivity.class.getSimpleName();
 
     private String mEngineType = SpeechConstant.TYPE_CLOUD;
 
@@ -80,7 +81,6 @@ public class SpeechRecognitionActivity extends AppCompatActivity {
     private SharedPreferences mSharedPreferences;
 
     private String language = "zh_cn";
-    private int selectedNum = 0;
 
     private String resultType = "json";
 
@@ -93,14 +93,11 @@ public class SpeechRecognitionActivity extends AppCompatActivity {
     /**
      * 初始化监听器
      */
-    private InitListener mInitListener = new InitListener() {
-
-        @Override
-        public void onInit(int code) {
-            Log.d(TAG, "SpeechRecognizer init() code = " + code);
-            if (code != ErrorCode.SUCCESS) {
-                showTip("初始化失败，错误码：" + code + ",请点击网址https://www.xfyun.cn/document/error-code查询解决方案");
-            }
+    private final InitListener mInitListener = code -> {
+        Timber.d("SpeechRecognizer init() code = %s", code);
+        if (code != ErrorCode.SUCCESS) {
+            showTip("初始化失败，错误码：" + code + ",请点击网址https://www.xfyun" +
+                    ".cn/document/error-code查询解决方案");
         }
     };
 
@@ -119,11 +116,10 @@ public class SpeechRecognitionActivity extends AppCompatActivity {
         public void onError(SpeechError error) {
             // Tips：
             // 错误码：10118(您没有说话)，可能是录音机权限被禁，需要提示用户打开应用的录音权限。
-            Log.d(TAG, "onError " + error.getPlainDescription(true));
+            Timber.d("onError %s", error.getPlainDescription(true));
             showTip(error.getPlainDescription(true));
             isListening = false;
             ib_audio_record.setImageResource(R.drawable.vector_drawable_voice_1);
-
         }
 
         @Override
@@ -134,9 +130,9 @@ public class SpeechRecognitionActivity extends AppCompatActivity {
 
         @Override
         public void onResult(RecognizerResult results, boolean isLast) {
-            Log.d(TAG, results.getResultString());
+            Timber.d(results.getResultString());
             if (isLast) {
-                Log.d(TAG, "onResult 结束");
+                Timber.d("onResult 结束");
                 isListening = false;
                 ib_audio_record.setImageResource(R.drawable.vector_drawable_voice_1);
 
@@ -159,12 +155,12 @@ public class SpeechRecognitionActivity extends AppCompatActivity {
 
         @Override
         public void onEvent(int eventType, int arg1, int arg2, Bundle obj) {
-            // 以下代码用于获取与云端的会话id，当业务出错时将会话id提供给技术支持人员，可用于查询会话日志，定位出错原因
-            // 若使用本地能力，会话id为null
-            //	if (SpeechEvent.EVENT_SESSION_ID == eventType) {
-            //		String sid = obj.getString(SpeechEvent.KEY_EVENT_SESSION_ID);
-            //		Log.d(TAG, "session id =" + sid);
-            //	}
+//             以下代码用于获取与云端的会话id，当业务出错时将会话id提供给技术支持人员，可用于查询会话日志，定位出错原因
+//             若使用本地能力，会话id为null
+            if (SpeechEvent.EVENT_SESSION_ID == eventType) {
+                String sid = obj.getString(SpeechEvent.KEY_EVENT_SESSION_ID);
+                Log.d(TAG, "session id =" + sid);
+            }
         }
     };
 
@@ -185,15 +181,13 @@ public class SpeechRecognitionActivity extends AppCompatActivity {
     };
 
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_speech_recognition);
         //初始化布局并设置按钮的点击事件监听
         init();
-
-        /**/        // 初始化识别无UI识别对象
+        // 初始化识别无UI识别对象
         // 使用SpeechRecognizer对象，可根据回调消息自定义界面；
         mIat = SpeechRecognizer.createRecognizer(SpeechRecognitionActivity.this, mInitListener);
         if (null == mIat) {
@@ -206,20 +200,18 @@ public class SpeechRecognitionActivity extends AppCompatActivity {
         // 使用UI听写功能，请根据sdk文件目录下的notice.txt,放置布局文件和图片资源
         mIatDialog = new RecognizerDialog(SpeechRecognitionActivity.this, mInitListener);
 
-        DialogInterface.OnDismissListener dismissListener = new DialogInterface.OnDismissListener() {
-            @Override
-            public void onDismiss(DialogInterface dialogInterface) {
-                isListening = false;
-                ib_audio_record.setImageResource(R.drawable.vector_drawable_voice_1);
-                mIat.cancel();
-            }
-        };
+        DialogInterface.OnDismissListener dismissListener =
+                dialogInterface -> {
+                    isListening = false;
+                    ib_audio_record.setImageResource(R.drawable.vector_drawable_voice_1);
+                    mIat.cancel();
+                };
         mIatDialog.setOnDismissListener(dismissListener);
     }
 
-/**
- * 封装弹窗功能
- * */
+    /**
+     * 封装弹窗功能
+     */
     private void showTip(final String str) {
         runOnUiThread(() -> {
             if (mToast != null) {
@@ -230,14 +222,14 @@ public class SpeechRecognitionActivity extends AppCompatActivity {
         });
     }
 
-/**
- * 初始化ActionBar
- *   *设置title
- *   *设置返回箭头
- * 初始化UI控件
- * 初始化监听器
- * 绑定监听器
- * */
+    /**
+     * 初始化ActionBar
+     * *设置title
+     * *设置返回箭头
+     * 初始化UI控件
+     * 初始化监听器
+     * 绑定监听器
+     */
     private void init() {
 
         ActionBar actionBar = getSupportActionBar();
@@ -248,43 +240,37 @@ public class SpeechRecognitionActivity extends AppCompatActivity {
         et_result = findViewById(R.id.et_result);
         ib_audio_record = findViewById(R.id.audio_record);
 
-        listener = new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                switch (view.getId()) {
-                    // 开始听写
-                    // 如何判断一次听写结束：OnResult isLast=true 或者 onError
-                    case R.id.audio_record:
-                        if (isListening) {
-                            ib_audio_record.setImageResource(R.drawable.vector_drawable_voice_1);
-                            mIat.cancel();
+        // 开始听写2
+        // 如何判断一次听写结束：OnResult isLast=true 或者 onError
+        View.OnClickListener listener = view -> {
+            switch (view.getId()) {
+                // 开始听写2
+                // 如何判断一次听写结束：OnResult isLast=true 或者 onError
+                case R.id.audio_record:
+                    if (isListening) {
+                        ib_audio_record.setImageResource(R.drawable.vector_drawable_voice_1);
+                        mIat.cancel();
 
-                        } else {
-                            ib_audio_record.setImageResource(R.drawable.vector_drawable_unabled_voice);
-                            recognize();
+                    } else {
+                        ib_audio_record.setImageResource(R.drawable.vector_drawable_unabled_voice);
+                        recognize();
 
-                        }
-                        break;
-                    case R.id.copy_text:
-                        copyText(et_result);
-                        break;
-                    case R.id.delete_result:
-                        new AlertDialog.Builder(SpeechRecognitionActivity.this)
-                                .setTitle("是否要删除当前的识别结果？")
-                                .setMessage("删除后无法恢复")
-                                .setNegativeButton("取消", null)
-                                .setPositiveButton("是的", new DialogInterface.OnClickListener() {
-                                    @Override
-                                    public void onClick(DialogInterface dialogInterface, int i) {
-                                        et_result.setText("");
-                                    }
-                                })
-                                .show();
-                        break;
-                    case R.id.open_folder_for_audio:
+                    }
+                    break;
+                case R.id.copy_text:
+                    copyText(et_result);
+                    break;
+                case R.id.delete_result:
+                    new AlertDialog.Builder(SpeechRecognitionActivity.this)
+                            .setTitle("是否要删除当前的识别结果？")
+                            .setMessage("删除后无法恢复")
+                            .setNegativeButton("取消", null)
+                            .setPositiveButton("是的", (dialogInterface, i) -> et_result.setText(""))
+                            .show();
+                    break;
+                case R.id.open_folder_for_audio:
                     pickAudioToRecognize();
-                        break;
-                }
+                    break;
             }
         };
 
@@ -299,16 +285,13 @@ public class SpeechRecognitionActivity extends AppCompatActivity {
     private void initData() {
         mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
 
-        userEmail=getSharedPreferences(AppConstant.preferenceFileName, Context.MODE_PRIVATE)
-                .getString(AppConstant.userEmail,"");
+        userEmail = getSharedPreferences(AppConstant.preferenceFileName, Context.MODE_PRIVATE)
+                .getString(AppConstant.userEmail, "");
 
         ExecutorService executor = Executors.newSingleThreadExecutor();
-        executor.submit(new Runnable() {
-            @Override
-            public void run() {
-                accountDao= AppDatabase.getInstance(getApplicationContext()).AccountDao();
-                currentUser=accountDao.findAccountByEmail(userEmail);
-            }
+        executor.submit(() -> {
+            accountDao = AppDatabase.getInstance(getApplicationContext()).AccountDao();
+            currentUser = accountDao.findAccountByEmail(userEmail);
         });
         executor.shutdown();
     }
@@ -336,7 +319,8 @@ public class SpeechRecognitionActivity extends AppCompatActivity {
             showTip("复制了“" + str + "”");
         else {
             //            在复制的文本过多时，做一个字符串的截取和拼接
-            String limitedStr = String.format("%s...%s", str.substring(0, 7), str.substring(str.length() - 7));
+            String limitedStr = String.format("%s...%s", str.substring(0, 7),
+                    str.substring(str.length() - 7));
             showTip("复制了“" + limitedStr + "”");
         }
 
@@ -346,53 +330,48 @@ public class SpeechRecognitionActivity extends AppCompatActivity {
      * 有（无）UI语音听写
      **/
     private void recognize() {
-                if (currentUser!=null){
+        if (currentUser != null) {
+
+            isListening = true;
+            Timber.e("recognize");
+            buffer.setLength(0);
+            et_result.setText(null);// 清空显示内容
+            mIatResults.clear();
+            // 设置参数
+            setParam();
+            boolean isShowDialog = mSharedPreferences.getBoolean(
+                    getString(R.string.pref_key_iat_show), true);
+            if (isShowDialog) {
+                // 显示听写对话框
+                mIatDialog.setListener(mRecognizerDialogListener);
+                mIatDialog.show();
+                showTip(getString(R.string.text_begin));
+            } else {
+                // 不显示听写对话框
+                ret = mIat.startListening(mRecognizerListener);
+                if (ret != ErrorCode.SUCCESS) {
+                    showTip("听写失败,错误码：" + ret + ",请点击网址https://www.xfyun" +
+                            ".cn/document/error-code查询解决方案");
+                } else {
+                    showTip(getString(R.string.text_begin));
                     ExecutorService executorService = Executors.newSingleThreadExecutor();
-                    executorService.submit(new Runnable() {
-                        @Override
-                        public void run() {
-                            accountDao.updateAccount(currentUser.useAsr());
-                        }
+                    executorService.submit(() -> {
+                        accountDao.updateAccount(currentUser.useAsr());
                     });
                     executorService.shutdown();
-                    isListening = true;
-                    Log.e(TAG, "recognize");
-                    buffer.setLength(0);
-                    et_result.setText(null);// 清空显示内容
-                    mIatResults.clear();
-                    // 设置参数
-                    setParam();
-                    boolean isShowDialog = mSharedPreferences.getBoolean(
-                            getString(R.string.pref_key_iat_show), true);
-                    if (isShowDialog) {
-                        Log.e(TAG, "recognize: " + isShowDialog);
-                        // 显示听写对话框
-                        mIatDialog.setListener(mRecognizerDialogListener);
-                        mIatDialog.show();
-                        showTip(getString(R.string.text_begin));
-                    } else {
-                        Log.e(TAG, "recognize: " + isShowDialog);
-
-                        // 不显示听写对话框
-                        ret = mIat.startListening(mRecognizerListener);
-                        if (ret != ErrorCode.SUCCESS) {
-                            showTip("听写失败,错误码：" + ret + ",请点击网址https://www.xfyun.cn/document/error-code查询解决方案");
-                        } else {
-                            showTip(getString(R.string.text_begin));
-                        }
-                    }
-                    isListening = true;
-                } else {
-                    showTip("登陆信息失效，请重新登陆后使用");
-
                 }
+            }
+            isListening = true;
+        } else {
+            showTip("登陆信息失效，请重新登陆后使用");
+        }
     }
 
     /**
      * 设置听写参数
      */
     public void setParam() {
-        Log.d(TAG, "setParam");
+        Timber.d("setParam");
         // 清空参数
         mIat.setParameter(SpeechConstant.PARAMS, null);
         // 设置听写引擎
@@ -400,12 +379,12 @@ public class SpeechRecognitionActivity extends AppCompatActivity {
         // 设置返回结果格式
         mIat.setParameter(SpeechConstant.RESULT_TYPE, resultType);
         //TODO 需要测试
-        language = mSharedPreferences.getString("iat_language_type_preference","zh_cn");
+        language = mSharedPreferences.getString("iat_language_type_preference", "zh_cn");
         if (language.equals("zh_cn")) {
             String lag = mSharedPreferences.getString("iat_language_preference",
                     "mandarin");
             // 设置语言
-            Log.e(TAG, "language = " + language);
+            Timber.e("language = %s", language);
             mIat.setParameter(SpeechConstant.LANGUAGE, "zh_cn");
             // 设置语言区域
             mIat.setParameter(SpeechConstant.ACCENT, lag);
@@ -413,26 +392,28 @@ public class SpeechRecognitionActivity extends AppCompatActivity {
         } else {
             mIat.setParameter(SpeechConstant.LANGUAGE, language);
         }
-        Log.e(TAG, "last language:" + mIat.getParameter(SpeechConstant.LANGUAGE));
+        Timber.e("last language:%s", mIat.getParameter(SpeechConstant.LANGUAGE));
 
         //此处用于设置dialog中不显示错误码信息
         //mIat.setParameter("view_tips_plain","false");
 
         // 设置语音前端点:静音超时时间，即用户多长时间不说话则当做超时处理
-        mIat.setParameter(SpeechConstant.VAD_BOS, mSharedPreferences.getString("iat_vadbos_preference", "4000"));
+        mIat.setParameter(SpeechConstant.VAD_BOS, mSharedPreferences.getString(
+                "iat_vadbos_preference", "4000"));
 
         // 设置语音后端点:后端点静音检测时间，即用户停止说话多长时间内即认为不再输入， 自动停止录音
-        mIat.setParameter(SpeechConstant.VAD_EOS, mSharedPreferences.getString("iat_vadeos_preference", "1000"));
+        mIat.setParameter(SpeechConstant.VAD_EOS, mSharedPreferences.getString(
+                "iat_vadeos_preference", "1000"));
 
         // 设置标点符号,设置为"0"返回结果无标点,设置为"1"返回结果有标点
-        mIat.setParameter(SpeechConstant.ASR_PTT, mSharedPreferences.getString("iat_punc_preference", "1"));
+        mIat.setParameter(SpeechConstant.ASR_PTT, mSharedPreferences.getString(
+                "iat_punc_preference", "1"));
 
         // 设置音频保存路径，保存音频格式支持pcm、wav.
         mIat.setParameter(SpeechConstant.AUDIO_FORMAT, "wav");
         mIat.setParameter(SpeechConstant.ASR_AUDIO_PATH,
                 getExternalFilesDir("msc").getAbsolutePath() + "/iat.wav");
     }
-
 
 
     /**
@@ -459,7 +440,6 @@ public class SpeechRecognitionActivity extends AppCompatActivity {
         et_result.setSelection(et_result.length());
     }
 
-
     /**
      * 创建选项菜单,设置菜单menu资源
      */
@@ -483,38 +463,33 @@ public class SpeechRecognitionActivity extends AppCompatActivity {
             case R.id.asr_preference_setting:
 //                跳转到音量、音调、语速和音频流类型的页面
                 Intent intent = new Intent(SpeechRecognitionActivity.this, SettingsActivity.class);
-                intent.putExtra(getString(R.string.class_name), SpeechRecognitionActivity.class.getSimpleName());
+                intent.putExtra(getString(R.string.class_name),
+                        SpeechRecognitionActivity.class.getSimpleName());
                 startActivity(intent);
                 Timber.d("onOptionsItemSelected: " + "点击了Speaker_setting");
                 break;
             default:
                 break;
         }
-
         return super.onOptionsItemSelected(item);
     }
 
-
-
-    private static final int REQUEST_CODE_PICK_FILE = 1;
+//    private static final int REQUEST_CODE_PICK_FILE = 1;
 
 
     private final ActivityResultLauncher pickAudioLauncher = registerForActivityResult(
             new ActivityResultContracts.GetContent(),
-            new ActivityResultCallback<Uri>() {
-                @Override
-                public void onActivityResult(Uri result) {
-                    if(result!=null){
-                        String extensionName = getFileExtension(getContentResolver(),result);
-                        if(extensionName.equals("pcm")||extensionName.equals("wav")){
-                            executeStream(result);
-                        }else {
-                            showTip("文件格式有误");
-                        }
-
-                    }else {
-                        showTip("请选择文件~");
+            result -> {
+                if (result != null) {
+                    String extensionName = getFileExtension(getContentResolver(), result);
+                    if (extensionName.equals("pcm") || extensionName.equals("wav")) {
+                        executeStream(result);
+                    } else {
+                        showTip("文件格式有误");
                     }
+
+                } else {
+                    showTip("请选择文件~");
                 }
             }
     );
@@ -529,14 +504,14 @@ public class SpeechRecognitionActivity extends AppCompatActivity {
         // 设置音频来源为外部文件
 //        mIat.setParameter(SpeechConstant.AUDIO_SOURCE, "-1");
 //         也可以像以下这样直接设置音频文件路径识别（要求设置文件在sdcard上的全路径）：
-         mIat.setParameter(SpeechConstant.AUDIO_SOURCE, "-1");
+        mIat.setParameter(SpeechConstant.AUDIO_SOURCE, "-1");
 //         mIat.setParameter(SpeechConstant.ASR_SOURCE_PATH, filePath);
         ret = mIat.startListening(mRecognizerListener);
         if (ret != ErrorCode.SUCCESS) {
             showTip("识别失败,错误码：" + ret + ",请点击网址https://www.xfyun.cn/document/error-code查询解决方案");
             return;
         }
-                try {
+        try {
             InputStream open = getContentResolver().openInputStream(uri);
             byte[] buff = new byte[1280];
             while (open.available() > 0) {
@@ -544,18 +519,25 @@ public class SpeechRecognitionActivity extends AppCompatActivity {
                 mIat.writeAudio(buff, 0, read);
             }
             mIat.stopListening();
+            ExecutorService executorService = Executors.newSingleThreadExecutor();
+            executorService.submit(new Runnable() {
+                @Override
+                public void run() {
+                    accountDao.updateAccount(currentUser.useAsr());
+                }
+            });
+            executorService.shutdown();
         } catch (IOException e) {
             mIat.cancel();
             showTip("读取音频流失败");
         }
-
     }
 
-    private void pickAudioToRecognize(){
+    private void pickAudioToRecognize() {
         pickAudioLauncher.launch("*/");
     }
 
-
+}
 //    private void pickAudio() {
 //        Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
 //        intent.setType("*/*");
@@ -583,4 +565,3 @@ public class SpeechRecognitionActivity extends AppCompatActivity {
 //            }
 //        }
 //    }
-}
