@@ -42,7 +42,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ellipsize="end"
-                android:textSize="15sp"
+                android:textSize="16sp"
                 android:textColor="@color/white"
                 android:gravity="start"
                 android:textColorHint="@color/common_text_hint_color"

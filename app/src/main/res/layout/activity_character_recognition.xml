@@ -42,11 +42,12 @@
                     android:layout_height="wrap_content"
                     android:padding="10dp"
                     android:minHeight="250dp"
+
                    android:background="@null"
                     android:gravity="start"
                     android:hint="@string/character_recognition_instruction"
                     android:inputType="textMultiLine"
-                    android:textSize="20sp"
+                    android:textSize="16sp"
                     tools:ignore="TouchTargetSizeCheck" />
             </LinearLayout>
 

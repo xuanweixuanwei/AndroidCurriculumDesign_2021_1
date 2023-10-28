@@ -22,9 +22,7 @@
                 android:id="@+id/et_result"
                 android:hint="@string/speech_recognition_hint"
                 android:inputType="textMultiLine"
-                android:textSize="15sp"
-
-
+                android:textSize="16sp"
                 android:background="@null"
                 android:paddingHorizontal="15dp"
                 android:layout_marginTop="10dp"
