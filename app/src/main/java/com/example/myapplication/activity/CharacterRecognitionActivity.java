@@ -60,17 +60,21 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Base64;
 import java.util.Date;
 import java.util.Locale;
 import java.util.TimeZone;
+import java.util.concurrent.Executor;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 import javax.crypto.Mac;
 import javax.crypto.spec.SecretKeySpec;
+
+import timber.log.Timber;
 
 /**
  * 1、通用文字识别
@@ -80,7 +84,8 @@ import javax.crypto.spec.SecretKeySpec;
  */
 public class CharacterRecognitionActivity extends AppCompatActivity {
     //https://api.xf-yun.com/v1/private/sf8e6aca1?
-    // authorization=YXBpX2tleT0iYXBpa2V5WFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFgiLCBhbGdvcml0aG09ImhtYWMtc2hhMjU2IiwgaGVhZGVycz0iaG9zdCBkYXRlIHJlcXVlc3QtbGluZSIsIHNpZ25hdHVyZT0iL21nMmg5QkNrZXNwaWxaOTRIVUJhUVZQcTJ2N1B4WUY5MHRlVEJsYXhkOD0i
+    // authorization
+    // =YXBpX2tleT0iYXBpa2V5WFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFgiLCBhbGdvcml0aG09ImhtYWMtc2hhMjU2IiwgaGVhZGVycz0iaG9zdCBkYXRlIHJlcXVlc3QtbGluZSIsIHNpZ25hdHVyZT0iL21nMmg5QkNrZXNwaWxaOTRIVUJhUVZQcTJ2N1B4WUY5MHRlVEJsYXhkOD0i
     // &host=api.xf-yun.com
     // &date=Wed%2C+11+Aug+2021+06%3A55%3A18+GMT
         /*
@@ -105,7 +110,6 @@ APPID f1d1cefd
 */
 
 
-
     private static final String TAG = CharacterRecognitionActivity.class.getSimpleName();
     private Bitmap photoBitmap;
 
@@ -115,7 +119,7 @@ APPID f1d1cefd
     private static String apiKey = "b02aa25c9c52fdf36cf809d300959d7c";
 
     //文件存放位置
-    private static final String IMAGE_PATH = "example/1.jpg";
+//    private static final String IMAGE_PATH = "example/1.jpg";
 
     //解析json
     private static Gson gson = new Gson();
@@ -127,9 +131,9 @@ APPID f1d1cefd
     public static String mImageName = "";
 
     private String photoBase64str;
-private String userEmail;
-private AccountDao accountDao;
-private Account currentUser;
+    private String userEmail;
+    private AccountDao accountDao;
+    private Account currentUser;
 
     private IosPopupWindow choosePicturePopupWindow;
     private String textBase64Decode = null;
@@ -142,30 +146,18 @@ private Account currentUser;
         initView();
         initData();
         createFileDirectory();
-/*//
-        try {
-            String resp = doRequest();
-            System.out.println("resp=>" + resp);
-            JsonParse myJsonParse = gson.fromJson(resp, JsonParse.class);
-            String textBase64Decode = new String(Base64.getDecoder().decode(myJsonParse.payload.result.text), "UTF-8");
-            JSONObject jsonObject = JSON.parseObject(textBase64Decode);
-            System.out.println("text字段Base64解码后=>" + jsonObject);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }*/
-
     }
 
     private void initData() {
-        userEmail=getSharedPreferences(AppConstant.preferenceFileName, Context.MODE_PRIVATE)
-                .getString(AppConstant.userEmail,"");
+        userEmail = getSharedPreferences(AppConstant.preferenceFileName, Context.MODE_PRIVATE)
+                .getString(AppConstant.userEmail, "");
 
         ExecutorService executor = Executors.newSingleThreadExecutor();
         executor.submit(new Runnable() {
             @Override
             public void run() {
-                accountDao= AppDatabase.getInstance(getApplicationContext()).AccountDao();
-                currentUser=accountDao.findAccountByEmail(userEmail);
+                accountDao = AppDatabase.getInstance(getApplicationContext()).AccountDao();
+                currentUser = accountDao.findAccountByEmail(userEmail);
             }
         });
         executor.shutdown();
@@ -174,66 +166,61 @@ private Account currentUser;
 
 
     private void request() {
-        ExecutorService executor = Executors.newSingleThreadExecutor();
-        executor.submit(new Runnable() {
-            @Override
-            public void run() {
+
 //                 增加OCR使用次数
+        if (currentUser != null) {
+            ExecutorService executor = Executors.newSingleThreadExecutor();
+            executor.submit(() -> {
+                accountDao.updateAccount(currentUser.useOcr());
 
-                if (currentUser!=null) {
-                        accountDao.updateAccount(currentUser.useOcr());
-                    try {
-                        String resp = doRequest();
-                        Log.w(TAG, "request: " + "resp=>" + resp);
-                        JsonResult myJsonResult = gson.fromJson(resp, JsonResult.class);
+            try {
 
-                        try {
-                            textBase64Decode = new String(Base64.getDecoder().decode(myJsonResult.payload.result.text), "UTF-8");
-                        } catch (UnsupportedEncodingException e) {
-                            e.printStackTrace();
-                        }
+                String resp = doRequest();
+                Timber.tag(TAG).w("request: " + "resp=>" + resp);
+                JsonResult myJsonResult = gson.fromJson(resp, JsonResult.class);
+                //修改了UTF-8的标准，未测试
+                textBase64Decode =
+                        new String(Base64.getDecoder().decode(myJsonResult.payload.result.text),
+                                StandardCharsets.UTF_8);
 
-                        JSONObject jsonObject = JSON.parseObject(textBase64Decode);
-                        Log.w(TAG, "request: " + "text字段Base64解码后=>" + jsonObject);
+                JSONObject jsonObject = JSON.parseObject(textBase64Decode);
+                Timber.tag(TAG).w("request: " + "text字段Base64解码后=>" + jsonObject);
 
-                        ArrayList<Page> pages = gson.fromJson(textBase64Decode, Text.class).pages;
-                        runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-//                            et_text_result.setText(textBase64Decode);
-
-                                et_text_result.setText("");
-                                StringBuilder result_string_buffer = new StringBuilder();
-                                for (Page page :
-                                        pages) {
-                                    for (Line line :
-                                            page.lines) {
-                                        if (line.words == null) {
-                                            result_string_buffer.append("\n");
-                                        } else {
-                                            for (Word word :
-                                                    line.words) {
-                                                result_string_buffer.append(word.content);
-                                            }
-                                            result_string_buffer.append("\n");
-                                        }
+                ArrayList<Page> pages = gson.fromJson(textBase64Decode, Text.class).pages;
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        et_text_result.setText("");
+                        StringBuilder result_string_buffer = new StringBuilder();
+                        for (Page page :
+                                pages) {
+                            for (Line line :
+                                    page.lines) {
+                                if (line.words == null) {
+                                    result_string_buffer.append("\n");
+                                } else {
+                                    for (Word word :
+                                            line.words) {
+                                        result_string_buffer.append(word.content);
                                     }
+                                    result_string_buffer.append("\n");
                                 }
-                                et_text_result.setText(result_string_buffer.toString().trim());
-                                changeEditTextHeight(et_text_result);
                             }
-                        });
-                    } catch (Exception e) {
-                        e.printStackTrace();
+                        }
+                        et_text_result.setText(result_string_buffer.toString().trim());
+                        changeEditTextHeight(et_text_result);
                     }
-                }else {
-                    showTip("登陆信息失效，请重新登陆后使用");
-                }
+                });
 
-
+            } catch (Exception e) {
+                e.printStackTrace();
             }
-        });
-        executor.shutdown();
+            });
+            executor.shutdown();
+        } else {
+            showTip("登陆信息失效，请重新登陆后使用");
+        }
+
     }
 
     private void initView() {
@@ -247,30 +234,31 @@ private Account currentUser;
         et_text_result = findViewById(R.id.et_text_result);
         iv_picture = findViewById(R.id.iv_picture);
 
-        choosePicturePopupWindow = new IosPopupWindow((Activity) CharacterRecognitionActivity.this, new IosPopupWindow.OnClickListener() {
+        choosePicturePopupWindow =
+                new IosPopupWindow((Activity) CharacterRecognitionActivity.this,
+                        new IosPopupWindow.OnClickListener() {
 
-            @Override
-            public void cameraOnClick() {
+                            @Override
+                            public void cameraOnClick() {
 //                pickPhotoByCamera.launch(null);
-                if (createSuccess) {
-                    pickPhotoByCamera();
-                } else {
-                    showTip("功能无法使用，可能是手机机型问题，请向开发者反馈~");
-                }
+                                if (createSuccess) {
+                                    pickPhotoByCamera();
+                                } else {
+                                    showTip("功能无法使用，可能是手机机型问题，请向开发者反馈~");
+                                }
+                            }
 
-            }
+                            @Override
+                            public void albumOnClick() {
+                                pickPhotoFromAlbum.launch("image/*");
+                            }
 
-            @Override
-            public void albumOnClick() {
-                pickPhotoFromAlbum.launch("image/*");
-            }
-
-            @Override
-            public void cancel() {
-                choosePicturePopupWindow.dismiss();
-                showTip("取消了");
-            }
-        });
+                            @Override
+                            public void cancel() {
+                                choosePicturePopupWindow.dismiss();
+                                showTip("取消了");
+                            }
+                        });
 
         ib_pick_picture.setOnClickListener(listener);
         iv_picture.setOnClickListener(listener);
@@ -279,7 +267,7 @@ private Account currentUser;
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                 changeEditTextHeight(et_text_result);
-                Log.w(TAG, "beforeTextChanged: change height" );
+                Log.w(TAG, "beforeTextChanged: change height");
             }
 
             @Override
@@ -293,7 +281,8 @@ private Account currentUser;
             }
         });
     }
-    private void changeEditTextHeight(EditText editText){
+
+    private void changeEditTextHeight(EditText editText) {
         ViewGroup.LayoutParams layoutParams = editText.getLayoutParams();
         layoutParams.height = getTextHeight(editText);
         editText.setLayoutParams(layoutParams);
@@ -308,7 +297,7 @@ private Account currentUser;
             int paddingBottom = editText.getPaddingBottom();
 
             int lineHeight = layout.getLineBottom(totalLineCount - 1) - layout.getLineTop(0);
-            Log.w(TAG, "getTextHeight: "+paddingBottom+"   "+paddingTop +"  "+lineHeight);
+            Log.w(TAG, "getTextHeight: " + paddingBottom + "   " + paddingTop + "  " + lineHeight);
             return lineHeight + paddingTop + paddingBottom;
         }
         return 0;
@@ -326,8 +315,7 @@ private Account currentUser;
                 new File(mImagePath + mImageName));
         intent.putExtra(MediaStore.EXTRA_OUTPUT, imageUri);
 
-        Log.e(TAG, "pickPhotoByCamera: " + imageUri + "    " + mImagePath + mImageName);
-
+        Timber.e("pickPhotoByCamera: " + imageUri + "    " + mImagePath + mImageName);
         startActivityForResult(intent, REQUEST_TAKEPHOTO_CODE);
     }
 
@@ -336,12 +324,8 @@ private Account currentUser;
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == REQUEST_TAKEPHOTO_CODE) {
             if (resultCode == -1) {
-
-                 photoBitmap = BitmapFactory.decodeFile(mImagePath + mImageName);
-//            Bitmap take = ResizeBitmap(bitmap,iv_picture.getMaxWidth());
+                photoBitmap = BitmapFactory.decodeFile(mImagePath + mImageName);
                 iv_picture.setImageBitmap(photoBitmap);
-//            bitmap.recycle();
-//            bitmap = compressBitmap(bitmap);
                 int quality = 40;
                 ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
                 photoBitmap.compress(Bitmap.CompressFormat.JPEG, quality, outputStream);
@@ -354,13 +338,10 @@ private Account currentUser;
                     byteArray = outputStream.toByteArray();
                     photoBase64str = Base64.getEncoder().encodeToString(byteArray);
                 }
-
                 request();
             } else {
                 showTip("未完成拍照~");
             }
-
-
         }
     }
 
@@ -406,7 +387,8 @@ private Account currentUser;
                     choosePicturePopupWindow.show(LayoutInflater.from(getApplicationContext()).inflate(R.layout.activity_character_recognition, null));
                     break;
                 case R.id.iv_picture:
-                    final Dialog dialog = new Dialog(CharacterRecognitionActivity.this, android.R.style.Theme_Black_NoTitleBar_Fullscreen); // 系统全屏样式
+                    final Dialog dialog = new Dialog(CharacterRecognitionActivity.this,
+                            android.R.style.Theme_Black_NoTitleBar_Fullscreen); // 系统全屏样式
 
                     ImageView target_picture = getImageView();
                     dialog.setContentView(target_picture);
@@ -448,20 +430,21 @@ private Account currentUser;
             showTip("复制了“" + str + "”");
         else {
             //            在复制的文本过多时，做一个字符串的截取和拼接
-            String limitedStr = String.format("%s...%s", str.substring(0, 7), str.substring(str.length() - 7));
+            String limitedStr = String.format("%s...%s", str.substring(0, 7),
+                    str.substring(str.length() - 7));
             showTip("复制了“" + limitedStr + "”");
         }
 
     }
 
 
-    private ImageView getImageView(){
+    private ImageView getImageView() {
         ImageView imageView = new ImageView(CharacterRecognitionActivity.this);
         imageView.setLayoutParams(new ActionBar.LayoutParams(ActionBar.LayoutParams.MATCH_PARENT,
-                                                              ActionBar.LayoutParams.MATCH_PARENT  ));
-        if (photoBitmap!=null) {
+                ActionBar.LayoutParams.MATCH_PARENT));
+        if (photoBitmap != null) {
             imageView.setImageBitmap(photoBitmap);
-        }else {
+        } else {
             imageView.setImageDrawable(getDrawable(R.drawable.meteor));
         }
         return imageView;
@@ -486,11 +469,11 @@ private Account currentUser;
                 @Override
                 public void onActivityResult(Uri result) {
 
-//                    TODO 解析
                     if (result != null) {
                         iv_picture.setImageURI(result);
                         try {
-                             photoBitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), result);
+                            photoBitmap = MediaStore.Images.Media.getBitmap(getContentResolver(),
+                                    result);
 //                            bitmap = compressBitmap(bitmap);
                             ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
                             int quality = 70;
@@ -499,7 +482,8 @@ private Account currentUser;
                             photoBase64str = Base64.getEncoder().encodeToString(byteArray);
 
                             while (base64FileSize(photoBase64str) > 4194304) {
-                                photoBitmap.compress(Bitmap.CompressFormat.JPEG, quality - 10, outputStream);
+                                photoBitmap.compress(Bitmap.CompressFormat.JPEG, quality - 10,
+                                        outputStream);
                                 byteArray = outputStream.toByteArray();
                                 photoBase64str = Base64.getEncoder().encodeToString(byteArray);
                             }
@@ -543,7 +527,8 @@ private Account currentUser;
                             int height = iv_picture.getHeight();
                             Matrix matrix = new Matrix();
                             matrix.postScale(6f,6f); //长和宽放大缩小的比例
-                            Bitmap resizeBmp = Bitmap.createBitmap(result,0,0,result.getWidth(),result.getHeight(),matrix,true);
+                            Bitmap resizeBmp = Bitmap.createBitmap(result,0,0,result.getWidth(),
+                            result.getHeight(),matrix,true);
 
 
                             iv_picture.setImageBitmap(resizeBmp);
@@ -556,7 +541,7 @@ private Account currentUser;
     private static String[] PERMISSIONS_STORAGE = {
             Manifest.permission.READ_EXTERNAL_STORAGE,
             Manifest.permission.WRITE_EXTERNAL_STORAGE};
-    private static int REQUEST_PERMISSION_CODE = 1;
+    private static int REQUEST_PERMISSION_CODE = 2;
     private boolean createSuccess = true;
 
     /**
@@ -564,11 +549,14 @@ private Account currentUser;
      */
     public void createFileDirectory() {
         if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
-            if (ActivityCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
-                ActivityCompat.requestPermissions(this, PERMISSIONS_STORAGE, REQUEST_PERMISSION_CODE);
+            if (ActivityCompat.checkSelfPermission(this,
+                    Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+                ActivityCompat.requestPermissions(this, PERMISSIONS_STORAGE,
+                        REQUEST_PERMISSION_CODE);
             }
         }
-        mImagePath = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES).getPath() + "/meteor/";//指定保存路径
+        mImagePath =
+                Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES).getPath() + "/meteor/";//指定保存路径
         File f = new File(mImagePath);
         if (!f.exists()) {
             if (!f.mkdirs()) {
@@ -576,9 +564,10 @@ private Account currentUser;
                 showTip("无法创建文件夹，通过拍照返回照片的功能无法使用！");
                 createSuccess = false;
             }
-
         }
     }
+
+
 
 
     /**
@@ -632,9 +621,8 @@ private Account currentUser;
             is = httpURLConnection.getErrorStream();
             throw new Exception("make request error:" + "code is " + httpURLConnection.getResponseMessage() + readAllBytes(is));
         }
+
         return readAllBytes(is);
-
-
     }
 
     /**
@@ -648,13 +636,15 @@ private Account currentUser;
         URL url = null;
         // 替换掉schema前缀 ，原因是URL库不支持解析包含ws,wss schema的url
         String requestUrl = "https://api.xf-yun.com/v1/private/sf8e6aca1";
-        String httpRequestUrl = requestUrl.replace("ws://", "http://").replace("wss://", "https://");
+        String httpRequestUrl = requestUrl.replace("ws://", "http://").replace("wss://", "https" +
+                "://");
 
         try {
             url = new URL(httpRequestUrl);
 
             //获取当前日期并格式化
-            SimpleDateFormat format = new SimpleDateFormat("EEE, dd MMM yyyy HH:mm:ss z", Locale.US);
+            SimpleDateFormat format = new SimpleDateFormat("EEE, dd MMM yyyy HH:mm:ss z",
+                    Locale.US);
             format.setTimeZone(TimeZone.getTimeZone("GMT"));
             String date = format.format(new Date());
 
@@ -664,19 +654,28 @@ private Account currentUser;
 //                host = host + ":" + String.valueOf(url.getPort());
 //            }
 
-            StringBuilder signatureOriginalFiled = new StringBuilder("host: ").append(host).append("\n").//host: $host\n
-                    append("date: ").append(date).append("\n").//date: $date\n
-                    append("POST ").append(url.getPath()).append(" HTTP/1.1");//$request-line 请求行，请求报文的第一行，包括请求方法字段、URL字段和HTTP协议版本
+            StringBuilder signatureOriginalFiled =
+                    new StringBuilder("host: ").append(host).append("\n").//host: $host\n
+                            append("date: ").append(date).append("\n").//date: $date\n
+                            append("POST ").append(url.getPath()).append(" HTTP/1.1");//$request
+            // -line
+            // 请求行，请求报文的第一行，包括请求方法字段、URL字段和HTTP协议版本
             //System.err.println(builder.toString());
             Charset charset = Charset.forName("UTF-8");
             Mac hmac_sha256 = Mac.getInstance("hmacsha256");
             SecretKeySpec spec = new SecretKeySpec(apiSecret.getBytes(charset), "hmac_sha256");
             hmac_sha256.init(spec);
-            byte[] signature_sha = hmac_sha256.doFinal(signatureOriginalFiled.toString().getBytes(charset));
+            byte[] signature_sha =
+                    hmac_sha256.doFinal(signatureOriginalFiled.toString().getBytes(charset));
             String signature = Base64.getEncoder().encodeToString(signature_sha);
-            String authorizationOrigin = String.format("api_key=\"%s\", algorithm=\"%s\", headers=\"%s\", signature=\"%s\"", apiKey, "hmac-sha256", "host date request-line", signature);
-            String authorization = Base64.getEncoder().encodeToString(authorizationOrigin.getBytes(charset));
-            return String.format("%s?authorization=%s&host=%s&date=%s", requestUrl, URLEncoder.encode(authorization, "utf-8"), URLEncoder.encode(host, "utf-8"), URLEncoder.encode(date, "utf-8"));
+            String authorizationOrigin = String.format("api_key=\"%s\", algorithm=\"%s\", " +
+                    "headers=\"%s\", signature=\"%s\"", apiKey, "hmac-sha256", "host date " +
+                    "request-line", signature);
+            String authorization =
+                    Base64.getEncoder().encodeToString(authorizationOrigin.getBytes(charset));
+            return String.format("%s?authorization=%s&host=%s&date=%s", requestUrl,
+                    URLEncoder.encode(authorization, "utf-8"), URLEncoder.encode(host, "utf-8"),
+                    URLEncoder.encode(date, "utf-8"));
         } catch (Exception e) {
             throw new RuntimeException("assemble requestUrl error:" + e.getMessage());
         }
@@ -757,7 +756,6 @@ private Account currentUser;
         }
         return out.toByteArray();
     }
-
 }
 
 //解析json
