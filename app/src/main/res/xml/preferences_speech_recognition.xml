@@ -3,46 +3,45 @@
     <PreferenceCategory app:title="@string/sr_messages_header">
 
         <ListPreference
-            app:key="iat_language_type_preference"
-            app:title="语种语言设置"
+            app:defaultValue="zh_cn"
             app:entries="@array/language_type_entries"
             app:entryValues="@array/language_type_values"
+            app:key="iat_language_type_preference"
             app:summary="在线听写支持多种小语种设置。支持语言类型如下： "
-            app:defaultValue="zh_cn" />
+            app:title="语种语言设置" />
         <ListPreference
-            app:key="iat_language_preference"
-            app:title="语言设置"
+            app:defaultValue="mandarin"
             app:entries="@array/language_entries"
             app:entryValues="@array/language_values"
+            app:key="iat_language_preference"
             app:summary="支持：普通话，粤语，英语 "
-            app:defaultValue="mandarin" />
+            app:title="语言设置" />
 
         <EditTextPreference
+            app:defaultValue="5000"
+            app:dialogTitle="请输入时间(0-10000)ms"
             app:key="iat_vadbos_preference"
-            app:title="前端点超时"
-            app:dialogTitle="请输入时间(0-10000)ms"
             app:summary="默认值：短信转写5000，其他4000"
-            app:defaultValue="5000" />
+            app:title="前端点超时" />
 
         <EditTextPreference
-            app:key="iat_vadeos_preference"
-            app:title="后端点超时"
+            app:defaultValue="1800"
             app:dialogTitle="请输入时间(0-10000)ms"
+            app:key="iat_vadeos_preference"
             app:summary="默认值：短信转写1800，其他700 "
-            app:defaultValue="1800" />
+            app:title="后端点超时" />
 
         <ListPreference
-            app:key="iat_punc_preference"
-            app:title="标点符号"
+            app:defaultValue="1"
             app:entries="@array/punc_entries"
             app:entryValues="@array/punc_values"
+            app:key="iat_punc_preference"
             app:summary="默认值：有标点 "
-            app:defaultValue="1" />
+            app:title="标点符号" />
 
         <CheckBoxPreference
+            app:defaultValue="true"
             app:key="@string/pref_key_iat_show"
-            app:title="@string/pref_title_iat_show"
-            app:defaultValue="true" />
+            app:title="@string/pref_title_iat_show" />
     </PreferenceCategory>
-
 </PreferenceScreen>
