@@ -42,6 +42,7 @@ import com.iflytek.cloud.SpeechRecognizer;
 import com.iflytek.cloud.ui.RecognizerDialog;
 import com.iflytek.cloud.ui.RecognizerDialogListener;
 
+import org.apache.poi.ss.formula.functions.T;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -142,6 +143,7 @@ public class SpeechRecognitionActivity extends AppCompatActivity {
                 buffer.append(results.getResultString());
                 et_result.setText(buffer.toString());
                 et_result.setSelection(et_result.length());
+
             }
         }
 
@@ -239,6 +241,7 @@ public class SpeechRecognitionActivity extends AppCompatActivity {
      * 绑定监听器
      */
     private void init() {
+        Timber.e("啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊");
 
         ActionBar actionBar = getSupportActionBar();
         assert actionBar != null;
@@ -258,11 +261,16 @@ public class SpeechRecognitionActivity extends AppCompatActivity {
                     if (isListening) {
                         ib_audio_record.setImageResource(R.drawable.vector_drawable_voice_1);
                         mIat.cancel();
-
                     } else {
                         ib_audio_record.setImageResource(R.drawable.vector_drawable_unabled_voice);
                         recognize();
 
+
+                        ExecutorService executorService = Executors.newSingleThreadExecutor();
+                        executorService.submit(() -> {
+                            accountDao.updateAccount(currentUser.useAsr());
+                        });
+                        executorService.shutdown();
                     }
                     break;
                 case R.id.copy_text:
@@ -362,11 +370,7 @@ public class SpeechRecognitionActivity extends AppCompatActivity {
                             ".cn/document/error-code查询解决方案");
                 } else {
                     showTip(getString(R.string.text_begin));
-                    ExecutorService executorService = Executors.newSingleThreadExecutor();
-                    executorService.submit(() -> {
-                        accountDao.updateAccount(currentUser.useAsr());
-                    });
-                    executorService.shutdown();
+
                 }
             }
             isListening = true;
@@ -524,14 +528,13 @@ public class SpeechRecognitionActivity extends AppCompatActivity {
                 mIat.writeAudio(buff, 0, read);
             }
             mIat.stopListening();
-            ExecutorService executorService = Executors.newSingleThreadExecutor();
-            executorService.submit(new Runnable() {
-                @Override
-                public void run() {
-                    accountDao.updateAccount(currentUser.useAsr());
-                }
-            });
-            executorService.shutdown();
+
+           new Thread(new Runnable() {
+               @Override
+               public void run() {
+                   accountDao.updateAccount(currentUser.useAsr());
+               }
+           }).start();
         } catch (IOException e) {
             mIat.cancel();
             showTip("读取音频流失败");
