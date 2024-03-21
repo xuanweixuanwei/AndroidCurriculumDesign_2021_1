@@ -112,9 +112,9 @@ APPID f1d1cefd
     private Bitmap photoBitmap;
 
     //控制台获取以下信息
-    private static String APPID = "f1d1cefd";
-    private static String apiSecret = "MWQ0MWIyNGUxMzhhOWQxYWI5NjlhOTJj";
-    private static String apiKey = "b02aa25c9c52fdf36cf809d300959d7c";
+    private static String APPID = "b5d063a5";
+    private static String apiSecret = "MTVkMjAwNDNjZDBjOWRhMmI5YjlkODNm";
+    private static String apiKey = "857529ad654b3aed232dc9bb525b65c3";
 
     //解析json
     private static Gson gson = new Gson();

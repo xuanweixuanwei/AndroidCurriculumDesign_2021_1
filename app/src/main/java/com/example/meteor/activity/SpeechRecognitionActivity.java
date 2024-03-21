@@ -192,6 +192,7 @@ public class SpeechRecognitionActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_speech_recognition);
+
         //初始化布局并设置按钮的点击事件监听
         init();
         // 初始化识别无UI识别对象

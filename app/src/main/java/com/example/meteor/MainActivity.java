@@ -110,14 +110,14 @@ public class MainActivity extends AppCompatActivity {
             new ActivityResultContracts.RequestMultiplePermissions(),
             result -> {
                 if (result.get(Manifest.permission.INTERNET) != null
-//                        && result.get(Manifest.permission.RECORD_AUDIO) != null
-//                        && result.get(Manifest.permission.CAMERA) != null
+                        && result.get(Manifest.permission.RECORD_AUDIO) != null
+                        && result.get(Manifest.permission.CAMERA) != null
                         && result.get(Manifest.permission.READ_PHONE_STATE) != null) {
                     if (Objects.requireNonNull(result.get(Manifest.permission.INTERNET)).equals(true)
-//                            && Objects.requireNonNull(result.get(Manifest.permission
-//                            .RECORD_AUDIO)).equals(true)
-//                            && Objects.requireNonNull(result.get(Manifest.permission.CAMERA))
-//                            .equals(true)
+                            && Objects.requireNonNull(result.get(Manifest.permission
+                            .RECORD_AUDIO)).equals(true)
+                            && Objects.requireNonNull(result.get(Manifest.permission.CAMERA))
+                            .equals(true)
                             && Objects.requireNonNull(result.get(Manifest.permission.READ_PHONE_STATE)).equals(true)) {
                         Toast.makeText(MainActivity.this, "联网和获取手机状态权限获取成功", Toast.LENGTH_SHORT).show();
                         //权限全部获取到之后的动作
@@ -136,7 +136,9 @@ public class MainActivity extends AppCompatActivity {
         //权限数组
         String[] permissions = new String[]{
                 Manifest.permission.INTERNET,
-                Manifest.permission.READ_PHONE_STATE
+                Manifest.permission.READ_PHONE_STATE,
+                Manifest.permission.RECORD_AUDIO,
+                Manifest.permission.CAMERA
         };
         permissionLauncher.launch(permissions);
     }

@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">基于Android的语音文字识别系统</string>
-    <string name="app_id">f1d1cefd</string>
+    <string name="app_id">b5d063a5</string>
     <string name="class_name">className</string>
     <string name="open_folder">打开文件夹</string>
     <string name="delete_text">删除文字</string>
