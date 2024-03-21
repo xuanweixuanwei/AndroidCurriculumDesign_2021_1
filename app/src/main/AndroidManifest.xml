@@ -8,12 +8,11 @@
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" /> <!-- 剪切板权限 -->
-    <uses-permission android:name="android.permission.READ_CLIPBOARD_IN_BACKGROUND" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_CLIPBOARD" />
 
     <application
-        android:name=".meteorApp"
+        android:name="com.example.meteor.meteorApp"
         android:allowBackup="true"
         android:fullBackupOnly="true"
         android:icon="@drawable/meteor"
@@ -22,57 +21,57 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MyApplication">
         <activity
-            android:name=".activity.RestPasswordActivity"
+            android:name="com.example.meteor.activity.RestPasswordActivity"
             android:exported="true" />
         <activity
-            android:name=".activity.ManageAppActivity"
+            android:name="com.example.meteor.activity.ManageAppActivity"
             android:exported="true" />
         <activity
-            android:name=".activity.ManageUserActivity"
+            android:name="com.example.meteor.activity.ManageUserActivity"
             android:exported="true" />
         <activity
-            android:name=".activity.AdminApplicationActivity"
+            android:name="com.example.meteor.activity.AdminApplicationActivity"
             android:exported="true" />
         <activity
-            android:name=".activity.UserApplicationActivity"
+            android:name="com.example.meteor.activity.UserApplicationActivity"
             android:exported="true" />
         <activity
-            android:name=".activity.ImageCropActivity"
+            android:name="com.example.meteor.activity.ImageCropActivity"
             android:exported="true" />
         <activity
-            android:name=".activity.CameraActivity"
+            android:name="com.example.meteor.activity.CameraActivity"
             android:exported="true" />
         <activity
-            android:name=".activity.ImagePreviewActivity"
+            android:name="com.example.meteor.activity.ImagePreviewActivity"
             android:exported="true" />
         <activity
-            android:name=".activity.ImageSelectActivity"
+            android:name="com.example.meteor.activity.ImageSelectActivity"
             android:exported="true" />
         <activity
-            android:name=".activity.InfoActivity"
+            android:name="com.example.meteor.activity.InfoActivity"
             android:exported="true" />
         <activity
-            android:name=".activity.RegisterActivity"
+            android:name="com.example.meteor.activity.RegisterActivity"
             android:exported="true" />
         <activity
-            android:name=".MainActivity"
+            android:name="com.example.meteor.MainActivity"
             android:exported="true"
             android:launchMode="singleTask" />
         <activity
-            android:name=".activity.SettingsActivity"
+            android:name="com.example.meteor.activity.SettingsActivity"
             android:exported="true" />
         <activity
-            android:name=".activity.VoiceSynthesisActivity"
+            android:name="com.example.meteor.activity.VoiceSynthesisActivity"
             android:exported="true"
             android:theme="@style/Theme.TTS" />
         <activity
-            android:name=".activity.SpeechRecognitionActivity"
+            android:name="com.example.meteor.activity.SpeechRecognitionActivity"
             android:exported="true" />
         <activity
-            android:name=".activity.CharacterRecognitionActivity"
+            android:name="com.example.meteor.activity.CharacterRecognitionActivity"
             android:exported="true" />
         <activity
-            android:name=".activity.LoginActivity"
+            android:name="com.example.meteor.activity.LoginActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

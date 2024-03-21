@@ -9,7 +9,7 @@
     android:layoutAnimation="@anim/layout_from_bottom"
     android:orientation="vertical"
     tools:layoutAnimation="@null"
-    tools:context=".activity.LoginActivity">
+    tools:context="com.example.meteor.activity.LoginActivity">
 
 <View
     android:layout_width="match_parent"

@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     app:sizeRatio="1:1"
-    tools:context=".adapter.ImageSelectAdapter">
+    tools:context="com.example.meteor.adapter.ImageSelectAdapter">
 
     <com.hjq.widget.view.ScaleImageView
         android:id="@+id/iv_image_select_image"

@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".activity.SettingsActivity">
+    tools:context="com.example.meteor.activity.SettingsActivity">
 
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/setting_fragment"

@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".activity.ImageSelectActivity">
+    tools:context="com.example.meteor.activity.ImageSelectActivity">
 
     <com.hjq.bar.TitleBar
         android:layout_width="match_parent"
@@ -15,7 +15,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <com.example.myapplication.ui.StatusLayout
+        <com.example.meteor.ui.StatusLayout
 
             android:id="@+id/hl_image_select_hint"
             android:layout_width="match_parent"
@@ -30,7 +30,7 @@
                 tools:listitem="@layout/image_select_item"
                 tools:spanCount="3" />
 
-        </com.example.myapplication.ui.StatusLayout>
+        </com.example.meteor.ui.StatusLayout>
 
         <com.hjq.widget.view.FloatActionButton
             android:id="@+id/fab_image_select_floating"

@@ -22,8 +22,8 @@ com/hjq/widget/view/ScaleImageView.java
  com.hjq.widget.view.ScaleImageView
 com/hjq/widget/view/CountdownView.java
  com.hjq.widget.view.CountdownView
-com/hjq/widget/view/SmartTextView.java
- com.hjq.widget.view.SmartTextView
+com/hjq/widget/view/ClearEditText.java
+ com.hjq.widget.view.ClearEditText
 com/hjq/widget/view/SlantedTextView.java
  com.hjq.widget.view.SlantedTextView
 com/hjq/widget/view/PlayButton.java
@@ -55,5 +55,5 @@ com/hjq/widget/layout/WrapRecyclerView.java
  com.hjq.widget.layout.WrapRecyclerView$WrapViewHolder
 com/hjq/widget/layout/SettingBar.java
  com.hjq.widget.layout.SettingBar
-com/hjq/widget/view/ClearEditText.java
- com.hjq.widget.view.ClearEditText
+com/hjq/widget/view/SmartTextView.java
+ com.hjq.widget.view.SmartTextView

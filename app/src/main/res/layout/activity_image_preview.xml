@@ -5,9 +5,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#363636"
-    tools:context=".activity.ImagePreviewActivity">
+    tools:context="com.example.meteor.activity.ImagePreviewActivity">
 
-    <com.example.myapplication.ui.PhotoViewPager
+    <com.example.meteor.ui.PhotoViewPager
         android:id="@+id/vp_image_preview_pager"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
