@@ -16,4 +16,5 @@ include ':library:base'
 include ':library:base'
 include ':library:widget'
 include ':recyclerviewdemo'
+include ':mscV5PlusDemo'
 

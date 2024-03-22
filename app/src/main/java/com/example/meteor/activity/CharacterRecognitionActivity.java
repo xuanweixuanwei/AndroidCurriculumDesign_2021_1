@@ -81,33 +81,6 @@ import timber.log.Timber;
  * 4、图片格式支持jpg格式、jpeg格式、png格式、bmp格式，且需保证图像文件大小base64编码后不超过10MB
  */
 public class CharacterRecognitionActivity extends AppCompatActivity {
-    //https://api.xf-yun.com/v1/private/sf8e6aca1?
-    // authorization
-    // =YXBpX2tleT0iYXBpa2V5WFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFgiLCBhbGdvcml0aG09ImhtYWMtc2hhMjU2IiwgaGVhZGVycz0iaG9zdCBkYXRlIHJlcXVlc3QtbGluZSIsIHNpZ25hdHVyZT0iL21nMmg5QkNrZXNwaWxaOTRIVUJhUVZQcTJ2N1B4WUY5MHRlVEJsYXhkOD0i
-    // &host=api.xf-yun.com
-    // &date=Wed%2C+11+Aug+2021+06%3A55%3A18+GMT
-        /*
-• date参数生成规则：
-date必须是UTC+0或GMT时区，RFC1123格式(Wed, 11 Aug 2021 06:55:18 GMT)。
-服务端会对date进行时钟偏移检查，最大允许300秒的偏差，超出偏差的请求都将被拒绝。
-
-• authorization参数生成格式：
-1）获取接口密钥APIKey 和 APISecret。
-在讯飞开放平台控制台，创建一个应用后打开OCR中英文字识别页面可以获取，均为32位字符串。
-2）参数authorization base64编码前（authorization_origin）的格式如下。
-api_key="$api_key",algorithm="hmac-sha256",
-headers="host date request-line",signature="$signature"
-其中 api_key 是在控制台获取的APIKey，
-algorithm 是加密算法（仅支持hmac-sha256），
-headers是参与签名的参数，请注意是固定的参数名（"host date request-line"），而非这些参数的值
-signature 是使用加密算法对参与签名的参数签名后并使用base64编码的字符串
-
-APIKey b02aa25c9c52fdf36cf809d300959d7c
-APISecret MWQ0MWIyNGUxMzhhOWQxYWI5NjlhOTJj
-APPID f1d1cefd
-*/
-
-
     private static final String TAG = CharacterRecognitionActivity.class.getSimpleName();
     private Bitmap photoBitmap;
 
@@ -376,25 +349,6 @@ APPID f1d1cefd
             }
         }
     }
-
-//    public static Bitmap compressBitmap(Bitmap bitmap) {//拍照的图片太大，设置格式大小
-//        int width = bitmap.getWidth();
-//        int height = bitmap.getHeight();
-//        int newWidth = width/2;
-//        float temp = ((float) height) / ((float) width);
-//        int newHeight = (int) ((newWidth) * temp);
-////        float scaleWidth = ((float) newWidth) / width;
-////        float scaleHeight = ((float) newHeight) / height;
-////        Matrix matrix = new Matrix();
-////        // resize the bit map
-////        matrix.postScale(scaleWidth, scaleHeight);
-////        // matrix.postRotate(45);
-//        Log.w(TAG, "ResizeBitmap: "+width+"  "+height );
-////       TODO createBitmap方法报错
-////        但是由于已经做过NestedScrollView，不需要压缩图片，可以忽略
-//        //        bitmap.recycle();
-//        return Bitmap.createScaledBitmap(bitmap,  width, height,  true);
-//    }
 
     private Toast mToast;
 
@@ -804,22 +758,13 @@ class Payload {
 
 class Result {
     String text;
-//    String compress;
-//    String encoding;
-//    String format;
 }
 
 class Text {
     ArrayList<Page> pages;
-//    String category;
-//    String version;
 }
 
 class Page {
-    //    int exception;
-    //    float width;
-    //    float angle;
-    //    float height;
     ArrayList<Line> lines;
 
 }

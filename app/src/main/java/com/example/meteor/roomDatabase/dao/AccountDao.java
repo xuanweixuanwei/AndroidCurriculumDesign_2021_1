@@ -10,7 +10,7 @@ import com.example.meteor.roomDatabase.entity.Account;
 
 @Dao
 public interface AccountDao {
-//    注册时，通过email查找account
+    //    注册时，通过email查找account
     @Query("SELECT * FROM ACCOUNT WHERE email = :EMAIL AND passwordSHA = :PASSWORD")
     Account findAccountByPassword(String EMAIL, String PASSWORD);
 
@@ -22,10 +22,11 @@ public interface AccountDao {
 
     @Query("DELETE from ACCOUNT")
     void clearAccount();
+
     @Delete
     void deleteAccount(Account account);
 
-//修改密码
+    //修改密码
 // Room 使用主键将传递的实体实例与数据库中的行进行匹配。
 // 如果没有具有相同主键的行，Room 不会进行任何更改。
 //@Update 方法可以选择性地返回 int 值，该值指示成功更新的行数。
@@ -40,8 +41,6 @@ public interface AccountDao {
 
     @Insert
     void insert(Account account);
-
-
 
 
 }
