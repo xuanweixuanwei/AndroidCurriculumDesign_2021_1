@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <PreferenceCategory app:title="@string/wu_messages_header">
+        <SwitchPreference
+            android:key="@string/wake_up_enable"
+            android:title="@string/wake_demo_hint"
+            android:defaultValue="false"/>
+        <EditTextPreference
+            android:key="@string/wake_up_thresh"
+            android:title="@string/wake_up_thresh_title"
+            android:summary="设置语音唤醒的门限值，门限值越低越容易被唤醒"
+            app:defaultValue="1200"
+            app:useSimpleSummaryProvider="true"
+            android:dependency="@string/wake_up_enable"/>
+        <SwitchPreference
+            android:key="@string/wake_up_net_mode"
+            android:title="@string/wake_demo_net"
+            app:defaultValue="false"
+            android:summary="@string/wake_up_net_mode_explain"
+            android:defaultValue="false"
+            android:dependency="@string/wake_up_enable"/>
+
+    </PreferenceCategory>
+
+</PreferenceScreen>

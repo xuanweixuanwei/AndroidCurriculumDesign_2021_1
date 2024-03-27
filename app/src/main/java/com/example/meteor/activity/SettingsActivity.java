@@ -10,6 +10,7 @@ import android.widget.Toast;
 import com.example.meteor.settingFragments.CharacterRecognitionSettingsFragment;
 import com.example.meteor.settingFragments.SpeechRecognitionSettingsFragment;
 import com.example.meteor.settingFragments.VoiceSynthesisSettingsFragment;
+import com.example.meteor.settingFragments.WakeUpSettingsFragment;
 import com.example.myapplication.R;
 
 import java.util.Timer;
@@ -42,7 +43,9 @@ public class SettingsActivity extends AppCompatActivity {
             return (F) SpeechRecognitionSettingsFragment.getInstance();
         } else if (className.equals(CharacterRecognitionActivity.class.getSimpleName())) {
             return (F) CharacterRecognitionSettingsFragment.getInstance();
-        } else {
+        } else if(className.equals(WakeUpSettingsFragment.class.getSimpleName())) {
+            return (F)WakeUpSettingsFragment.getInstance();
+        }else {
             return null;
         }
     }

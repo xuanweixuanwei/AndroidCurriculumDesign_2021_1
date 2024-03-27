@@ -3,7 +3,7 @@ package com.example.meteor.util;
 
 import android.text.InputFilter;
 import android.text.Spanned;
-
+//隐含设置为只能输入整数？够用了但是可以改改
 public class InputFilterMinMax implements InputFilter {
 
     private int min, max;
