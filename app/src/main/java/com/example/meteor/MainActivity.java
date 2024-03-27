@@ -9,6 +9,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.Manifest;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -16,12 +17,17 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
+import com.example.meteor.activity.SettingsActivity;
+import com.example.meteor.activity.WakeTestActivity;
+import com.example.meteor.settingFragments.WakeUpSettingsFragment;
 import com.example.myapplication.R;
 import com.example.meteor.activity.CharacterRecognitionActivity;
 import com.example.meteor.activity.InfoActivity;
 import com.example.meteor.activity.SpeechRecognitionActivity;
 import com.example.meteor.activity.VoiceSynthesisActivity;
 import com.example.meteor.roomDatabase.database.AppDatabase;
+import com.iflytek.cloud.Setting;
+import com.iflytek.cloud.util.ResourceUtil;
 
 import java.util.Objects;
 import java.util.Timer;
@@ -29,7 +35,10 @@ import java.util.TimerTask;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
+import timber.log.Timber;
+
 public class MainActivity extends AppCompatActivity {
+    private static final String TAG = "MainActivity";
     private Intent intent;
     private View.OnClickListener listener;
     private Button toCharacterRecognition;
@@ -86,6 +95,9 @@ public class MainActivity extends AppCompatActivity {
                 break;
             case R.id.user_info_setting:
                 startActivity(new Intent(MainActivity.this, InfoActivity.class));
+                break;
+            case R.id.wake_up_settings:
+                startActivity(new Intent(MainActivity.this, SettingsActivity.class).putExtra(getString(R.string.class_name), WakeUpSettingsFragment.class.getSimpleName()));
         }
         return super.onOptionsItemSelected(item);
     }
@@ -173,6 +185,13 @@ public class MainActivity extends AppCompatActivity {
         toCharacterRecognition.setOnClickListener(listener);
         toSpeechRecognition.setOnClickListener(listener);
         toVoiceSynthesis.setOnClickListener(listener);
+    }
+
+    private String getResource() {
+        final String resPath = ResourceUtil.generateResourcePath(MainActivity.this,
+                ResourceUtil.RESOURCE_TYPE.assets, "ivw/" + getString(R.string.app_id) + ".jet");
+        Timber.e("resPath: " + resPath);
+        return resPath;
     }
 }
 

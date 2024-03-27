@@ -10,14 +10,14 @@ import androidx.preference.EditTextPreference;
 import androidx.preference.PreferenceFragmentCompat;
 import com.example.myapplication.R;
 
-import com.example.meteor.util.InputFilterMinMax;
+import com.example.meteor.util.*;
 
 public class SpeechRecognitionSettingsFragment extends PreferenceFragmentCompat {
 
     private final static SpeechRecognitionSettingsFragment instance = new SpeechRecognitionSettingsFragment();
 
-    private androidx.preference.EditTextPreference mVadbosPreference;
-    private androidx.preference.EditTextPreference mVadeosPreference;
+    private EditTextPreference mVadbosPreference;
+    private EditTextPreference mVadeosPreference;
 
     public static SpeechRecognitionSettingsFragment getInstance(){
         return instance;

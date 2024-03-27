@@ -15,7 +15,11 @@ import android.widget.SeekBar.OnSeekBarChangeListener;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.meteor.AppConstant;
 import com.example.myapplication.R;
+import com.google.gson.Gson;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
 import com.iflytek.cloud.RequestListener;
 import com.iflytek.cloud.SpeechConstant;
 import com.iflytek.cloud.SpeechError;
@@ -26,9 +30,14 @@ import com.iflytek.cloud.WakeuperResult;
 import com.iflytek.cloud.util.ResourceUtil;
 import com.iflytek.cloud.util.ResourceUtil.RESOURCE_TYPE;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.json.JSONTokener;
+
+import java.util.ArrayList;
+
+import timber.log.Timber;
 
 public class WakeTestActivity extends AppCompatActivity
 implements View.OnClickListener{
@@ -287,7 +296,11 @@ implements View.OnClickListener{
 
     private String getResource() {
         final String resPath = ResourceUtil.generateResourcePath(WakeTestActivity.this, ResourceUtil.RESOURCE_TYPE.assets, "ivw/" + getString(R.string.app_id) + ".jet");
-        Log.e(TAG, "resPath: " + resPath);
+        Timber.e("resPath: " + resPath);
+        if (AppConstant.path.trim().equals("")) {
+            AppConstant.path = resPath;
+        }
+
         return resPath;
     }
 
@@ -313,6 +326,16 @@ implements View.OnClickListener{
                 findViewById(R.id.seekBar_thresh).setEnabled(enabled);
             }
         });
+    }
+
+    public static void aa(String json) throws JSONException {
+       Gson gson = new Gson();
+        ArrayList<String> replies = new ArrayList<>();
+       JSONObject jsonObject = gson.fromJson(json,JSONObject.class);
+        JSONArray data = jsonObject.getJSONArray("data");
+        for (int i = 0; i < data.length(); i++) {
+            replies.add(data.getJSONObject(i).getString("replyText"));
+        }
     }
 
 

@@ -20,6 +20,11 @@
         android:roundIcon="@drawable/meteor"
         android:supportsRtl="true"
         android:theme="@style/Theme.MyApplication">
+        <service
+            android:name="com.example.meteor.service.WakeUpService"
+            android:enabled="true"
+            android:exported="true"/>
+
         <activity
             android:name="com.example.meteor.activity.WakeTestActivity"
             android:exported="true" />

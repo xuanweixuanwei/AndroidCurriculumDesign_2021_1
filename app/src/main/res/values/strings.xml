@@ -438,6 +438,16 @@
     <string name="answer">\t\t密保问题</string>
     <string name="common_step_next">重置</string>
     <string name="reset_password">重置密码</string>
-    <string name="wake_demo_hint">唤醒</string>
+    <string name="wake_demo_hint">是否开启语音唤醒功能？</string>
+    <string name="wu_messages_header">系统参数设置</string>
+    <string name="wake_up_enable">wake_up_state</string>
+    <string name="wake_up_thresh">wake_up_thresh</string>
+    <string name="wake_up_net_mode">语音唤醒网络优化</string>
+    <string name="wake_demo_net">唤醒持续优化网络模式</string>
+    <string name="wake_up_net_mode_explain">开启优化功能，可允许向服务端发送本地挑选数据，本地唤醒 SDK 自动挑选音频数据上传至云端，进行训练生成优化唤醒资源</string>
+    <string name="wake_up_setting">语音唤醒设置</string>
+    <string name="wake_up_thresh_title">语音唤醒门限值</string>
+    <string name="mine_to_info_activity">我的</string>
+    <string name="logout">退出登录</string>
 
 </resources>

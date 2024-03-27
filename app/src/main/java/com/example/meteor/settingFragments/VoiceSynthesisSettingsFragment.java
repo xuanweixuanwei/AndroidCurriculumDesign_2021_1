@@ -11,7 +11,7 @@ import androidx.preference.PreferenceFragmentCompat;
 
 import com.example.myapplication.R;
 
-import com.example.meteor.util.InputFilterMinMax;
+import com.example.meteor.util.*;
 
 public class VoiceSynthesisSettingsFragment extends PreferenceFragmentCompat {
 

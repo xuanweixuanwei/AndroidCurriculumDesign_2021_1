@@ -20,4 +20,6 @@ public class AppConstant {
     public static String loginState = "login_state";
     public static final String INTENT_KEY_EMAIL = "email";
     public static final String INTENT_KEY_PASSWORD = "password";
+
+    public static String path  ;
 }

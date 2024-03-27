@@ -26,7 +26,7 @@ public interface ClickAction extends View.OnClickListener {
     }
 
     default void setOnClickListener(View... views) {
-       setOnClickListener(this, views);
+        setOnClickListener(this, views);
     }
 
     default void setOnClickListener(@Nullable View.OnClickListener listener, View... views) {

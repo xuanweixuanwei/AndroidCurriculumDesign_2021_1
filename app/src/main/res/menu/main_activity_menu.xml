@@ -3,13 +3,18 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
         android:id="@+id/user_info_setting"
-        app:showAsAction="always|withText"
+        app:showAsAction="ifRoom|withText"
         android:icon="@drawable/vector_drawable_voicer"
-        android:title="我的"/>
+        android:title="@string/mine_to_info_activity"/>
     <item
         android:id="@+id/exit_account"
         android:icon="@drawable/vector_drawable_exit_account"
-        android:title="退出登录"
+        android:title="@string/logout"
         app:showAsAction="withText"
         />
+    <item
+        android:id="@+id/wake_up_settings"
+        android:icon="@drawable/answer"
+        android:title="@string/wake_up_setting"
+        app:showAsAction="withText"/>
 </menu>
