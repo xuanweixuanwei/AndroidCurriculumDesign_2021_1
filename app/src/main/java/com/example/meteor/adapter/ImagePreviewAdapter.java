@@ -4,9 +4,10 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 
+import com.example.meteor.http.glide.GlideApp;
 import com.example.myapplication.R;
 import com.example.meteor.app.AppAdapter;
-import com.example.meteor.http.glide.GlideApp;
+
 import com.github.chrisbanes.photoview.PhotoView;
 
 /**

@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:app="http://schemas.android.com/apk/res-auto"
+xmlns:tools="http://schemas.android.com/tools"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+android:background="@color/white"
+tools:context="com.example.meteor.activity.AddUserActivity">
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:clipToPadding="false"
+    android:gravity="center_horizontal"
+    android:layoutAnimation="@anim/layout_fall_down"
+    android:orientation="vertical"
+    android:paddingHorizontal="@dimen/dp_40"
+    tools:layoutAnimation="@null">
+
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_add_user_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_40"
+        android:text="@string/admin_add_user"
+        android:textColor="@color/black60"
+        android:textSize="@dimen/sp_23"
+        />
+
+    <com.hjq.widget.view.ClearEditText
+        android:id="@+id/et_add_user_email"
+        style="@style/EditTextStyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/common_phone_input_hint"
+        android:inputType="textEmailAddress"
+        android:background="@null"
+        android:singleLine="true"
+        />
+
+    <View style="@style/HorizontalLineStyle" />
+
+    <com.hjq.widget.view.PasswordEditText
+        android:id="@+id/et_add_user_password1"
+        style="@style/EditTextStyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_20"
+        android:hint="@string/register_password_hint1"
+        android:digits="0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
+        android:maxLength="18"
+        android:maxLines="1"
+        android:inputType="textPassword"
+        android:singleLine="true" />
+
+    <View style="@style/HorizontalLineStyle" />
+
+    <com.hjq.widget.view.PasswordEditText
+        android:id="@+id/et_add_user_password2"
+        style="@style/EditTextStyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_20"
+        android:hint="@string/register_password_hint2"
+        android:imeOptions="actionDone"
+        android:digits="0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
+        android:maxLength="18"
+        android:maxLines="1"
+        android:inputType="textPassword"
+        android:singleLine="true"
+        />
+
+    <View style="@style/HorizontalLineStyle" />
+
+    <com.hjq.widget.view.ClearEditText
+        android:id="@+id/et_add_user_question"
+        style="@style/EditTextStyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="备用验证问题，注册成功后可再修改"
+        android:inputType="text"
+        android:maxLines="30"
+        android:background="@null"
+        android:singleLine="true"
+        android:layout_marginTop="@dimen/dp_20"
+
+        />
+
+
+    <View style="@style/HorizontalLineStyle" />
+
+
+    <com.hjq.widget.view.ClearEditText
+        android:id="@+id/et_add_user_answer"
+        style="@style/EditTextStyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="答案(未输入上面的验证问题则无效)"
+        android:inputType="text"
+        android:maxLines="30"
+        android:background="@null"
+        android:singleLine="true"
+        android:layout_marginTop="@dimen/dp_20"
+        android:enabled="false"
+        />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        >
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="是否为管理员"
+            android:layout_marginTop="@dimen/dp_20"
+            style="@style/EditTextStyle"
+            />
+        <androidx.appcompat.widget.SwitchCompat
+            android:id="@+id/switchWidget"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_20"
+            android:layout_marginStart="@dimen/dp_120"/>
+    </LinearLayout>
+
+    <View style="@style/HorizontalLineStyle" />
+
+
+    <com.hjq.widget.view.SubmitButton
+        android:id="@+id/btn_add_user_commit"
+        style="@style/ButtonStyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginVertical="@dimen/dp_30"
+        android:text="@string/ok" />
+
+
+</LinearLayout>
+
+</androidx.core.widget.NestedScrollView>

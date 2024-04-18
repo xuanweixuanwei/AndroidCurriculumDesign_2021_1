@@ -7,14 +7,15 @@
         android:icon="@drawable/vector_drawable_voicer"
         android:title="@string/mine_to_info_activity"/>
     <item
+        android:id="@+id/wake_up_settings"
+        android:icon="@drawable/vector_drawable_settings"
+        android:title="@string/wake_up_setting"
+        app:showAsAction="ifRoom|withText"/>
+    <item
         android:id="@+id/exit_account"
         android:icon="@drawable/vector_drawable_exit_account"
         android:title="@string/logout"
-        app:showAsAction="withText"
+        app:showAsAction="ifRoom|withText"
         />
-    <item
-        android:id="@+id/wake_up_settings"
-        android:icon="@drawable/answer"
-        android:title="@string/wake_up_setting"
-        app:showAsAction="withText"/>
+
 </menu>

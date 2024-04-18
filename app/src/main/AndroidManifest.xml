@@ -20,10 +20,14 @@
         android:roundIcon="@drawable/meteor"
         android:supportsRtl="true"
         android:theme="@style/Theme.MyApplication">
+        <activity
+            android:name="com.example.meteor.activity.AddUserActivity"
+            android:exported="true" />
+
         <service
             android:name="com.example.meteor.service.WakeUpService"
             android:enabled="true"
-            android:exported="true"/>
+            android:exported="true" />
 
         <activity
             android:name="com.example.meteor.activity.WakeTestActivity"
@@ -32,13 +36,7 @@
             android:name="com.example.meteor.activity.RestPasswordActivity"
             android:exported="true" />
         <activity
-            android:name="com.example.meteor.activity.ManageAppActivity"
-            android:exported="true" />
-        <activity
-            android:name="com.example.meteor.activity.ManageUserActivity"
-            android:exported="true" />
-        <activity
-            android:name="com.example.meteor.activity.AdminApplicationActivity"
+            android:name="com.example.meteor.activity.ManagementActivity"
             android:exported="true" />
         <activity
             android:name="com.example.meteor.activity.UserApplicationActivity"
@@ -56,7 +54,7 @@
             android:name="com.example.meteor.activity.ImageSelectActivity"
             android:exported="true" />
         <activity
-            android:name="com.example.meteor.activity.InfoActivity"
+            android:name="com.example.meteor.activity.UserInfoActivity"
             android:exported="true" />
         <activity
             android:name="com.example.meteor.activity.RegisterActivity"

@@ -42,8 +42,10 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.example.meteor.AppConstant;
 import com.example.meteor.roomDatabase.dao.AccountDao;
+import com.example.meteor.roomDatabase.dao.UsageLogDao;
 import com.example.meteor.roomDatabase.database.AppDatabase;
 import com.example.meteor.roomDatabase.entity.Account;
+import com.example.meteor.roomDatabase.entity.UsageLog;
 import com.example.meteor.ui.IosPopupWindow;
 import com.example.myapplication.R;
 import com.google.gson.Gson;
@@ -61,6 +63,8 @@ import java.net.URLEncoder;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Base64;
 import java.util.Date;
@@ -101,7 +105,9 @@ public class CharacterRecognitionActivity extends AppCompatActivity {
     private String photoBase64str;
     private String userEmail;
     private AccountDao accountDao;
+    private UsageLogDao usageLogDao;
     private Account currentUser;
+    private UsageLog usageLog;
 
     private IosPopupWindow choosePicturePopupWindow;
     private String textBase64Decode = null;
@@ -131,8 +137,15 @@ public class CharacterRecognitionActivity extends AppCompatActivity {
         executor.submit(new Runnable() {
             @Override
             public void run() {
-                accountDao = AppDatabase.getInstance(getApplicationContext()).AccountDao();
+                AppDatabase appDatabase = AppDatabase.getInstance(getApplicationContext());
+                accountDao = appDatabase.AccountDao();
                 currentUser = accountDao.findAccountByEmail(userEmail);
+                usageLogDao = appDatabase.UsageLogDao();
+                usageLog = usageLogDao.getUsageLogForUserOnDate(currentUser.getRowid(), LocalDate.now().format(DateTimeFormatter.ISO_LOCAL_DATE));
+                if (usageLog == null) {
+                    usageLog = new UsageLog(currentUser.getRowid(), LocalDate.now().format(DateTimeFormatter.ISO_LOCAL_DATE));
+                    usageLogDao.insert(usageLog);
+                }
             }
         });
         executor.shutdown();
@@ -154,7 +167,7 @@ public class CharacterRecognitionActivity extends AppCompatActivity {
             ExecutorService executor = Executors.newSingleThreadExecutor();
             executor.submit(() -> {
                 accountDao.updateAccount(currentUser.useOcr());
-
+                usageLogDao.update(usageLog.updateOcr());
                 try {
 
                     String resp = doRequest();

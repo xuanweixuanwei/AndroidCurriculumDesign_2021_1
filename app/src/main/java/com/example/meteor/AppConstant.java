@@ -22,4 +22,5 @@ public class AppConstant {
     public static final String INTENT_KEY_PASSWORD = "password";
 
     public static String path  ;
+    public static String email_hint = "12345678";
 }

@@ -36,8 +36,10 @@ import com.example.meteor.AppConstant;
 import com.example.meteor.action.ToastAction;
 import com.example.meteor.dialog.TipsDialog;
 import com.example.meteor.roomDatabase.dao.AccountDao;
+import com.example.meteor.roomDatabase.dao.UsageLogDao;
 import com.example.meteor.roomDatabase.database.AppDatabase;
 import com.example.meteor.roomDatabase.entity.Account;
+import com.example.meteor.roomDatabase.entity.UsageLog;
 import com.example.meteor.util.ExtractTextFromFile;
 import com.example.myapplication.R;
 import com.iflytek.cloud.ErrorCode;
@@ -53,6 +55,8 @@ import java.io.IOException;
 
 import java.io.RandomAccessFile;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Timer;
 import java.util.TimerTask;
 import java.util.concurrent.ExecutorService;
@@ -99,7 +103,10 @@ public class VoiceSynthesisActivity extends AppCompatActivity implements ToastAc
     private File pcmFile;
     private final Timer timer = new Timer();
     private Account currentUser;
+    private UsageLog usageLog;
     private AccountDao accountDao;
+    private UsageLogDao usageLogDao;
+
     private String userEmail;
 
     private View.OnClickListener listener = new View.OnClickListener() {
@@ -207,9 +214,16 @@ public class VoiceSynthesisActivity extends AppCompatActivity implements ToastAc
 
         ExecutorService executor = Executors.newSingleThreadExecutor();
         executor.submit(() -> {
-            accountDao = AppDatabase.getInstance(getApplicationContext()).AccountDao();
+            AppDatabase appDatabase = AppDatabase.getInstance(getApplicationContext());
+            accountDao = appDatabase.AccountDao();
+            usageLogDao = appDatabase.UsageLogDao();
             currentUser = accountDao.findAccountByEmail(userEmail);
-            showTip("欢迎" + currentUser.getName());
+            usageLog = usageLogDao.getUsageLogForUserOnDate(currentUser.getRowid(), LocalDate.now().format(DateTimeFormatter.ISO_LOCAL_DATE));
+            if (usageLog == null) {
+                usageLog = new UsageLog(currentUser.getRowid(), LocalDate.now().format(DateTimeFormatter.ISO_LOCAL_DATE));
+                usageLogDao.insert(usageLog);
+            }
+
         });
         executor.shutdown();
     }
@@ -615,6 +629,7 @@ public class VoiceSynthesisActivity extends AppCompatActivity implements ToastAc
                     //调用合成播放方法
                     mTts.startSpeaking(texts, mTtsListener);
                     accountDao.updateAccount(currentUser.useTts());
+                    usageLogDao.update(usageLog.updateTts());
                 }
             } else {
                 showTip("登陆信息失效，请重新登陆后使用");

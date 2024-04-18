@@ -3,11 +3,19 @@ package com.example.meteor.roomDatabase.entity;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.Ignore;
+import androidx.room.Index;
 import androidx.room.PrimaryKey;
 
 import com.example.meteor.AppConstant;
 
+import java.time.LocalDate;
+import java.time.Period;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.List;
 
 import okio.ByteString;
 
@@ -27,6 +35,7 @@ public class Account {
     /**
      * 账号注册时使用的邮箱，是登陆的唯一凭证
      */
+
     private String email;
     /**
      * 账号密码的SHA256值，避免意外的数据库泄露导致用户密码被窃取
@@ -159,6 +168,25 @@ public class Account {
     }
 
     /**
+     * 注册账号时，未设置密保问题时,为了设置管理员调用的构造方法
+     */
+    @Ignore
+    public Account(String email, String password,boolean isAdmin) {
+        this(email,password);
+        if(isAdmin)
+            this.role = AppConstant.ADMIN_USER;
+    }
+    /**
+     * 注册账号时，设置密保问题时,为了设置管理员调用的构造方法
+     */
+    @Ignore
+    public Account(String email, String password, String question, String answer,boolean isAdmin) {
+        this(email,password,question,answer);
+        if(isAdmin)
+            this.role = AppConstant.ADMIN_USER;
+    }
+
+    /**
      * 注册账号时，设置了密保问题和答案时调用的构造方法
      *
      *  answer 用户输入的问题答案，存储时会转换为SHA256值
@@ -169,7 +197,6 @@ public class Account {
         this.question = question;
         this.answerSHA = ByteString.encodeUtf8(answer).sha256().toString();
     }
-
 
     public int getRowid() {
         return rowid;
@@ -216,6 +243,7 @@ public class Account {
     public boolean isLockedCauseErrorPassword() {
         if (this.isLocked && this.errorTimes > 3 && (Calendar.getInstance().getTimeInMillis() - lastErrorTime) > 5 * 60 * 1000) {//如果当前输错密码时间距离上一次输错时间大于5min
             isLocked = false;
+
             errorTimes = 0;
         }
         return isLocked;
@@ -454,6 +482,14 @@ public class Account {
     public Account useTts(){
         this.ttsUsageCount++;
         return this;
+    }
 
+    // 计算年龄的方法
+    public void calculateAge() {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy年M月d日");
+        LocalDate now = LocalDate.now();
+        LocalDate birthDate = LocalDate.parse(birthday, formatter);
+        Period age = Period.between(birthDate, now);
+        this.age= age.getYears();
     }
 }

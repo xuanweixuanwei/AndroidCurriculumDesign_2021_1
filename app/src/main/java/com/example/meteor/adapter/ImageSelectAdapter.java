@@ -9,18 +9,13 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.meteor.http.glide.GlideApp;
 import com.example.myapplication.R;
 import com.example.meteor.app.AppAdapter;
-import com.example.meteor.http.glide.GlideApp;
+
 
 import java.util.List;
 
-/**
- *    author : Android 轮子哥
- *    github : https://github.com/getActivity/AndroidProject
- *    time   : 2019/07/24
- *    desc   : 图片选择适配器
- */
 public final class ImageSelectAdapter extends AppAdapter<String> {
 
     private final List<String> mSelectImages;

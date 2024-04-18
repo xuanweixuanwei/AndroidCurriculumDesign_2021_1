@@ -26,8 +26,10 @@ import android.widget.Toast;
 
 import com.example.meteor.AppConstant;
 import com.example.meteor.roomDatabase.dao.AccountDao;
+import com.example.meteor.roomDatabase.dao.UsageLogDao;
 import com.example.meteor.roomDatabase.database.AppDatabase;
 import com.example.meteor.roomDatabase.entity.Account;
+import com.example.meteor.roomDatabase.entity.UsageLog;
 import com.example.meteor.util.FileUtils;
 import com.example.meteor.util.JsonParser;
 import com.example.myapplication.R;
@@ -48,6 +50,8 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 
@@ -87,7 +91,9 @@ public class SpeechRecognitionActivity extends AppCompatActivity {
 
     private String userEmail;
     private Account currentUser;
+    private UsageLog usageLog;
     private AccountDao accountDao;
+    private UsageLogDao usageLogDao;
     /**
      * 初始化监听器
      */
@@ -269,6 +275,7 @@ public class SpeechRecognitionActivity extends AppCompatActivity {
                         ExecutorService executorService = Executors.newSingleThreadExecutor();
                         executorService.submit(() -> {
                             accountDao.updateAccount(currentUser.useAsr());
+                            usageLogDao.update(usageLog.updateAsr());
                         });
                         executorService.shutdown();
                     }
@@ -306,8 +313,15 @@ public class SpeechRecognitionActivity extends AppCompatActivity {
 
         ExecutorService executor = Executors.newSingleThreadExecutor();
         executor.submit(() -> {
-            accountDao = AppDatabase.getInstance(getApplicationContext()).AccountDao();
+            AppDatabase appDatabase = AppDatabase.getInstance(getApplicationContext());
+            accountDao = appDatabase.AccountDao();
+            usageLogDao = appDatabase.UsageLogDao();
             currentUser = accountDao.findAccountByEmail(userEmail);
+            usageLog = usageLogDao.getUsageLogForUserOnDate(currentUser.getRowid(), LocalDate.now().format(DateTimeFormatter.ISO_LOCAL_DATE));
+            if (usageLog == null) {
+                usageLog = new UsageLog(currentUser.getRowid(), LocalDate.now().format(DateTimeFormatter.ISO_LOCAL_DATE));
+                usageLogDao.insert(usageLog);
+            }
         });
         executor.shutdown();
     }
@@ -533,6 +547,7 @@ public class SpeechRecognitionActivity extends AppCompatActivity {
                @Override
                public void run() {
                    accountDao.updateAccount(currentUser.useAsr());
+                   usageLogDao.update(usageLog.updateAsr());
                }
            }).start();
         } catch (IOException e) {

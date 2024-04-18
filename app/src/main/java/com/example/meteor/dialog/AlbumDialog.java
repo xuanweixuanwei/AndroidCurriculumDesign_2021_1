@@ -11,6 +11,7 @@ import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.meteor.app.AppAdapter;
+
 import com.example.meteor.http.glide.GlideApp;
 import com.hjq.base.BaseAdapter;
 import com.hjq.base.BaseDialog;

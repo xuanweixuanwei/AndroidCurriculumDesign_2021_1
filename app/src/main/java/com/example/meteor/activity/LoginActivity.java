@@ -43,6 +43,7 @@ public class LoginActivity extends AppCompatActivity implements HandlerAction {
     private AppCompatTextView tv_register;
     private AppCompatTextView tv_login_forget;
     private SubmitButton btn_login_commit;
+    private SubmitButton btn_admin_login_commit;
     private ScaleImageView iv_login_qq;
     private ScaleImageView iv_login_wechat;
     private View.OnClickListener listener;
@@ -58,27 +59,36 @@ public class LoginActivity extends AppCompatActivity implements HandlerAction {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         db = AppDatabase.getInstance(this);
-        sharedPreferences = getSharedPreferences(AppConstant.preferenceFileName,MODE_PRIVATE);
+        sharedPreferences = getSharedPreferences(AppConstant.preferenceFileName, MODE_PRIVATE);
         initView();
         initListener();
+        if (sharedPreferences.getBoolean(AppConstant.loginState, false)) {
+            et_login_email.setText(sharedPreferences.getString(AppConstant.userEmail, ""));
+            et_login_password.setText(AppConstant.email_hint);
+            Toast.makeText(LoginActivity.this, getText(R.string.auto_login_toast),
+                    Toast.LENGTH_SHORT).show();
+            LoginSuccess();
+
+
+        }
     }
 
     private ActivityResultLauncher registerLauncher =
             registerForActivityResult(new ActivityResultContracts.StartActivityForResult(),
-            new ActivityResultCallback<ActivityResult>() {
-                @Override
-                public void onActivityResult(ActivityResult result) {
-                    if (result.getResultCode() == RESULT_OK) {
-                        Intent resultData = result.getData();
-                        if (resultData != null) {
+                    new ActivityResultCallback<ActivityResult>() {
+                        @Override
+                        public void onActivityResult(ActivityResult result) {
+                            if (result.getResultCode() == RESULT_OK) {
+                                Intent resultData = result.getData();
+                                if (resultData != null) {
 //                        et_login_email.setText(resultData.getExtras().getString("email"));
 //                        TODO 注册成功后，填写注册时填写的邮箱，密码不填写
-                            et_login_email.setText( resultData.getStringExtra(AppConstant.INTENT_KEY_EMAIL));
-                            et_login_password.setText( resultData.getStringExtra(AppConstant.INTENT_KEY_PASSWORD));
+                                    et_login_email.setText(resultData.getStringExtra(AppConstant.INTENT_KEY_EMAIL));
+                                    et_login_password.setText(resultData.getStringExtra(AppConstant.INTENT_KEY_PASSWORD));
+                                }
+                            }
                         }
-                    }
-                }
-            });
+                    });
 
 
     private void initView() {
@@ -87,8 +97,10 @@ public class LoginActivity extends AppCompatActivity implements HandlerAction {
         tv_register = findViewById(R.id.tv_register);
         tv_login_forget = findViewById(R.id.tv_login_forget);
         btn_login_commit = findViewById(R.id.btn_login_commit);
+        btn_admin_login_commit = findViewById(R.id.btn_admin_login_commit);
         iv_login_qq = findViewById(R.id.iv_login_qq);
         iv_login_wechat = findViewById(R.id.iv_login_wechat);
+
     }
 
     private void initListener() {
@@ -101,45 +113,80 @@ public class LoginActivity extends AppCompatActivity implements HandlerAction {
                                 RegisterActivity.class));
                         break;
                     case R.id.tv_login_forget:
-                        registerLauncher.launch(new Intent(LoginActivity.this,RestPasswordActivity.class));
+                        registerLauncher.launch(new Intent(LoginActivity.this,
+                                RestPasswordActivity.class));
                         break;
                     case R.id.btn_login_commit:
                         btn_login_commit.showProgress();
-                        String email = Objects.requireNonNull(et_login_email.getText()).toString().trim();
-                        String password = Objects.requireNonNull(et_login_password.getText()).toString().trim();
-                        if (email.matches(emailPattern)&&
-                                password.length()>=8) {
+                        String email =
+                                Objects.requireNonNull(et_login_email.getText()).toString().trim();
+                        String password =
+                                Objects.requireNonNull(et_login_password.getText()).toString().trim();
+                        if (email.matches(emailPattern) &&
+                                password.length() >= 8) {
                             ExecutorService executorService = Executors.newSingleThreadExecutor();
                             executorService.submit(new Runnable() {
                                 @Override
                                 public void run() {
-                                    Login(email,password);
-                                    if (sharedPreferences.getBoolean(AppConstant.loginState,false)) {
-                                        success();
-                                    }else {
+                                    Login(email, password);
+                                    if (sharedPreferences.getBoolean(AppConstant.loginState,
+                                            false)) {
+
+                                        LoginSuccess();
+                                    } else {
                                         btn_login_commit.showError(2000);
                                     }
                                 }
                             });
                             executorService.shutdown();
+                        } else {
+                            btn_login_commit.showError(1000);
+                            loginError();
+                            showTip("账号或密码格式有误，账号为注册时填入的邮箱号");
+//                              动画？什么东西todo我服了
                         }
+                        break;
+                    case R.id.btn_admin_login_commit:
+                        startActivity(new Intent(LoginActivity.this, ManagementActivity.class));
                 }
             }
         };
         tv_register.setOnClickListener(listener);
         btn_login_commit.setOnClickListener(listener);
         tv_login_forget.setOnClickListener(listener);
+        btn_admin_login_commit.setOnClickListener(listener);
     }
 
-    private void success() {
-        postDelayed(() -> {
-            btn_login_commit.showSucceed();
-            postDelayed(() -> {
+    private void LoginSuccess() {
+        ExecutorService service = Executors.newSingleThreadExecutor();
+        service.submit(new Runnable() {
+            @Override
+            public void run() {
+                Account account =
+                        db.AccountDao()
+                                .findAccountBySHAPassword(
+                                        sharedPreferences.getString(AppConstant.userEmail, ""),
+                                        sharedPreferences.getString(AppConstant.userPasswordSHA, "")
+                                );
 
-                startActivity(new Intent(LoginActivity.this, MainActivity.class));
-            }, 1000);
-        }, 2000);
+            Timber.e("hhhhhhhhhhhhhhhhhhhhhhhhhhhhh");
+                postDelayed(() -> {
+                    btn_login_commit.showSucceed();
+                    postDelayed(() -> {
+                        if (account != null && account.getRole() == AppConstant.ADMIN_USER) {
+                            startActivity(new Intent(LoginActivity.this,
+                                    ManagementActivity.class));
+                        } else {
+                            startActivity(new Intent(LoginActivity.this, MainActivity.class));
+                        }
+                    }, 1000);
+                }, 2000);
+            }
+        });
+        service.shutdown();
+
     }
+
 
     /**
      * 封装弹窗功能
@@ -172,71 +219,80 @@ public class LoginActivity extends AppCompatActivity implements HandlerAction {
         Logout();
     }
 
-    private void Login(String email, String password){
-
-
-                Boolean loginCheck = false;
-                Account accountByEmail=db.AccountDao().findAccountByEmail(email);
-                Account account = db.AccountDao().findAccountByPassword(email,ByteString.encodeUtf8(password).sha256().toString());//通过email和password查询
-                if (account!=null) {//账号和密码正确，判断账号是否处于封锁状态：注销5天内或者某日密码错误超过次数还处于封禁日期内（也是5天）
-                    if (account.isLocked()) {//账号被锁
-                        if (account.getLogoutTime()==0) {//未被注销，说明可能在封锁期间
-                            if (account.getErrorTimes()>4) {//今日错误次数超过4次
-                                accountStateError();
-                                showTip("账户由于输入密码错误次数超过4次已被禁用，解锁时间为"+ DateUtil.MillisToStr(account.getLockedTime()));
-                            }else {
-                                showTip("系统出错，请稍后再试或联系管理员");
-                                Timber.e("Login:account.getLockedTime(): %s", account.getLockedTime());
-                                Timber.e("Login:account.getLastErrorTime() %s", account.getLastErrorTime());
-                                Timber.e("Login:account.getEmail() %s", account.getEmail());
-                                Timber.e("Login:account.getPasswordSHA() %s", account.getPasswordSHA());
-                                Timber.e("Login:account.isLocked() %s", account.isLocked());
-                                Timber.e("Login: account.getErrorTimes() %s", account.getErrorTimes());
-                            }
-                        }else {
-                            if (account.getLogoutTime()> Calendar.getInstance().getTimeInMillis()) {//如果注销时间未到
-                                accountStateError();
-                                showTip("当前账号于五日内被注销，如有疑问请联系管理员");
-                            }else {//已注销，删除用户信息
-//                        TODO 为确保表的onDelete = CASCADE 生效，应该再实现其他表的删除
-                                db.AccountDao().deleteAccount(account);
-                                loginError();
-                            }
-                        }
-
-                    }else {
-                       loginCheck = true;
+    private void Login(String email, String password) {
+        Boolean loginCheck = false;
+        Account accountByEmail = db.AccountDao().findAccountByEmail(email);
+        Account account = db.AccountDao().findAccountBySHAPassword(email,
+                ByteString.encodeUtf8(password).sha256().toString());//通过email和password查询
+        if (account != null) {//账号和密码正确，判断账号是否处于封锁状态：注销5天内或者某日密码错误超过次数还处于封禁日期内（也是5天）
+            if (account.isLocked()) {//账号被锁
+                if (account.getLogoutTime() == 0) {//未被注销，说明可能在封锁期间
+                    if (account.getErrorTimes() > 4) {//今日错误次数超过4次
+                        accountStateError();
+                        showTip("账户由于输入密码错误次数超过4次已被禁用，解锁时间为" + DateUtil.MillisToStr(account.getLockedTime()));
+                    } else {
+                        showTip("系统出错，请稍后再试或联系管理员");
+                        Timber.e("Login:account.getLockedTime(): %s", account.getLockedTime());
+                        Timber.e("Login:account.getLastErrorTime() %s", account.getLastErrorTime());
+                        Timber.e("Login:account.getEmail() %s", account.getEmail());
+                        Timber.e("Login:account.getPasswordSHA() %s", account.getPasswordSHA());
+                        Timber.e("Login:account.isLocked() %s", account.isLocked());
+                        Timber.e("Login: account.getErrorTimes() %s", account.getErrorTimes());
                     }
-
-                }else {
+                } else {
+                    if (account.getLogoutTime() > Calendar.getInstance().getTimeInMillis()) {
+                        //如果注销时间未到
+                        accountStateError();
+                        showTip("当前账号于五日内被注销，如有疑问请联系管理员");
+                    } else {//已注销，删除用户信息
+//                        TODO 为确保表的onDelete = CASCADE 生效，应该再实现其他表的删除
+                        db.AccountDao().deleteAccount(account);
+                        loginError();
+                        showTip("账号已注销");
+                    }
+                }
+            } else {
+                loginCheck = true;
+            }
+        } else {
 //            账号、密码错误
-                    loginError();
+            loginError();
+            showTip("账号或密码错误,一天内密码连续错误超过4次会封锁账号");
 
 //            如果存在对应账号，记录错误次数
-                    if (accountByEmail!=null) {
-                        accountByEmail.passwordError();
-                        db.AccountDao().updateAccount(accountByEmail);
-                    }
-                }
-//                commit方法同步执行IO操作
-                if (!sharedPreferences.edit()
-                       .putString(AppConstant.userEmail,et_login_email.getText().toString().trim())
-                       .putString(AppConstant.userPasswordSHA, ByteString.encodeUtf8(et_login_password.getText().toString().trim()).sha256().toString())
-                       .putBoolean(AppConstant.loginState,loginCheck)
-                       .commit()) {
-                    showTip("数据异常，请联系管理员或清理内存后重启APP");
-                }
+            if (accountByEmail != null) {
+                accountByEmail.passwordError();
+                db.AccountDao().updateAccount(accountByEmail);
             }
-
-
-    private void loginError(){
-        et_login_password.setAnimation(AnimationUtils.loadAnimation(getApplicationContext(),R.anim.shake_anim));
-        et_login_email.setAnimation(AnimationUtils.loadAnimation(getApplicationContext(),R.anim.shake_anim));
-        showTip("账号或密码错误,一天内密码连续错误超过4次会封锁账号");
+        }
+//                commit方法同步执行IO操作
+        if (loginCheck) {
+            if (!sharedPreferences.edit()
+                    .putString(AppConstant.userEmail,
+                            Objects.requireNonNull(et_login_email.getText()).toString().trim())
+                    .putString(AppConstant.userPasswordSHA,
+                            ByteString.encodeUtf8(Objects.requireNonNull(et_login_password.getText()).toString().trim()).sha256().toString())
+                    .putBoolean(AppConstant.loginState, loginCheck)
+                    .commit()) {
+                Timber.e("Login: 写缓存失败");
+                showTip("数据异常，请联系管理员或清理内存后重启APP");
+            }
+        }
     }
 
-    private void accountStateError(){
-        et_login_email.setAnimation(AnimationUtils.loadAnimation(getApplicationContext(),R.anim.shake_anim));
+
+    private void loginError() {
+        et_login_password.setAnimation(AnimationUtils.loadAnimation(getApplicationContext(),
+                R.anim.shake_anim));
+        et_login_email.setAnimation(AnimationUtils.loadAnimation(getApplicationContext(),
+                R.anim.shake_anim));
+//        showTip("账号或密码错误,一天内密码连续错误超过4次会封锁账号");
+    }
+
+
+    private void accountStateError() {
+        et_login_email.setAnimation(AnimationUtils.loadAnimation(getApplicationContext(),
+                R.anim.shake_anim));
 
     }
 
@@ -245,15 +301,15 @@ public class LoginActivity extends AppCompatActivity implements HandlerAction {
         TimerTask task = new TimerTask() {
             @Override
             public void run() {
-                getSharedPreferences(AppConstant.preferenceFileName,MODE_PRIVATE).edit()
-                        .putBoolean(AppConstant.loginState,false)
-                        .putString(AppConstant.userEmail,"")
-                        .putString(AppConstant.userPasswordSHA,"")
+                getSharedPreferences(AppConstant.preferenceFileName, MODE_PRIVATE).edit()
+                        .putBoolean(AppConstant.loginState, false)
+                        .putString(AppConstant.userEmail, "")
+                        .putString(AppConstant.userPasswordSHA, "")
                         .apply();
                 finish();
             }
         };
-        timer.schedule(task,1000);
+        timer.schedule(task, 1000);
     }
 
 }

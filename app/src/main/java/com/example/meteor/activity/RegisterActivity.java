@@ -54,7 +54,6 @@ public class RegisterActivity extends AppCompatActivity implements HandlerAction
     @Override
     protected void onRestart() {
         super.onRestart();
-//        et_register_email.getFocusable();
         requireFocused(et_register_email);
     }
 

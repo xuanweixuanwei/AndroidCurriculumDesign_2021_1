@@ -449,5 +449,9 @@
     <string name="wake_up_thresh_title">语音唤醒门限值</string>
     <string name="mine_to_info_activity">我的</string>
     <string name="logout">退出登录</string>
+    <string name="auto_login_toast">自动登录成功，取消自动登录请在登录后选择退出</string>
+    <string name="admin_login_text">管理员登录</string>
+    <string name="admin_add_user">添加用户</string>
+    <string name="ok">完成</string>
 
 </resources>

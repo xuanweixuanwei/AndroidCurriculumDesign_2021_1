@@ -1,0 +1,59 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.example.meteor.fragment.UserManagementFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+       >
+
+        <Button
+            android:id="@+id/bt_add_user_by_admin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/ripple_view"
+            android:text="新增用户"
+            android:layout_margin="5dp"
+            android:textColor="@color/common_accent_color"
+            android:textSize="15sp" />
+
+        <Button
+            android:layout_margin="5dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/ripple_view"
+            android:text="多选删除用户"
+            android:textColor="@color/common_accent_color"
+            android:textSize="15sp" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_margin="5dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/ripple_view"
+            android:text="更新用户年龄"
+            android:textColor="@color/common_accent_color"
+            android:textSize="15sp" />
+
+        <Button
+            android:layout_margin="5dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/ripple_view"
+            android:text="刷新使用次数"
+            android:textColor="@color/common_accent_color"
+            android:textSize="15sp" />
+    </LinearLayout>
+
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/item_recycler_view"
+        layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingHorizontal="@dimen/item_padding"
+        android:paddingTop="0dp" />
+</LinearLayout>

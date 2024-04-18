@@ -7,9 +7,11 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.Manifest;
+import android.content.ComponentName;
 import android.content.Intent;
+import android.content.ServiceConnection;
 import android.os.Bundle;
-import android.util.Log;
+import android.os.IBinder;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -18,15 +20,14 @@ import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.example.meteor.activity.SettingsActivity;
-import com.example.meteor.activity.WakeTestActivity;
+import com.example.meteor.service.WakeUpService;
 import com.example.meteor.settingFragments.WakeUpSettingsFragment;
 import com.example.myapplication.R;
 import com.example.meteor.activity.CharacterRecognitionActivity;
-import com.example.meteor.activity.InfoActivity;
+import com.example.meteor.activity.UserInfoActivity;
 import com.example.meteor.activity.SpeechRecognitionActivity;
 import com.example.meteor.activity.VoiceSynthesisActivity;
 import com.example.meteor.roomDatabase.database.AppDatabase;
-import com.iflytek.cloud.Setting;
 import com.iflytek.cloud.util.ResourceUtil;
 
 import java.util.Objects;
@@ -47,17 +48,37 @@ public class MainActivity extends AppCompatActivity {
     private LinearLayout tts_view;
     private LinearLayout asr_view;
     private LinearLayout ocr_view;
+    private ServiceConnection connection;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         initAccount();
+        initWakeUpService();
         initView();
         initListener();
 //        申请网络权限等
         requestPermissions();
 
+    }
+
+    private void initWakeUpService() {
+        connection = new ServiceConnection() {
+            @Override
+            public void onServiceConnected(ComponentName name, IBinder service) {
+
+            }
+
+            @Override
+            public void onServiceDisconnected(ComponentName name) {
+
+            }
+        };
+
+        Intent intent = new Intent(MainActivity.this, WakeUpService.class);
+        intent.putExtra("data", "hello");
+        bindService( intent, connection, BIND_AUTO_CREATE);
     }
 
     private void initAccount() {
@@ -75,7 +96,6 @@ public class MainActivity extends AppCompatActivity {
                     Toast.makeText(MainActivity.this, "用户登陆信息失效，请重新登陆", Toast.LENGTH_SHORT).show();
                     Logout();
                 }
-
             }
         });
         executorService.shutdown();
@@ -94,7 +114,7 @@ public class MainActivity extends AppCompatActivity {
                 Logout();
                 break;
             case R.id.user_info_setting:
-                startActivity(new Intent(MainActivity.this, InfoActivity.class));
+                startActivity(new Intent(MainActivity.this, UserInfoActivity.class));
                 break;
             case R.id.wake_up_settings:
                 startActivity(new Intent(MainActivity.this, SettingsActivity.class).putExtra(getString(R.string.class_name), WakeUpSettingsFragment.class.getSimpleName()));
@@ -193,6 +213,8 @@ public class MainActivity extends AppCompatActivity {
         Timber.e("resPath: " + resPath);
         return resPath;
     }
+
+
 }
 
 

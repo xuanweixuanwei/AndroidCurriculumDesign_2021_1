@@ -33,9 +33,11 @@ import android.widget.Toast;
 import com.example.meteor.aop.SingleClick;
 import com.example.meteor.app.AppActivity;
 import com.example.meteor.dialog.InputDialog;
+import com.example.meteor.roomDatabase.dao.UsageLogDao;
 import com.example.meteor.roomDatabase.database.AppDatabase;
 import com.example.meteor.roomDatabase.entity.Account;
 import com.example.meteor.AppConstant;
+import com.example.meteor.roomDatabase.entity.UsageLog;
 import com.example.myapplication.R;
 
 import com.example.meteor.dialog.SelectDialog;
@@ -48,6 +50,8 @@ import com.hjq.widget.layout.SettingBar;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Base64;
 import java.util.Calendar;
 import java.util.HashMap;
@@ -56,7 +60,7 @@ import java.util.concurrent.Executors;
 
 import timber.log.Timber;
 
-public class InfoActivity extends AppActivity {
+public class UserInfoActivity extends AppActivity {
     private static final int REQUEST_TAKEPHOTO_CODE = 1;
     private ViewGroup mAvatarLayout;
     private ImageView mAvatarView;
@@ -86,8 +90,11 @@ public class InfoActivity extends AppActivity {
 
     private String userEmail;
     private AppDatabase db;
-    private AccountDao accountDao;
     private Account currentUser;
+    private UsageLog usageLog;
+    private AccountDao accountDao;
+    private UsageLogDao usageLogDao;
+
 
     /** 头像地址 */
 
@@ -153,7 +160,7 @@ public class InfoActivity extends AppActivity {
         actionBar.setTitle("个人信息");
         actionBar.setDisplayHomeAsUpEnabled(true);
 
-        chooseAvatarPopupWindow = new IosPopupWindow( InfoActivity.this, new IosPopupWindow.OnClickListener() {
+        chooseAvatarPopupWindow = new IosPopupWindow( UserInfoActivity.this, new IosPopupWindow.OnClickListener() {
 
             @Override
             public void cameraOnClick() {
@@ -214,9 +221,14 @@ public class InfoActivity extends AppActivity {
             public void run() {
                 db = AppDatabase.getInstance(getApplicationContext());
                 accountDao = db.AccountDao();
-
+                usageLogDao = db.UsageLogDao();
 
                 if ((currentUser=accountDao.findAccountByEmail(userEmail))!=null) {
+                    usageLog = usageLogDao.getUsageLogForUserOnDate(currentUser.getRowid(), LocalDate.now().format(DateTimeFormatter.ISO_LOCAL_DATE));
+                    if (usageLog == null) {
+                        usageLog = new UsageLog(currentUser.getRowid(), LocalDate.now().format(DateTimeFormatter.ISO_LOCAL_DATE));
+                        usageLogDao.insert(usageLog);
+                    }
                     Log.e(TAG, "run: sexEntries[currentUser.getSex()]:"+sexEntries[currentUser.getSex()] );
                     runOnUiThread(new Runnable() {
                         @Override
@@ -224,9 +236,12 @@ public class InfoActivity extends AppActivity {
                             mSexView.setRightText(sexEntries[currentUser.getSex()]);
                             mNameView.setRightText(currentUser.getName()==null?"昵称还未设置哦":currentUser.getName());
                             mBirthdayView.setRightText(currentUser.getBirthday()==null?"来设置生日吧":currentUser.getBirthday());
-                            mAsrCountUsageView.setRightText(currentUser.getAsrUsageCount()+"");
-                            mOcrCountUsageView.setRightText(currentUser.getOcrUsageCount()+"");
-                            mTtsCountUsageView.setRightText(currentUser.getTtsUsageCount()+"");
+                            mAsrCountUsageView.setRightText(currentUser.getAsrUsageCount()+"次");
+                            mOcrCountUsageView.setRightText(currentUser.getOcrUsageCount()+"次");
+                            mTtsCountUsageView.setRightText(currentUser.getTtsUsageCount()+"次");
+                            mTtsDailyUsageView.setRightText(usageLog.getTtsCount()+"次");
+                            mAsrDailyUsageView.setRightText(usageLog.getAsrCount()+"次");
+                            mOcrDailyUsageView.setRightText(usageLog.getOcrCount()+"次");
                         }
                     });
 
@@ -331,7 +346,7 @@ ExecutorService executor = Executors.newSingleThreadExecutor();
         }else
             if(view == mAvatarView){
 
-            final Dialog dialog = new Dialog(InfoActivity.this, android.R.style.Theme_Black_NoTitleBar_Fullscreen); // 系统全屏样式
+            final Dialog dialog = new Dialog(UserInfoActivity.this, android.R.style.Theme_Black_NoTitleBar_Fullscreen); // 系统全屏样式
 
             ImageView target_picture = getImageView();
             dialog.setContentView(target_picture);
@@ -388,7 +403,7 @@ ExecutorService executor = Executors.newSingleThreadExecutor();
         }
     }
     private ImageView getImageView(){
-        ImageView imageView = new ImageView(InfoActivity.this);
+        ImageView imageView = new ImageView(UserInfoActivity.this);
         imageView.setLayoutParams(new ActionBar.LayoutParams(ActionBar.LayoutParams.MATCH_PARENT,
                 ActionBar.LayoutParams.MATCH_PARENT  ));
         if (mAvatarBitmap!=null) {
@@ -502,7 +517,7 @@ ExecutorService executor = Executors.newSingleThreadExecutor();
 
     public void getDate() {
         Calendar data = Calendar.getInstance();
-        DatePickerDialog dpd = new DatePickerDialog(InfoActivity.this, new DatePickerDialog.OnDateSetListener() {
+        DatePickerDialog dpd = new DatePickerDialog(UserInfoActivity.this, new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker view, int year, int month, int day) {
                 String str;
@@ -527,7 +542,7 @@ ExecutorService executor = Executors.newSingleThreadExecutor();
         mImageName = System.currentTimeMillis() + ".jpeg";
         intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(new File(mImagePath + mImageName)));
         Uri imageUri = FileProvider.getUriForFile(
-                InfoActivity.this,
+                UserInfoActivity.this,
                 "com.example.myapplication.provider", //(use your app signature + ".provider" )
                 new File(mImagePath + mImageName));
         intent.putExtra(MediaStore.EXTRA_OUTPUT, imageUri);

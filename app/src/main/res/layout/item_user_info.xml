@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/no_boundary_ripple"
+    android:layout_margin="@dimen/item_padding"
+    android:paddingBottom="@dimen/item_padding">
+
+    <TextView
+        android:id="@+id/user_brief_rowid"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/item_padding"
+        android:layout_marginTop="@dimen/item_padding"
+        android:text="11111"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/user_brief_email"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:text="1322300337@qq.com"
+        app:layout_constraintStart_toStartOf="@+id/user_brief_rowid"
+        app:layout_constraintTop_toBottomOf="@+id/user_brief_rowid" />
+
+    <TextView
+        android:id="@+id/user_brief_nickname"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:text="helloworld"
+        app:layout_constraintStart_toEndOf="@+id/user_brief_rowid"
+        app:layout_constraintTop_toTopOf="@+id/user_brief_rowid" />
+
+    <TextView
+        android:id="@+id/user_brief_sex"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="36dp"
+        android:text="女"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/user_brief_rowid" />
+
+    <TextView
+        android:id="@+id/user_brief_create_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="48dp"
+        android:text="2024-04-08"
+        app:layout_constraintStart_toStartOf="@+id/user_brief_rowid"
+        app:layout_constraintTop_toBottomOf="@+id/user_brief_rowid" />
+
+    <TextView
+        android:id="@+id/user_brief_status"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:text="active"
+        app:layout_constraintStart_toEndOf="@+id/user_brief_create_time"
+        app:layout_constraintTop_toTopOf="@+id/user_brief_create_time" />
+
+    <TextView
+        android:id="@+id/user_brief_role"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="普通用户"
+        app:layout_constraintEnd_toEndOf="@+id/user_brief_sex"
+        app:layout_constraintTop_toTopOf="@+id/user_brief_create_time" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

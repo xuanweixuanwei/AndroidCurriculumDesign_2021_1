@@ -97,6 +97,15 @@
             android:layout_marginHorizontal="@dimen/dp_40"
             android:layout_marginTop="@dimen/dp_30"
             android:text="@string/login_text" />
+        <com.hjq.widget.view.SubmitButton
+            android:visibility="gone"
+            android:id="@+id/btn_admin_login_commit"
+            style="@style/ButtonStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/dp_40"
+            android:layout_marginTop="@dimen/dp_30"
+            android:text="@string/admin_login_text" />
 
     </LinearLayout>
 
@@ -132,6 +141,7 @@
     </LinearLayout>
 
     <LinearLayout
+
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
